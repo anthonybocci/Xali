@@ -1,0 +1,16 @@
+{# src/Xali/DefaultBundle/Resources/views/base_default.html.twig #}
+{# layout_default extends the global index #}
+{% extends "::base.html.twig" %}
+
+{% block title %}Welcome - {{ parent() }} {% endblock %}
+
+{# body can be edit by this layout #}
+{% block body %}
+
+    {# default_body can be edit by pages #}
+    {% block default_body %}
+        
+        
+    {% endblock %}
+    
+{% endblock %}

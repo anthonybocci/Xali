@@ -1,0 +1,4 @@
+services:
+#    xali_default.example:
+#        class: Xali\Bundle\DefaultBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

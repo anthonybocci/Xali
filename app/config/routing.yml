@@ -1,0 +1,27 @@
+xali_administration:
+    resource: "@XaliAdministrationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+xali_camp:
+    resource: "@XaliCampBundle/Resources/config/routing.yml"
+    prefix:   /
+
+xali_volunteer:
+    resource: "@XaliVolunteerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+xali_organisation:
+    resource: "@XaliOrganisationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+xali_survivor:
+    resource: "@XaliSurvivorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+xali_default:
+    resource: "@XaliDefaultBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation

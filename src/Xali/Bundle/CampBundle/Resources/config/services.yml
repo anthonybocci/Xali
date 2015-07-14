@@ -1,0 +1,4 @@
+services:
+#    xali_camp.example:
+#        class: Xali\Bundle\CampBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

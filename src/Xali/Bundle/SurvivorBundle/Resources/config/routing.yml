@@ -1,0 +1,3 @@
+xali_survivor_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: XaliSurvivorBundle:Default:index }

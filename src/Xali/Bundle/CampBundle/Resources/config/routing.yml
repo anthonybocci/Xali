@@ -1,0 +1,3 @@
+xali_camp_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: XaliCampBundle:Default:index }

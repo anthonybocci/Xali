@@ -1,0 +1,4 @@
+#The Xali's index
+xali_default_homepage:
+    path:     /
+    defaults: { _controller: XaliDefaultBundle:Default:index }

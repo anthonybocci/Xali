@@ -1,0 +1,4 @@
+services:
+#    xali_survivor.example:
+#        class: Xali\Bundle\SurvivorBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
