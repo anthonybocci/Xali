@@ -71,3 +71,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#FOSUserBundle configuration
+fos_user:
+    db_driver:  orm
+        # We use Doctrine ORM
+    firewall_name: main
+        # The firewall is called main
+    user_class: Xali\Bundle\UserBundle\Entity\User
+        # The User entity
