@@ -1,0 +1,38 @@
+## YAML Template for Default Bundle.
+---
+welcome:
+    presentation: >
+        <h2 class="text-center">What is Xali ?</h2>
+        <br />
+        In contries where there are wars, thousands of families are separated
+        each years. Children lost their parents, and it's very difficult for
+        organisations to get them together.<br />
+        Xali is a free and open source project witch has for goal to get together
+        lot of families who lives in these countries. We stay in our country, but
+        NGO, organisations, come into these countries in order to help population,
+        we must help them in their task.<br />
+        This is why Xali is free and open source, every one can fork or use or
+        participate to Xali, Xali has to help organisations.
+        <br /><br />
+        <h2 class="text-center">Why create Xali ?</h2>
+        <br />
+        One day in a programming competition, a challenge was to imagine a Web
+        platform witch should help organisation to get together families. If
+        this challenge was proposed it's because there is a real need of this
+        kind of platform. So, in order to help organisations, help families
+        witch are separated, we had to create Xali.<br />
+        It will take a long time until Xali be functional and useful, but with
+        hard work and motivation Xali will help thousands of people.
+        <br /><br />
+        <h2 class="text-center">How to contribute to Xali ?</h2>
+        <br />
+        There are several ways to contribute to Xali, no need to be a
+        developper.<br />
+        If you're a Web designer, you can help to make the interface more
+        intuitive, smarter or lighter.<br />
+        If you're a developper you can develop a functionnality or fix a
+        bug.<br />
+        If you're a translator you can help to improve english texts, and help
+        to translate Xali into your language.<br />
+        Else, if you want to contribute you can speak about Xali, on social
+        networks for example.

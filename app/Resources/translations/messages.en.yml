@@ -1,0 +1,12 @@
+#Header
+header:
+    xali: Xali
+    login: Login
+    administration: Administration
+    profile: Profile
+    addngo: Add a NGO
+    addcamp: Add a camp
+    addvolunteer: Add a volunteer
+#Footer
+footer:
+    legal: Xali is a free and open source project distributed under GNU GPL licence

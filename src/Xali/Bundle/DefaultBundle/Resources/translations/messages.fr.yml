@@ -1,0 +1,57 @@
+## YAML Template pour Default Bundle.
+---
+
+welcome:
+    presentation: >
+        <h2 class="text-center">Qu'est-ce que Xali ?</h2>
+        <br />
+        Dans les pays en guerre, des milliers de familles sont séparées chaque
+        année. Des enfants perdent leurs parents, et il est très difficile pour
+        les organisations de les réunir.<br />
+        Xali est un projet gratuit et open source qui a pour but de réunir de
+        nombreuses familles qui vivent dans ces pays. Nous restons dans nos
+        pays respectifs, mais les ONG, les organisations, vont dans ces pays
+        pour aider les populations, nous devons les aider dans leur tâche.<br />
+        C'est pourquoi Xali est gratuit et open source, chacun peut forker,
+        utiliser ou contribuer à Xali, Xali doit aider les organisations.
+        <br /><br />
+        <h2 class="text-center">Pourquoi créer Xali ?</h2>
+        <br />
+        Un jour lors d'une compétition de programmation, un défi était
+        d'imaginer une plate-forme Web qui devait aider les organisations à
+        réunir les familles. Si ce défi a été lancé c'est parce qu'il y a un
+        réel besoin de ce genre de plate-forme. Donc, dans le but d'aider les
+        organisations, d'aider les familles qui sont séparées, nous devons
+        créer Xali.<br />
+        Cela prendra du temps avant que Xali soit fonctionnelle et utile, mais
+        avec un travail acharné et de la motivation Xali aidera des milliers
+        de personnes.<br />
+        <br /><br />
+        <h2 class="text-center">Comment contribuer à Xali ?</h2>
+        <br />
+        Il y a plusieurs façons de conotribuer à Xali, même si l'on n'est pas 
+        développeur.<br />
+        Si vous êtes intégrateur vous pouvez aider à rendre l'interface plus 
+        intuitive, plus intelligente ou plus légère.<br />
+        Si vous êtes développeur vous pouvez développer une fonctionnalité ou
+        corriger un bogue.<br />
+        Si vous êtes traducteur vous pouvez aider à améliorer les texts anglais,
+        et aider à traduire Xali dans votre langue.<br />
+        Sinon, si vous voulez aider vous pouvez parler de Xali autour de vous,
+        sur les réseaux sociaux par exemple.
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
