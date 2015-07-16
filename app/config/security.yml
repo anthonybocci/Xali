@@ -28,9 +28,10 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
         #Allow user to access to welcome page and login page even if he's anonymous
         main_anonymous:
-            pattern:    ^/login?$
+            pattern:    ^/(login)?$
             anonymous:  true
             
         main:

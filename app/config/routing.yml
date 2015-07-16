@@ -34,6 +34,8 @@ fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /profile
 
+#Maybe remove it, there is no registration. This is root who add organisations
+#And organisations who add volunteers
 fos_user_register:
     resource:   "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /register
