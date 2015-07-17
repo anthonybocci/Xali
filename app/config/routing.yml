@@ -4,23 +4,23 @@ xali_user:
 
 xali_administration:
     resource: "@XaliAdministrationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /administration
 
 xali_camp:
     resource: "@XaliCampBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /camp
 
 xali_volunteer:
     resource: "@XaliVolunteerBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /volunteer
 
 xali_organisation:
     resource: "@XaliOrganisationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /organisation
 
 xali_survivor:
     resource: "@XaliSurvivorBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /survivor
 
 xali_default:
     resource: "@XaliDefaultBundle/Resources/config/routing.yml"

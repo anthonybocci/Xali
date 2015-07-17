@@ -1,0 +1,33 @@
+## YAML Template for SurvivorBundle.
+---
+
+form:
+    firstname:      "Firstname:"
+    lastname:       "Lastname:"
+    birthday:       "Birthday:"
+    eyescolor:      "Eyes color:"
+    weight:         "Weight:"
+    weight_unit:    "Weight unit:"
+    height:         "Height:"
+    height_unit:    "Height unit:"
+    hair_color:     "Hair color:"
+    brown:          "Brown"
+    blond:          "Blond"
+    red:            "Red"
+    blue:           "Blue"
+    purple:         "Purple"
+    pink:           "Pink"
+    other:          "Other"
+    kg:             "Kg"
+    lb:             "Lb"
+    cm:             "Centimeters"
+    inch:           "Inch"
+    feet:           "Feet"
+    submit:         "Submit"
+    
+profile:
+    birth_on:       "Birth on"
+    eyes_color:     "Eyes color:"
+    weight:         "Weight:"
+    height:         "Height:"
+    hair_color:     "Hair color:"

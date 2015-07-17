@@ -1,3 +1,9 @@
-xali_survivor_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: XaliSurvivorBundle:Default:index }
+#Add and probably update a survivor, it depend of a variable
+xali_survivor_add_survivor:
+    path:     /add_survivor
+    defaults: { _controller: XaliSurvivorBundle:Survivor:add_survivor }
+
+#Add an *obligatory* id after /profile
+xali_survivor_profile:
+    path:     /profile
+    defaults: { _controller: XaliSurvivorBundle:Survivor:see_profile }

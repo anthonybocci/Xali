@@ -1,12 +1,14 @@
 #Header
 header:
-    xali: Xali
-    login: Login
+    xali:           Xali
+    login:          Login
+    logout:         Logout
     administration: Administration
-    profile: Profile
-    addngo: Add a NGO
-    addcamp: Add a camp
-    addvolunteer: Add a volunteer
+    profile:        Profile
+    add_ngo:        Add a NGO
+    add_camp:       Add a camp
+    add_volunteer:  Add a volunteer
+    add_survivor:   Add a survivor
 #Footer
 footer:
-    legal: Xali is a free and open source project distributed under GNU GPL licence
+    legal:          Xali is a free and open source project distributed under GNU GPL licence

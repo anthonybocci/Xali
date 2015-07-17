@@ -1,0 +1,137 @@
+{# src/SurvivorBundle/Resources/views/Management/add_survivor.html.twig #}
+
+{% extends "XaliSurvivorBundle::base_survivor.html.twig" %}
+
+{#Overwrite survivor_body block#}
+{% block survivor_body %}
+    
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+    <form id="" method="" action="">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="firstname">{{ "form.firstname"|trans }}</label>
+                <input type="text" class="form-control" id="firstname" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="lastname">{{ "form.lastname"|trans }}</label>
+                <input type="text" class="form-control" id="lastname" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="birthday">{{ "form.birthday"|trans }}</label>
+                <input type="date" class="form-control" id="birthday" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>{{ "form.eyescolor"|trans }}</label><br />
+                <select class="list-group">
+                    <option class="list-group-item" value="brown">
+                        {{ "form.eyescolor.brown"|trans }}
+                    </option>
+                    <option class="list-group-item" value="green">
+                        {{ "form.eyescolor.green"|trans }}
+                    </option>
+                    <option class="list-group-item" value="blue">
+                        {{ "form.eyescolor.blue"|trans }}
+                    </option>
+                    <option class="list-group-item" value="grey">
+                        {{ "form.eyescolor.grey"|trans }}
+                    </option>
+                    <option class="list-group-item" value="black">
+                        {{ "form.eyescolor.black"|trans }}
+                    </option>
+                    <option class="list-group-item" value="other">
+                        {{ "form.eyescolor.other"|trans }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>
+                    {{ "form.weight"|trans }}
+                </label><br />
+                <input type="number" class="form-control" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>
+                    {{ "form.weight_unit"|trans }}
+                </label><br />
+                <select class="list-group">
+                    <option class="list-group-item" value="kg">
+                        {{ "form.kg"|trans }}
+                    </option>
+                    <option class="list-group-item" value="lb">
+                        {{ "form.lb"|trans }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>
+                    {{ "form.height"|trans }}
+                </label>
+                <input type="number" class="form-control" id="height" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>
+                    {{ "form.height_unit"|trans }}
+                </label><br />
+                <select class="list-group">
+                    <option class="list-group-item" value="cm">
+                        {{ "form.cm"|trans }}
+                    </option>
+                    <option class="list-group-item" value="inch">
+                        {{ "form.inch"|trans }}
+                    </option>
+                    <option class="list-group-item" value="feet">
+                        {{ "form.feet"|trans }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label>
+                    {{ "form.hair_color"|trans }}
+                </label><br />
+                <select class="list-group">
+                    <option class="list-group-item" value="blond">
+                        {{ "form.blond"|trans }}
+                    </option>
+                    <option class="list-group-item" value="blue">
+                        {{ "form.blue"|trans }}
+                    </option>
+                    <option class="list-group-item" value="brown">
+                        {{ "form.brown"|trans }}
+                    </option>
+                    <option class="list-group-item" value="pink">
+                        {{ "form.pink"|trans }}
+                    </option>
+                    <option class="list-group-item" value="purple">
+                        {{ "form.purple"|trans }}
+                    </option>
+                    <option class="list-group-item" value="red">
+                        {{ "form.red"|trans }}
+                    </option>
+                    <option class="list-group-item" value="other">
+                        {{ "form.other"|trans }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
+    </form>
+</div>
+        
+{% endblock %}
+

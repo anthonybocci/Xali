@@ -36,7 +36,8 @@ security:
             
         main:
             pattern:    ^/
-            anonymous: false
+            anonymous: true
+            #Update to false to secure all URLs
             provider: in_memory
             form_login:
                 login_path: fos_user_security_login
