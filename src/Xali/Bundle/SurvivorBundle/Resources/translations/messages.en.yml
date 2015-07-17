@@ -24,6 +24,7 @@ form:
     inch:           "Inch"
     feet:           "Feet"
     submit:         "Submit"
+    search:         "Search"
     
 profile:
     birth_on:       "Birth on"
@@ -31,3 +32,13 @@ profile:
     weight:         "Weight:"
     height:         "Height:"
     hair_color:     "Hair color:"
+    
+search:
+    suggestions:    "Suggestions"
+    firstname:      "Firstname"
+    lastname:       "Lastname"
+    birthday:       "Birthday"
+    eyes_color:     "Eyes color"
+    hair_color:     "Hair color"
+    height:         "Height"
+    weight:         "Weight"

@@ -24,6 +24,7 @@ form:
     inch:           "Pouces"
     feet:           "Pieds"
     submit:         "Valider"
+    search:         "Rechercher"
     
 profile:
     birth_on:       "Né(e) le"
@@ -31,3 +32,13 @@ profile:
     weight:         "Poids :"
     height:         "Taille :"
     hair_color:     "Couleur des cheveux :"
+
+search:
+    suggestions:    "Suggestions"
+    firstname:      "Prénom"
+    lastname:       "Nom"
+    birthday:       "Date de naissance"
+    eyes_color:     "Couleur des yeux"
+    hair_color:     "Couleur des cheveux"
+    height:         "Taille"
+    weight:         "Poids"
