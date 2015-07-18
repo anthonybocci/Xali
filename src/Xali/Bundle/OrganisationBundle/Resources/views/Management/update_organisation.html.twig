@@ -1,4 +1,4 @@
-{# src/OrganisationBundle/Resources/views/Management/add_organisation.html.twig #}
+{# src/OrganisationBundle/Resources/views/Management/update_organisation.html.twig #}
 
 {% extends "XaliOrganisationBundle::base_organisation.html.twig" %}
 
@@ -10,6 +10,12 @@
             <div class="form-group">
                 <label for="name">{{ "form.name"|trans }}</label>
                 <input type="text" class="form-control" id="name" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="creating_date">{{ "form.creating_date"|trans }}</label>
+                <input type="text" class="form-control" id="creatin_date" />
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -39,5 +45,10 @@
         <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
     </form>
 </div>
+        
+        
+        
+        
+        
         
 {% endblock %}

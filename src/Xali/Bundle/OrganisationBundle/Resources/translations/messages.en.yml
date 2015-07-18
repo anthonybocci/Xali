@@ -2,9 +2,10 @@
 ---
 
 form:
-    english_name:       "English name:"
+    name:               "Name:"
     email:              "Email:"
     confirm_email:      "Confirm email:"
     password:           "Password:"
     confirm_password:   "Confirm password:"
+    creating_date:      "Creating date"
     

@@ -10,4 +10,13 @@ class OrganisationController extends Controller
     {
         return $this->render('XaliOrganisationBundle:Management:add_organisation.html.twig');
     }
+    
+    public function update_organisationAction()
+    {
+        return $this->render('XaliOrganisationBundle:Management:update_organisation.html.twig');
+    }
+    
+    public function profileAction() {
+        return $this->render('XaliOrganisationBundle:Profile:profile.html.twig');
+    }
 }
