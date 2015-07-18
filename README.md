@@ -1,12 +1,12 @@
 Xali
 ===================
 
-Xali is a Web platform, a tool witch allow families to be
+Xali is a Web platform, a tool which allow families to be
 together again. In countries where there are wars, some families are separated.
 If these people come in humanitarian organisation's camp, they'll can use
-Xali to add them in database, and the rest of family, witch is
+Xali to add them in database, and the rest of family, which is
 is an other country, will can find them again with help of humanitarian organisation
-witch will user Xali to find them.
+which will user Xali to find them.
 
 
 1) Installing Xali

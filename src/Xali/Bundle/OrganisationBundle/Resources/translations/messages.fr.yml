@@ -1,0 +1,10 @@
+## YAML Template pour OrganisationBundle.
+---
+
+form:
+    english_name:       "Nom anglais :"
+    email:              "Email :"
+    confirm_email:      "Confirmer l'email :"
+    password:           "Mot de passe :"
+    confirm_password:   "Confirmer le mot de passe :"
+    

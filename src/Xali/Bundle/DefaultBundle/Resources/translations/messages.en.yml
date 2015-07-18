@@ -7,7 +7,7 @@ welcome:
         In contries where there are wars, thousands of families are separated
         each years. Children lost their parents, and it's very difficult for
         organisations to get them together.<br />
-        Xali is a free and open source project witch has for goal to get together
+        Xali is a free and open source project which has for goal to get together
         lot of families who lives in these countries. We stay in our country, but
         NGO, organisations, come into these countries in order to help population,
         we must help them in their task.<br />
@@ -17,10 +17,10 @@ welcome:
         <h2 class="text-center">Why create Xali ?</h2>
         <br />
         One day in a programming competition, a challenge was to imagine a Web
-        platform witch should help organisation to get together families. If
+        platform which should help organisation to get together families. If
         this challenge was proposed it's because there is a real need of this
         kind of platform. So, in order to help organisations, help families
-        witch are separated, we had to create Xali.<br />
+        which are separated, we had to create Xali.<br />
         It will take a long time until Xali be functional and useful, but with
         hard work and motivation Xali will help thousands of people.
         <br /><br />
@@ -36,3 +36,9 @@ welcome:
         to translate Xali into your language.<br />
         Else, if you want to contribute you can speak about Xali, on social
         networks for example.
+
+meta:
+    description: >
+                    Xali is a Web platform which has a goal, help NGO in their
+                    work. Xali allow to get together survivors who are separated
+                    of their family.

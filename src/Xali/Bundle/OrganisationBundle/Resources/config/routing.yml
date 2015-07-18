@@ -1,3 +1,3 @@
-xali_organisation_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: XaliOrganisationBundle:Default:index }
+xali_organisation_add_organisation:
+    path:     /add_organisation
+    defaults: { _controller: XaliOrganisationBundle:Organisation:add_organisation }

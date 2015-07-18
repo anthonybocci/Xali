@@ -40,7 +40,11 @@ welcome:
         Sinon, si vous voulez aider vous pouvez parler de Xali autour de vous,
         sur les réseaux sociaux par exemple.
 
-    
+meta:
+    description: >
+                    Xali est une plate-forme Web qui a un but, aider les ONG
+                    dans leur travail. Xali permet de réunir les rescapés qui
+                    sont séparés de leur famille.
     
     
     

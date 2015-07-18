@@ -32,6 +32,7 @@ profile:
     weight:         "Poids :"
     height:         "Taille :"
     hair_color:     "Couleur des cheveux :"
+    left:           "A quitté le camp"
 
 search:
     suggestions:    "Suggestions"
@@ -42,3 +43,6 @@ search:
     hair_color:     "Couleur des cheveux"
     height:         "Taille"
     weight:         "Poids"
+    results:        "Résultats"
+    camp:           "Camp"
+    not_found:      "Non trouvé ? Ajouter le rescapé"

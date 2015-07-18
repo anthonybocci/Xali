@@ -12,7 +12,3 @@ xali_survivor_profile:
 xali_survivor_search:
     path:     /search
     defaults: { _controller: XaliSurvivorBundle:Survivor:search }
-    
-xali_survivor_search_result:
-    path:     /search_result
-    defaults: { _controller: XaliSurvivorBundle:Survivor:search_result }

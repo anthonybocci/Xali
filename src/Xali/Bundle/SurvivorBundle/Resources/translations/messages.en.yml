@@ -32,6 +32,7 @@ profile:
     weight:         "Weight:"
     height:         "Height:"
     hair_color:     "Hair color:"
+    left:           "Has left the camp"
     
 search:
     suggestions:    "Suggestions"
@@ -42,3 +43,6 @@ search:
     hair_color:     "Hair color"
     height:         "Height"
     weight:         "Weight"
+    results:        "Results"
+    camp:           "Camp"
+    not_found:      "Not found ? Add the survivor"
