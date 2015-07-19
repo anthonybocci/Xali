@@ -1,3 +1,14 @@
-xali_camp_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: XaliCampBundle:Default:index }
+#Add a camp
+xali_camp_add_camp:
+    path:     /add_camp
+    defaults: { _controller: XaliCampBundle:Camp:add_camp }
+
+#See profile
+xali_camp_profile:
+    path:     /profile
+    defaults: { _controller: XaliCampBundle:Camp:profile }
+    
+#Assign a volunteer to a camp
+xali_camp_assign_volunteer:
+    path:       /assign_volunteer
+    defaults:   { _controller: XaliCampBundle:Camp:assign_volunteer }

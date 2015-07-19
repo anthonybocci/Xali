@@ -1,0 +1,17 @@
+{# src/Xali/Bundle/CampBundle/Resources/views/base_camp.html.twig #}
+{# base_camp extends the global index #}
+{% extends "::base.html.twig" %}
+
+{% block title %} Camp - {{ parent() }} {% endblock %}
+
+
+{# body can be edit by this layout #}
+{% block body %}
+
+    {# camp_body can be edit by pages #}
+    {% block camp_body %}
+        
+        
+    {% endblock %}
+    
+{% endblock %}

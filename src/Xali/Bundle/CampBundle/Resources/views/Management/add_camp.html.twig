@@ -1,0 +1,35 @@
+{# src/CampBundle/Resources/views/Management/add_camp.html.twig #}
+
+{% extends "XaliCampBundle::base_camp.html.twig" %}
+
+{#Overwrite camp_body block#}
+{% block camp_body %}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1>{{ "form.add_camp"|trans }}</h1>
+            </div>
+        </div>
+    <form id="" method="" action="">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="name">{{ "form.name_unique"|trans }}</label>
+                <input type="text" class="form-control" id="name" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="city">{{ "form.city"|trans }}</label>
+                <input type="text" class="form-control" id="lastname" />
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="country">{{ "form.country"|trans }}</label>
+                <input type="text" class="form-control" id="country" />
+            </div>
+        </div>
+        <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
+    </form>
+</div>
+{% endblock %}

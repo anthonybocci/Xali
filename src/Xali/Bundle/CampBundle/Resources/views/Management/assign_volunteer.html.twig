@@ -1,0 +1,37 @@
+{# src/CampBundle/Resources/views/Management/assign_volunteer.html.twig #}
+
+{% extends "XaliCampBundle::base_camp.html.twig" %}
+
+{#Overwrite camp_body block#}
+{% block camp_body %}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <form class="text-center" method="" action="">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h1>{{ "assign_volunteer.assign_volunteer"|trans }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>{{ "assign_volunteer.camp_name"|trans }}</label>
+                        <input type="text" class="form-control" id="camp_name" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>{{ "assign_volunteer.volunteer_name"|trans }}</label>
+                        <input type="text" class="form-control" id="volunteer_name" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="submit" class="btn btn-primary form-control" value="{{ "assign_volunteer.submit"|trans }}"/>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

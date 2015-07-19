@@ -9,3 +9,11 @@ form:
     confirm_password:   "Confirmer le mot de passe :"
     creating_date:      "Date de création"
     
+profile:
+    created_on:         "Créé le"
+    email:              "Email"
+    nb_camps:           "Nombre de camps"
+    nb_survivors:       "Nombre de rescapés"
+    survivors:          "Rescapés"
+    camps:              "Camps"
+    

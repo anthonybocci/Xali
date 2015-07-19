@@ -9,3 +9,11 @@ form:
     confirm_password:   "Confirm password:"
     creating_date:      "Creating date"
     
+profile:
+    created_on:         "Created on"
+    email:              "Email"
+    nb_camps:           "Camps number"
+    nb_survivors:       "Survivors number"
+    survivors:          "Survivors"
+    camps:              "Camps"
+    

@@ -1,0 +1,23 @@
+## YAML Template for CampBundle.
+---
+
+form:
+    add_camp:       "Add a camp"
+    name_unique:    "Name (unique)"
+    city:           "City"
+    country:        "Country"
+    unique:         "unique"
+
+profile:
+    created_on:         "Created on"
+    nb_survivors:       "Survivors number:"
+    survivors:          "survivors"
+    nb_volunteers:      "Volunteers number:"
+    volunteers:         "volunteers"
+    assign_volunteer:   "Assign volunteers"
+    
+assign_volunteer:
+    assign_volunteer:   "Assign a volunteer"
+    camp_name:          "Camp's name"
+    volunteer_name:     "Volunteer's name"
+    submit:             "Submit"
