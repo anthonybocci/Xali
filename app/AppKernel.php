@@ -23,8 +23,9 @@ class AppKernel extends Kernel
             new Xali\Bundle\VolunteerBundle\XaliVolunteerBundle(),
             new Xali\Bundle\CampBundle\XaliCampBundle(),
             new Xali\Bundle\AdministrationBundle\XaliAdministrationBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new Xali\Bundle\UserBundle\XaliUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

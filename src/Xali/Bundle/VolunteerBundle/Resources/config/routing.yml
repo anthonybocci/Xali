@@ -1,3 +1,0 @@
-xali_volunteer_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: XaliVolunteerBundle:Default:index }

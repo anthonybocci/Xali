@@ -1,0 +1,17 @@
+{# src/Xali/Bundle/VolunteerBundle/Resources/views/base_volunteer.html.twig #}
+{# base_volunteer extends the global index #}
+{% extends "::base.html.twig" %}
+
+{% block title %} Volunteer - {{ parent() }} {% endblock %}
+
+
+{# body can be edit by this layout #}
+{% block body %}
+
+    {# volunteer_body can be edit by pages #}
+    {% block volunteer_body %}
+        
+        
+    {% endblock %}
+    
+{% endblock %}

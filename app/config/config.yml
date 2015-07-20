@@ -63,6 +63,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -80,3 +81,9 @@ fos_user:
         # The firewall is called main
     user_class: Xali\Bundle\UserBundle\Entity\User
         # The User entity
+        
+# Stof\DoctrineExtensionBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true

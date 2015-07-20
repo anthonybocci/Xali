@@ -1,0 +1,9 @@
+## YAML Template pour UserBundle.
+---
+
+form:
+    firstname:          "Prénom :"
+    lastname:           "Nom :"
+    email:              "Email :"
+    email_confirmation: "Vérification :"
+    add_volunteer:      "Ajouter un bénévole"
