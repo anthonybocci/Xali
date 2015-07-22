@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Xali\Bundle\CampBundle\XaliCampBundle(),
             new Xali\Bundle\AdministrationBundle\XaliAdministrationBundle(),
             new Xali\Bundle\UserBundle\XaliUserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 

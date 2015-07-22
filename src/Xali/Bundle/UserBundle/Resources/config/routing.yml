@@ -1,2 +1,17 @@
 ## YAML Template.
 ---
+#Add a volunteer
+xali_user_registration_register:
+    path:   /register
+    defaults: { _controller: XaliUserBundle:Registration:register }
+    
+#Show profile
+xali_user_profile_show:
+    path:   /profile/id/
+    defaults: { _controller: XaliUserBundle:Profile:show }
+    
+#Edit profile
+xali_user_profile_edit:
+    path:   /profile/edit/id/
+    defaults: { _controller: XaliUserBundle:Profile:edit }
+    

@@ -1,5 +1,14 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{# src/Xali/Bundle/UserBundle/Resources/views/Profile/edit.html.twig #}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% extends "XaliUserBundle::base_user.html.twig" %}
+
+{% block user_body %}
+
+    <form action="{{ path('xali_user_profile_edit') }}" {#{{ form_enctype(form) }}#} method="POST" class="fos_user_profile_edit">
+        {#{{ form_widget(form) }}#}
+        Form content is commented
+        <div>
+            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+    </form>
+{% endblock %}

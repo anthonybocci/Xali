@@ -2,7 +2,7 @@
 
 namespace Xali\Bundle\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Xali\Bundle\UserBundle\Entity\UserRepository")
  */
-class User extends BaseUser
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -21,38 +21,57 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      * 
      * @Gedmo\Slug(fields={"firstname", "lastname"})
+     * @ORM\Column(name="username", type="string", length=201, unique=true) 
      */
-    protected $username;
+    private $username;
     
     /**
      * @var string
      * 
-     * @Gedmo\Slug(fields={"firstname", "lastname"})
+     * @ORM\Column(name="salt", type="string", length=255)
      */
-    protected $usernameCanonical;
-    
-    
+     private $salt;
+
     /**
+     * @var array
+     * 
+     * @ORM\Column(name="roles", type="array")
+     */
+     private $roles;
+    
+     /**
+      * @var string
+      * 
+      * @ORM\Column(name="password", type="string")
+      */
+     private $password;
+
+
+     /**
      * @var string
      * 
-     * @ORM\Column(name="firstname", type="string", length=200) 
+     * @ORM\Column(name="firstname", type="string", length=100) 
      */
     private $firstname;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="lastname", type="string", length=200) 
+     * @ORM\Column(name="lastname", type="string", length=100) 
      */
     private $lastname;
     
 
+    public function __construct()
+    {
+        $this->roles = array();
+    }
 
     /**
      * Get id
@@ -107,5 +126,56 @@ class User extends BaseUser
         $this->lastname = $p_lastname;
         return $this;
     }
+
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+        return $this;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+    
+
 }
 

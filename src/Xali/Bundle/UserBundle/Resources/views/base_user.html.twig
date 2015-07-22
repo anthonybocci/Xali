@@ -1,0 +1,15 @@
+{# src/Xali/Bundle/UserBundle/Resources/views/base_user.html.twig #}
+{# base_user extends the global index #}
+
+{% extends "::base.html.twig" %}
+
+
+{# body can be edit by this layout #}
+{% block body %}
+    
+    {% block user_body %}
+        
+    {% endblock user_body %}
+    
+{% endblock %}    
+

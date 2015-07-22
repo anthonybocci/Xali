@@ -19,7 +19,8 @@ security:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         main:
-            id: fos_user.user_provider.username_email
+            entity: { class: Xali\Bundle\UserBundle\Entity\User, property: username }
+
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -30,20 +31,20 @@ security:
             security: false
             
         #Allow user to access to welcome page and login page even if he's anonymous
-        main_anonymous:
-            pattern:    ^/(login)?$
-            anonymous:  true
+       # main_anonymous:
+        #    pattern:    ^/(login)?$
+         #   anonymous:  true
             
         main:
             pattern:    ^/
             anonymous: true
             #Update to false to secure all URLs
-            provider: in_memory
+            provider: main
             form_login:
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
+                login_path: login
+                check_path: login_check
             logout:
-                path:   fos_user_security_logout
+                path:   logout
                 target: /
             remember_me:
                 key:    %secret%
