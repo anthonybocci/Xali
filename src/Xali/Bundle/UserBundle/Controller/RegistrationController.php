@@ -21,6 +21,7 @@ class RegistrationController extends Controller
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
         $request = $this->get('request');
+        $entityManager = $this->getDoctrine()->getManager();
         
         //If form is submitted
         if ($request->getMethod() == "POST") {
@@ -34,7 +35,6 @@ class RegistrationController extends Controller
                                     $data->getPlainPassword(), $data->getSalt()
                                 )
                         );
-                $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
