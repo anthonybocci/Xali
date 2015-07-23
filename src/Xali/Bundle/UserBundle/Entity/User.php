@@ -5,13 +5,13 @@ namespace Xali\Bundle\UserBundle\Entity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Xali\Bundle\UserBundle\Entity\UserRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -58,26 +58,34 @@ class User implements UserInterface
      * @var string
      * 
      * @ORM\Column(name="firstname", type="string", length=100) 
+     * @Asset\NotBlank()
      */
     private $firstname;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="lastname", type="string", length=100) 
+     * @ORM\Column(name="lastname", type="string", length=100)
+     * @Assert\NotBlank() 
      */
     private $lastname;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="email", type="string", length=100) 
+     * @ORM\Column(name="email", type="string", length=100, unique=true) 
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
     
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      */
     private $plainPassword;
     
@@ -85,6 +93,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->roles = array();
+        $this->roles[] = "ROLE_USER";
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
