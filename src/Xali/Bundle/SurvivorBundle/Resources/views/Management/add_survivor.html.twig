@@ -6,7 +6,7 @@
 {% block survivor_body %}
     
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
-    <form id="" method="" action="">
+    <form id="form_add_survivor" method="POST" action="{{ path('xali_survivor_management_add_survivor') }}">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label for="firstname">{{ "form.firstname"|trans }}</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>{{ "form.eyescolor"|trans }}</label><br />
+                <label>{{ "form.eyes_color"|trans }}</label><br />
                 <select class="list-group">
                     <option class="list-group-item" value="brown">
                         {{ "form.eyescolor.brown"|trans }}
@@ -45,7 +45,7 @@
                         {{ "form.eyescolor.black"|trans }}
                     </option>
                     <option class="list-group-item" value="other">
-                        {{ "form.eyescolor.other"|trans }}
+                        {{ "form.eyes_color.other"|trans }}
                     </option>
                 </select>
             </div>
@@ -106,25 +106,25 @@
                 </label><br />
                 <select class="list-group">
                     <option class="list-group-item" value="blond">
-                        {{ "form.blond"|trans }}
+                        {{ "form.haircolor.blond"|trans }}
                     </option>
                     <option class="list-group-item" value="blue">
-                        {{ "form.blue"|trans }}
+                        {{ "form.haircolor.blue"|trans }}
                     </option>
                     <option class="list-group-item" value="brown">
-                        {{ "form.brown"|trans }}
+                        {{ "form.haircolor.brown"|trans }}
                     </option>
                     <option class="list-group-item" value="pink">
-                        {{ "form.pink"|trans }}
+                        {{ "form.haircolor.pink"|trans }}
                     </option>
                     <option class="list-group-item" value="purple">
-                        {{ "form.purple"|trans }}
+                        {{ "form.haircolor.purple"|trans }}
                     </option>
                     <option class="list-group-item" value="red">
-                        {{ "form.red"|trans }}
+                        {{ "form.haircolor.red"|trans }}
                     </option>
                     <option class="list-group-item" value="other">
-                        {{ "form.other"|trans }}
+                        {{ "form.haircolor.other"|trans }}
                     </option>
                 </select>
             </div>
