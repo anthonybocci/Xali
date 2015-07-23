@@ -6,127 +6,70 @@
 {% block survivor_body %}
     
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
-    <form id="form_add_survivor" method="POST" action="{{ path('xali_survivor_management_add_survivor') }}">
+    <form id="form_add_survivor" method="POST" 
+          action="{{ path('xali_survivor_management_add_survivor') }}" 
+          {{ form_enctype(form) }}>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label for="firstname">{{ "form.firstname"|trans }}</label>
-                <input type="text" class="form-control" id="firstname" />
+                {{ form_label(form.firstname) }}
+                {{ form_errors(form.firstname) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label for="lastname">{{ "form.lastname"|trans }}</label>
-                <input type="text" class="form-control" id="lastname" />
+                {{ form_label(form.lastname) }}
+                {{ form_errors(form.lastname) }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label for="birthday">{{ "form.birthday"|trans }}</label>
-                <input type="date" class="form-control" id="birthday" />
+                {{ form_label(form.birthday) }}
+                {{ form_errors(form.birthday) }}
+                {{ form_widget(form.birthday, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>{{ "form.eyes_color"|trans }}</label><br />
-                <select class="list-group">
-                    <option class="list-group-item" value="brown">
-                        {{ "form.eyescolor.brown"|trans }}
-                    </option>
-                    <option class="list-group-item" value="green">
-                        {{ "form.eyescolor.green"|trans }}
-                    </option>
-                    <option class="list-group-item" value="blue">
-                        {{ "form.eyescolor.blue"|trans }}
-                    </option>
-                    <option class="list-group-item" value="grey">
-                        {{ "form.eyescolor.grey"|trans }}
-                    </option>
-                    <option class="list-group-item" value="black">
-                        {{ "form.eyescolor.black"|trans }}
-                    </option>
-                    <option class="list-group-item" value="other">
-                        {{ "form.eyes_color.other"|trans }}
-                    </option>
-                </select>
+                {{ form_label(form.eyesColor) }}<br />
+                {{ form_errors(form.eyesColor) }}
+                {{ form_widget(form.eyesColor, {'attr': {'class': 'list-group'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>
-                    {{ "form.weight"|trans }}
-                </label><br />
-                <input type="number" class="form-control" />
+                {{ form_label(form.weight) }}
+                {{ form_errors(form.weight) }}
+                {{ form_widget(form.weight, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>
-                    {{ "form.weight_unit"|trans }}
-                </label><br />
-                <select class="list-group">
-                    <option class="list-group-item" value="kg">
-                        {{ "form.kg"|trans }}
-                    </option>
-                    <option class="list-group-item" value="lb">
-                        {{ "form.lb"|trans }}
-                    </option>
-                </select>
+                {{ form_label(form.weightUnit) }}<br />
+                {{ form_errors(form.weightUnit) }}
+                {{ form_widget(form.weightUnit, {'attr': {'class': 'list-group'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>
-                    {{ "form.height"|trans }}
-                </label>
-                <input type="number" class="form-control" id="height" />
+                {{ form_label(form.height) }}
+                {{ form_errors(form.height) }}
+                {{ form_widget(form.height, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>
-                    {{ "form.height_unit"|trans }}
-                </label><br />
-                <select class="list-group">
-                    <option class="list-group-item" value="cm">
-                        {{ "form.cm"|trans }}
-                    </option>
-                    <option class="list-group-item" value="inch">
-                        {{ "form.inch"|trans }}
-                    </option>
-                    <option class="list-group-item" value="feet">
-                        {{ "form.feet"|trans }}
-                    </option>
-                </select>
+                {{ form_label(form.heightUnit) }}<br />
+                {{ form_errors(form.heightUnit) }}
+                {{ form_widget(form.heightUnit, {'attr': {'class': 'list-group'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label>
-                    {{ "form.hair_color"|trans }}
-                </label><br />
-                <select class="list-group">
-                    <option class="list-group-item" value="blond">
-                        {{ "form.haircolor.blond"|trans }}
-                    </option>
-                    <option class="list-group-item" value="blue">
-                        {{ "form.haircolor.blue"|trans }}
-                    </option>
-                    <option class="list-group-item" value="brown">
-                        {{ "form.haircolor.brown"|trans }}
-                    </option>
-                    <option class="list-group-item" value="pink">
-                        {{ "form.haircolor.pink"|trans }}
-                    </option>
-                    <option class="list-group-item" value="purple">
-                        {{ "form.haircolor.purple"|trans }}
-                    </option>
-                    <option class="list-group-item" value="red">
-                        {{ "form.haircolor.red"|trans }}
-                    </option>
-                    <option class="list-group-item" value="other">
-                        {{ "form.haircolor.other"|trans }}
-                    </option>
-                </select>
+                {{ form_label(form.hairColor) }}
+                {{ form_errors(form.hairColor) }}
+                {{ form_widget(form.hairColor, {'attr': {'class': 'list-group'} }) }}
             </div>
         </div>
         <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
@@ -135,3 +78,6 @@
         
 {% endblock %}
 
+{% block javascript %}
+    <script type="text/javascript" src="{{ asset('resources/scripts/forms/add_list_group_item_class.js') }}"></script>
+{% endblock %}

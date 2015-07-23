@@ -19,7 +19,20 @@ class SurvivorController extends Controller
     public function add_survivorAction()
     {
         $survivor = new Survivor();
-        return $this->render('XaliSurvivorBundle:Management:add_survivor.html.twig');
+        $form = $this->createForm(new SurvivorType(), $survivor);
+        $request = $this->get('request');
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        //If form is submitted
+        if ($request->getMethod() == "POST") {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $entityManager->persist($survivor);
+                $entityManager->flush();
+            }
+        }
+        return $this->render('XaliSurvivorBundle:Management:add_survivor.html.twig',
+                array('form' => $form->createView()));
     }
     
     public function see_profileAction()

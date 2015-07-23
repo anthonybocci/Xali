@@ -19,10 +19,14 @@ class SurvivorType extends AbstractType
             
             ->add('lastname', 'text', array('label' => "form.lastname"))
             
-            ->add('birthday', 'date', array('label' => "form.birthday"))
+            ->add('birthday', 'birthday', array(
+                'label' => "form.birthday",
+                'widget' => "single_text"
+                ))
             
             ->add('eyesColor', 'choice', array(
-                'choice' => array(
+                'label'  => "eyes_color",
+                'choices' => array(
                     'brown'  => 'form.eyescolor.brown',
                     'green'   => 'form.eyescolor.green',
                     'blue' => 'form.eyescolor.blue',
@@ -31,15 +35,39 @@ class SurvivorType extends AbstractType
                     'other'  => 'form.eyescolor.other',
                 ),
             'multiple' => false,
-            'expanded' => false
+            'expanded' => false,
+            'empty_value' => 'form.choose_value',
             ))
             
             ->add('weight', 'number', array('label' => "form.weight"))
+                
+            ->add('weightUnit', 'choice', array(
+                'label'  => "form.weight_unit",
+                'choices' => array(
+                    'kg' => 'form.kg',
+                    'lb' => 'form.lb'
+                ),
+                'multiple' => false,
+                'expanded' => false,
+                'empty_value' => 'form.choose_value',
+                ))
             
             ->add('height', 'number', array('label' => "form.height"))
+                
+            ->add('heightUnit', 'choice', array(
+                'label'  => "form.height_unit",
+                'choices' => array(
+                    'cm' => 'form.cm',
+                    'inch' => 'form.inch'
+                ),
+                'multiple' => false,
+                'expanded' => false,
+                'empty_value' => 'form.choose_value',
+                ))
             
             ->add('hairColor', 'choice', array(
-                'choice' => array(
+                'label' => "form.hair_color",
+                'choices' => array(
                     'blond'  => 'form.haircolor.blond',
                     'blue'   => 'form.haircolor.blue',
                     'brown'  => 'form.haircolor.brown',
