@@ -120,12 +120,12 @@ class User implements UserInterface
     /**
      * Set firstname
      * 
-     * @param string $p_firstname
+     * @param string $firstname
      * @return \Xali\Bundle\UserBundle\Entity\User
      */
-    public function setFirstname($p_firstname)
+    public function setFirstname($firstname)
     {
-        $this->firstname = $p_firstname;
+        $this->firstname = $firstname;
         return $this;
     }
     
@@ -142,58 +142,116 @@ class User implements UserInterface
     /**
      * Set lastname
      * 
-     * @param string $p_lastname
+     * @param string $lastname
      * @return \Xali\Bundle\UserBundle\Entity\User
      */
-    public function setLastname($p_lastname)
+    public function setLastname($lastname)
     {
-        $this->lastname = $p_lastname;
+        $this->lastname = $lastname;
         return $this;
     }
+    
+  
 
     public function eraseCredentials()
     {
         
     }
 
+    /**
+     * Get password
+     * 
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;
     }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    public function getUsername()
-    {
-        return $this->username;
-    }
     
+    /**
+     * Set password
+     * 
+     * @param string $password
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
     public function setPassword($password)
     {
         $this->password = $password;
         return $this;
     }
 
+    /**
+     * Get roles
+     * 
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+    
+    /**
+     * Set roles
+     * 
+     * @param array $roles
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
     public function setRoles($roles)
     {
         $this->roles = $roles;
         return $this;
     }
+    
+    /**
+     * Add roles
+     * 
+     * @param array $role
+     */
+    public function addRoles($roles)
+    {
+        foreach ($roles as $role) {
+            $this->roles[] = $role;
+        }
+    }
 
+    /**
+     * Get salt
+     * 
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
+    /**
+     * Set salt
+     * 
+     * @param string $salt
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
     public function setSalt($salt)
     {
         $this->salt = $salt;
         return $this;
     }
 
+    /**
+     * Get username
+     * 
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    
+    /**
+     * Set username
+     * 
+     * @param string $username
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
     public function setUsername($username)
     {
         $this->username = $username;
@@ -243,7 +301,6 @@ class User implements UserInterface
         $this->plainPassword = $p_plainPassword;
         return $this;
     }
-    
-    
+
 }
 
