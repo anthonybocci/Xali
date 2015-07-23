@@ -45,14 +45,11 @@ class UserType extends AbstractType
         ));
     }
     
-    
-    
-
     /**
      * @return string
      */
     public function getName()
     {
-        return 'bdtln_userbundle_user';
+        return 'xali_userbundle_user';
     }
 }

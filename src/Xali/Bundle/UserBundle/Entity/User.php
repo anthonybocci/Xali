@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Xali\Bundle\UserBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -67,10 +68,24 @@ class User implements UserInterface
      */
     private $lastname;
     
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="email", type="string", length=100) 
+     */
+    private $email;
+    
+    /**
+     * @var string
+     * 
+     */
+    private $plainPassword;
+    
 
     public function __construct()
     {
         $this->roles = array();
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
     /**
@@ -176,6 +191,50 @@ class User implements UserInterface
         return $this;
     }
     
-
+    /**
+     * Get email
+     * 
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    /**
+     * Set email
+     * 
+     * @param string $p_email
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
+    public function setEmail($p_email)
+    {
+        $this->email= $p_email;
+        return $this;
+    }
+    
+    /**
+     * Get plainPassword
+     * 
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+    
+    /**
+     * Set plainPassword
+     * 
+     * @param string $p_plainPassword
+     * @return \Xali\Bundle\UserBundle\Entity\User
+     */
+    public function setPlainPassword($p_plainPassword)
+    {
+        $this->plainPassword = $p_plainPassword;
+        return $this;
+    }
+    
+    
 }
 

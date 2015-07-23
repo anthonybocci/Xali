@@ -4,7 +4,10 @@ security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        Xali\Bundle\UserBundle\Entity\User: sha512
+        Xali\Bundle\UserBundle\Entity\User:
+            algorithm: sha512
+            iterations: 9616
+            encode_as_base64: true
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
@@ -31,7 +34,7 @@ security:
             security: false
             
         #Allow user to access to welcome page and login page even if he's anonymous
-       # main_anonymous:
+       # welcome_login:
         #    pattern:    ^/(login)?$
          #   anonymous:  true
             

@@ -3,11 +3,10 @@
 
 {% block user_body %}
     <h1 class="text-center">{{ "form.add_volunteer"|trans({}, "messages") }}</h1>
-    Form's content is commented
-    <form action="{{ path('xali_user_registration_register') }}" {#{{ form_enctype(form) }}#} method="POST" class="fos_user_registration_register text-center">
+    <form name="register_form" action="{{ path('xali_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="text-center">
         <div class="row">
             <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {# {{ form_label(form.firstname) }}<br />
+                {{ form_label(form.firstname) }}<br />
                 {{ form_errors(form.firstname) }}
                 {{ form_widget(form.firstname, {'attr': {'class': 'form-control'} }) }}
             </div>
@@ -49,6 +48,6 @@
             </div>
         </div>
         {{ form_rest(form) }}
-        #}
+        
     </form>
 {% endblock %}
