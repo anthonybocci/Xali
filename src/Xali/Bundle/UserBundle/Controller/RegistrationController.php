@@ -40,8 +40,9 @@ class RegistrationController extends Controller
             }
         }
         
-        return $this->render('XaliUserBundle:Registration:register.html.twig', array('form' => $form->createView()));        
+        return $this->render(
+                    'XaliUserBundle:Registration:register.html.twig',
+                    array('form' => $form->createView())
+                );        
     }
-
-   
 }
