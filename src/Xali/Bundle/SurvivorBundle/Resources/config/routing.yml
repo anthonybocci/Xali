@@ -1,14 +1,14 @@
 #Add and probably update a survivor, it depend of a variable
-xali_survivor_add_survivor:
+xali_survivor_management_add_survivor:
     path:     /add_survivor
     defaults: { _controller: XaliSurvivorBundle:Survivor:add_survivor }
 
 #Add an *obligatory* id after /profile
-xali_survivor_profile:
+xali_survivor_profile_profile:
     path:     /profile
     defaults: { _controller: XaliSurvivorBundle:Survivor:see_profile }
 
 #Search a survivor
-xali_survivor_search:
+xali_survivor_search_search:
     path:     /search
     defaults: { _controller: XaliSurvivorBundle:Survivor:search }
