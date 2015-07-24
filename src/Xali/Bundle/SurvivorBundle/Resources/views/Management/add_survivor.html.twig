@@ -34,7 +34,7 @@
             <div class="form-group">
                 {{ form_label(form.eyesColor) }}<br />
                 {{ form_errors(form.eyesColor) }}
-                {{ form_widget(form.eyesColor, {'attr': {'class': 'list-group'} }) }}
+                {{ form_widget(form.eyesColor, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -48,7 +48,7 @@
             <div class="form-group">
                 {{ form_label(form.weightUnit) }}<br />
                 {{ form_errors(form.weightUnit) }}
-                {{ form_widget(form.weightUnit, {'attr': {'class': 'list-group'} }) }}
+                {{ form_widget(form.weightUnit, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -62,16 +62,17 @@
             <div class="form-group">
                 {{ form_label(form.heightUnit) }}<br />
                 {{ form_errors(form.heightUnit) }}
-                {{ form_widget(form.heightUnit, {'attr': {'class': 'list-group'} }) }}
+                {{ form_widget(form.heightUnit, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 {{ form_label(form.hairColor) }}
                 {{ form_errors(form.hairColor) }}
-                {{ form_widget(form.hairColor, {'attr': {'class': 'list-group'} }) }}
+                {{ form_widget(form.hairColor, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
+        {{ form_rest(form) }}
         <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
     </form>
 </div>

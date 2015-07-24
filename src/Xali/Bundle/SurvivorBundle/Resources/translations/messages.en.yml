@@ -33,6 +33,7 @@ form:
     feet:           "Feet"
     submit:         "Submit"
     search:         "Search"
+    choose_value:   "Choose a value"
     
 profile:
     birth_on:       "Birth on"

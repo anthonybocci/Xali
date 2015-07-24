@@ -33,6 +33,7 @@ form:
     feet:           "Pieds"
     submit:         "Valider"
     search:         "Rechercher"
+    choose_value:   "Choisissez une valeur"
     
 profile:
     birth_on:       "Né(e) le"
