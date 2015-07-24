@@ -25,7 +25,7 @@ class SurvivorType extends AbstractType
                 ))
             
             ->add('eyesColor', 'choice', array(
-                'label'  => "eyes_color",
+                'label'  => "form.eyes_color",
                 'choices' => array(
                     'brown'  => 'form.eyescolor.brown',
                     'green'   => 'form.eyescolor.green',
@@ -77,7 +77,8 @@ class SurvivorType extends AbstractType
                     'other'  => 'form.haircolor.other',
                 ),
             'multiple' => false,
-            'expanded' => false
+            'expanded' => false,
+            'empty_value' => 'form.choose_value',
             ))
         ;
     }
