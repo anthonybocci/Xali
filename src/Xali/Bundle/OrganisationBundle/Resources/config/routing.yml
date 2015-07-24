@@ -1,14 +1,14 @@
 #Add organisation
-xali_organisation_add_organisation:
+xali_organisation_management_add_organisation:
     path:     /add_organisation
     defaults: { _controller: XaliOrganisationBundle:Organisation:add_organisation }
 
 #Update organisation
-xali_organisation_update_organisation:
+xali_organisation_management_update_organisation:
     path:     /update_organisation
     defaults: { _controller: XaliOrganisationBundle:Organisation:update_organisation }
 
 #See profile. Add an *obligatory* id after /profile
-xali_organisation_profile:
+xali_organisation_profile_profile:
     path:     /profile
     defaults: { _controller: XaliOrganisationBundle:Organisation:profile }
