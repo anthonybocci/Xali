@@ -45,7 +45,7 @@ class Survivor
     /**
      * @var string
      *
-     * @ORM\Column(name="eyesColor", type="string", length=50)
+     * @ORM\Column(name="eyes_color", type="string", length=50)
      */
     private $eyesColor;
 
@@ -80,7 +80,7 @@ class Survivor
     /**
      * @var string
      *
-     * @ORM\Column(name="hairColor", type="string", length=50)
+     * @ORM\Column(name="hair_color", type="string", length=50)
      */
     private $hairColor;
 
@@ -292,7 +292,7 @@ class Survivor
      */
     public function getHeightUnit()
     {
-        return $this->weightUnit;
+        return $this->heightUnit;
     }
     
     /**
