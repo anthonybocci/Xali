@@ -5,7 +5,6 @@ namespace Xali\Bundle\OrganisationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\OrganisationBundle\Form\OrganisationType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 /**
  * Manage organisations
