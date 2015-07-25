@@ -1,6 +1,6 @@
 #Add a camp
-xali_camp_add_camp:
-    path:     /add_camp
+xali_camp_management_add_camp:
+    path:     /idorganisation/add_camp
     defaults: { _controller: XaliCampBundle:Camp:add_camp }
 
 #See profile
