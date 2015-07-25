@@ -10,26 +10,44 @@
                 <h1>{{ "form.add_camp"|trans }}</h1>
             </div>
         </div>
-    <form id="" method="" action="">
+    <form id="form_add_camp" method="POST" action="{{ path('xali_camp_management_add_camp') }}">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label for="name">{{ "form.name_unique"|trans }}</label>
-                <input type="text" class="form-control" id="name" />
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{form_widget(form.name, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
-                <label for="city">{{ "form.city"|trans }}</label>
-                <input type="text" class="form-control" id="lastname" />
+                <label for="maps">{{ 'form.city'|trans }}</label>
+                <input id="maps" class="form-control" type="text" size="50" 
+                        placeholder="Enter a city" autocomplete="on"/>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group">
-                <label for="country">{{ "form.country"|trans }}</label>
-                <input type="text" class="form-control" id="country" />
-            </div>
-        </div>
-        <input type="submit" class="form-control btn btn-primary" value="{{ "form.submit"|trans }}" />
+        {{ form_label(form.city) }}
+        {{ form_errors(form.city) }}
+        {{form_widget(form.city) }}
+        
+        
+        {{ form_label(form.country) }}
+        {{ form_errors(form.country) }}
+        {{form_widget(form.country)}}
+                    
+          {{ form_rest(form) }}
+        <input type="submit" class="form-control btn btn-primary"
+                                            value="{{ "form.submit"|trans }}" />
     </form>
 </div>
+        
+        
+        
+{% block javascript %}
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('resources/scripts/forms/city_complete.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('resources/scripts/forms/fill_city_inputs.js') }}">
+    </script>
+{% endblock %}    
+
 {% endblock %}

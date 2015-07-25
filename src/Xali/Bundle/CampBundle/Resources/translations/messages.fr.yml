@@ -3,7 +3,7 @@
 
 form:
     add_camp:       "Ajouter un camp"
-    name_unique:    "Nom (unique)"
+    name:           "Nom"
     city:           "Ville"
     country:        "Pays"
     unique:         "unique"
