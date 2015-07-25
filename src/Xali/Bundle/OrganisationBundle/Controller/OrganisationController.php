@@ -5,6 +5,7 @@ namespace Xali\Bundle\OrganisationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\OrganisationBundle\Form\OrganisationType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 /**
  * Manage organisations
@@ -19,22 +20,22 @@ class OrganisationController extends Controller
         $organisation = new Organisation();
         $form = $this->createForm(new OrganisationType(), $organisation);
         $request = $this->get('request');
-        $entityManager = $this->getDoctrine()->getManager();
-        $userRepository = $entityManager->getRepository('XaliUserBundle:User');
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository('XaliUserBundle:User');
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $error = null;
         //If form is submitted
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $manager = $userRepository->findOneByEmail(
+                $manager = $userRepo->findOneByEmail(
                                             $request->request->get('manager'));
-                $organisation->setManager($manager);
-                $entityManager->persist($organisation);
-                $entityManager->flush();
+                $error = $orgRepo->insertIfManagerNotNull($manager, $organisation);
             }
         }
         
         $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
-        return $this->render($render, array('form' => $form->createView()));
+        return $this->render($render, array('form' => $form->createView(), 'error' => $error));
     }
     
     public function update_organisationAction()

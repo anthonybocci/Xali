@@ -3,11 +3,14 @@
 
 form:
     name:               "Nom :"
-    email:              "Email :"
-    confirm_email:      "Confirmer l'email :"
-    password:           "Mot de passe :"
-    confirm_password:   "Confirmer le mot de passe :"
-    creating_date:      "Date de création"
+    manager_email:      "Email du gérant :"
+    error:
+        violation_key:  >
+                        "Il semblerait que cette personne gère déjà une autre
+                        organisation. Veuillez choisir quelqu'un d'autre."
+        other_error:    >
+                        "Il y a une erreur dans l'ajout de l'organisation, merci
+                        de contacter un administrateur."
     
 profile:
     created_on:         "Créé le"

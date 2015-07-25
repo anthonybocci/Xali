@@ -3,11 +3,14 @@
 
 form:
     name:               "Name:"
-    email:              "Email:"
-    confirm_email:      "Confirm email:"
-    password:           "Password:"
-    confirm_password:   "Confirm password:"
-    creating_date:      "Creating date"
+    manager_email:      "Manager's email:"
+    error:
+        violation_key:  >
+                        "This person manage an other organisation, please chose
+                        an other person."
+        other_error:    >
+                        "There is an error to add this organisation, please 
+                        contact an administrator"
     
 profile:
     created_on:         "Created on"
