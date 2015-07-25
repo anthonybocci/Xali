@@ -9,11 +9,13 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 /**
  * Manage organisations
+ * @author Anthony Bocci <boccianthony@yahoo.fr>
  */
 class OrganisationController extends Controller
 {
     /**
      * Add an organisation and assign to it a manager
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
     public function add_organisationAction()
     {
@@ -30,7 +32,7 @@ class OrganisationController extends Controller
             if ($form->isValid()) {
                 $manager = $userRepo->findOneByEmail(
                                             $request->request->get('manager'));
-                $error = $orgRepo->insertIfManagerNotNull($manager, $organisation);
+                $error = $orgRepo->insertOrganisation($manager, $organisation);
             }
         }
         

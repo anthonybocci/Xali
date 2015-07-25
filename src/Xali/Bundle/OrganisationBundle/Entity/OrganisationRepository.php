@@ -2,6 +2,9 @@
 
 namespace Xali\Bundle\OrganisationBundle\Entity;
 
+use Xali\Bundle\UserBundle\Entity\User;
+use \Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 /**
  * OrganisationRepository
  *
@@ -11,25 +14,26 @@ namespace Xali\Bundle\OrganisationBundle\Entity;
 class OrganisationRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * Insert an organisation if the manager is not null
+     * Insert an organisation if the manager is valid and not null
      * 
      * @param \Xali\Bundle\UserBundle\Entity\User $manager
      * @param \Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
-     * @return $result
+     * @return $result null or the error string
      */
-    public function insertIfManagerNotNull($manager, $organisation)
+    public function insertOrganisation($manager, $organisation)
     {
-        if (!empty($manager)) {
+        if (!empty($manager) && $manager instanceof User) {
             $result = null;
             $sql = "INSERT INTO organisation (manager_id, name) "
-            . "VALUES ("
-                        . "'". $manager->getId() . "', "
-                        . "'" . $organisation->getName() . "'"
-                    . ")";
+            . "VALUES (?, ?)";
             try {
                 $stmt = $this->_em->getConnection()->prepare($sql);
-                $stmt->execute();
-            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+                $stmt->execute(
+                        array(
+                            $manager->getId(),
+                            $organisation->getName()
+                        ));
+            } catch (UniqueConstraintViolationException $e) {
                 $result = "form.error.violation_key";
             } catch (\Exception $e) {
                 $result = "form.error.other_error";

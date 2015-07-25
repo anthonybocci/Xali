@@ -37,7 +37,10 @@ class Organisation
      */
     private $manager;
 
-    
+    public function __construct()
+    {
+        $this->manager = new User();
+    }
     
     /**
      * Get id
@@ -76,11 +79,11 @@ class Organisation
     /**
      * Set manager
      *
-     * @param string $manager
+     * @param Xali\Bundle\UserBundle\Entity\User $manager
      *
      * @return Organisation
      */
-    public function setManager($manager)
+    public function setManager(User $manager)
     {
         $this->manager = $manager;
 
