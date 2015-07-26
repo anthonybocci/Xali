@@ -17,7 +17,12 @@ profile:
     assign_volunteer:   "Assigner des bénévoles"
     
 assign_volunteer:
-    assign_volunteer:   "Assigner un bénévole"
-    camp_name:          "Nom du camp"
-    volunteer_name:     "Nom du bénévole"
-    submit:             "Valider"
+    assign_volunteer:           "Assigner un bénévole"
+    camp_name:                  "Nom du camp"
+    volunteer_email:            "Email du bénévole"
+    submit:                     "Valider"
+    volunteer_invalid:          "L'email entrée est invalide, veuillez réessayer"
+    volunteer_already_assigned: >
+                                Le bénévole que vous essayez d'affecter est 
+                                déjà affecté à ce camp.
+    success:                    "Le bénévole a bien été affecté."

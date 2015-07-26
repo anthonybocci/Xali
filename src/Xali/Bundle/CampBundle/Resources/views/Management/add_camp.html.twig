@@ -10,7 +10,7 @@
                 <h1>{{ "form.add_camp"|trans }}</h1>
             </div>
         </div>
-    <form id="form_add_camp" method="POST" action="{{ path('xali_camp_management_add_camp') }}">
+    <form id="form_add_camp" method="POST" action="{{ path('xali_camp_management_add_camp', {'id': organisationId}) }}">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 {{ form_label(form.name) }}
@@ -23,6 +23,13 @@
                 <label for="maps">{{ 'form.city'|trans }}</label>
                 <input id="maps" class="form-control" type="text" size="50" 
                         placeholder="Enter a city" autocomplete="on"/>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.dateOfCreation) }}
+                {{ form_errors(form.dateOfCreation) }}
+                {{form_widget(form.dateOfCreation, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
         {{ form_label(form.city) }}

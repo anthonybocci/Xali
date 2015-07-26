@@ -1,14 +1,20 @@
-#Add a camp
+#Add a camp for organisation which has id equals to {id}
 xali_camp_management_add_camp:
-    path:     /idorganisation/add_camp
+    path:     /{id}/add_camp
     defaults: { _controller: XaliCampBundle:Camp:add_camp }
+    requirements:
+        id: \d+
 
-#See profile
-xali_camp_profile:
-    path:     /profile
+#See camp's profile which has id equals to {id}
+xali_camp_profile_profile:
+    path:     /profile/{id}
     defaults: { _controller: XaliCampBundle:Camp:profile }
+    requirements:
+        id: \d+
     
 #Assign a volunteer to a camp
-xali_camp_assign_volunteer:
-    path:       /assign_volunteer
+xali_camp_management_assign_volunteer:
+    path:       /{id}/assign_volunteer
     defaults:   { _controller: XaliCampBundle:Camp:assign_volunteer }
+    requirements:
+        id: \d+
