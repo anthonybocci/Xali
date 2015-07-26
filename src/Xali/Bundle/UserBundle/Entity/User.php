@@ -89,6 +89,13 @@ class User implements UserInterface
      */
     private $plainPassword;
     
+    /**
+     * @var Xali\Bundle\CampBundle\Entity\Camp 
+     * 
+     * @ORM\ManyToOne(targetEntity="Xali\Bundle\CampBundle\Entity\Camp")
+     */
+    private $camp;
+    
 
     public function __construct()
     {
@@ -302,5 +309,28 @@ class User implements UserInterface
         return $this;
     }
 
-}
 
+    /**
+     * Set camp
+     *
+     * @param \Xali\Bundle\CampBundle\Entity\Camp $camp
+     *
+     * @return User
+     */
+    public function setCamp(\Xali\Bundle\CampBundle\Entity\Camp $camp = null)
+    {
+        $this->camp = $camp;
+
+        return $this;
+    }
+
+    /**
+     * Get camp
+     *
+     * @return \Xali\Bundle\CampBundle\Entity\Camp
+     */
+    public function getCamp()
+    {
+        return $this->camp;
+    }
+}
