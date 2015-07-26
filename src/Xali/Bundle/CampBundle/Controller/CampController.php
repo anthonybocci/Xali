@@ -72,8 +72,8 @@ class CampController extends Controller
         if ($request->getMethod() == "POST" &&
                             !empty($session->get('csrf_token')) &&
                             !empty($request->request->get('csrf_token')) &&
-                            !empty($request->request->get('volunteer_email'))
-        ) {
+                            !empty($request->request->get('volunteer_email'))) {
+            
             $receivedToken = $request->request->get('csrf_token');
             //If received token equals to token in session
             if ($receivedToken == $session->get('csrf_token')) {
@@ -86,6 +86,7 @@ class CampController extends Controller
         //Set csrf token
         $session->set('csrf_token', sha1(time() * rand()));
         $render = 'XaliCampBundle:Management:assign_volunteer.html.twig';
-        return $this->render($render, array('camp' => $camp, 'insertSuccess' => $insert));
+        return $this->render($render, array(
+                                'camp' => $camp, 'insertSuccess' => $insert));
     }
 }
