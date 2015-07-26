@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Xali : Xali is a Web platform which will allow NGO and organisations to get separated families together in countries where there are wars">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Xali</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/anthonybocci/Xali">View on GitHub</a>
+
+          <h1 id="project_title">Xali</h1>
+          <h2 id="project_tagline">Xali is a Web platform which will allow NGO and organisations to get separated families together in countries where there are wars</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/anthonybocci/Xali/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/anthonybocci/Xali/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="xali" class="anchor" href="#xali" aria-hidden="true"><span class="octicon octicon-link"></span></a>Xali</h1>
+
+<p>Xali is a Web platform, a tool which allow families to be
+together again. In countries where there are wars, some families are separated.
+If these people come in humanitarian organisation's camp, they'll can use
+Xali to add them in database, and the rest of family, which is
+is an other country, will can find them again with help of humanitarian organisation
+which will user Xali to find them.</p>
+
+<h2>
+<a id="1-installing-xali" class="anchor" href="#1-installing-xali" aria-hidden="true"><span class="octicon octicon-link"></span></a>1) Installing Xali</h2>
+
+<ul>
+<li>Install a webserver, Wampserver if you're using Windows for example</li>
+<li>Clone this repository onto your web server</li>
+<li>Copy app/config/parameters.yml.dist in the same folder, and rename the copy as app/config/parameters.yml</li>
+<li>Set your paramaters in app/config/parameters.yml, the username and password for database, and the database's name (xali for example)</li>
+</ul>
+
+<p>Execute following commands :</p>
+
+<pre><code>php ./composer.phar update
+php app/console doctrine:database:create
+php app/console doctrine:schema:update --force
+php app/console doctrine:fixtures:load
+</code></pre>
+
+<p>Note : If you're using Windows, add "PHP" and "Git" to the PATH</p>
+
+<h2>
+<a id="2-check-your-configuration" class="anchor" href="#2-check-your-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>2) Check your configuration</h2>
+
+<p>After installing, launch you Web browser and type the following adress :
+http://localhost//web/config.php</p>
+
+<p>This page will tell you if your configuration is fine or not.</p>
+
+<h2>
+<a id="3-using-xali" class="anchor" href="#3-using-xali" aria-hidden="true"><span class="octicon octicon-link"></span></a>3) Using Xali</h2>
+
+<p>To know exactly how to use it, you have to read features.html, and there
+is a Use Case ("Use Case.png")</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Xali maintained by <a href="https://github.com/anthonybocci">anthonybocci</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
