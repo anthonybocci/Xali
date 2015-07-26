@@ -20,9 +20,7 @@ class AppKernel extends Kernel
             new Xali\Bundle\DefaultBundle\XaliDefaultBundle(),
             new Xali\Bundle\SurvivorBundle\XaliSurvivorBundle(),
             new Xali\Bundle\OrganisationBundle\XaliOrganisationBundle(),
-            new Xali\Bundle\VolunteerBundle\XaliVolunteerBundle(),
             new Xali\Bundle\CampBundle\XaliCampBundle(),
-            new Xali\Bundle\AdministrationBundle\XaliAdministrationBundle(),
             new Xali\Bundle\UserBundle\XaliUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );

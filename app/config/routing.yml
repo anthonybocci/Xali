@@ -2,17 +2,9 @@ xali_user:
     resource: "@XaliUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-xali_administration:
-    resource: "@XaliAdministrationBundle/Resources/config/routing.yml"
-    prefix:   /administration
-
 xali_camp:
     resource: "@XaliCampBundle/Resources/config/routing.yml"
     prefix:   /camp
-
-xali_volunteer:
-    resource: "@XaliVolunteerBundle/Resources/config/routing.yml"
-    prefix:   /volunteer
 
 xali_organisation:
     resource: "@XaliOrganisationBundle/Resources/config/routing.yml"
