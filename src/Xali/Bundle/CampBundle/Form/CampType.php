@@ -18,6 +18,10 @@ class CampType extends AbstractType
             ->add('name', 'text', array('label' => "form.name"))
             ->add('city', 'hidden', array('label' => " "))
             ->add('country', 'hidden', array('label' => " "))
+            ->add('dateOfCreation', 'date', array(
+                                            'label' => 'form.date_of_creation',
+                                            'widget' => "single_text",
+                ))
         ;
     }
     

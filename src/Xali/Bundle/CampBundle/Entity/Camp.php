@@ -10,6 +10,7 @@ use \Xali\Bundle\OrganisationBundle\Entity\Organisation;
  *
  * @ORM\Table(name="camp")
  * @ORM\Entity(repositoryClass="Xali\Bundle\CampBundle\Entity\CampRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Camp
 {
@@ -50,8 +51,21 @@ class Camp
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisation;
+    
+    /**
+     * @var \DateTime 
+     * 
+     * @ORM\Column(name="dateofcreation", type="date")
+     */
+    private $dateOfCreation;
 
 
+    
+    public function __construct()
+    {
+        $this->dateOfCreation = new \DateTime();
+    }
+    
     /**
      * Get id
      *
@@ -157,4 +171,30 @@ class Camp
     {
         return $this->organisation;
     }
+
+    /**
+     * Set dateOfCreation
+     *
+     * @param \DateTime $dateOfCreation
+     *
+     * @return Camp
+     */
+    public function setDateOfCreation(\DateTime $dateOfCreation)
+    {
+        $this->dateOfCreation = $dateOfCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateOfCreation()
+    {
+        return $this->dateOfCreation;
+    }
+    
+    
 }
