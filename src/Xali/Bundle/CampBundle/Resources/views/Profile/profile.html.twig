@@ -7,7 +7,7 @@
     <div class="text-center">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>{{ camp.name }}</h1>
+                <h1>Camp "{{ camp.name }}"</h1>
             </div>
         </div><br />
         <div class="row">
@@ -15,12 +15,12 @@
                 {{ "profile.created_on"|trans }} {{ camp.dateOfCreation|localizeddate('long', 'none', app.request.locale) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.nb_survivors"|trans }} {{ "x" }} {{ "profile.survivors"|trans }}
+                {{ "profile.nb_survivors"|trans }} {{ "profile.survivors_nb"|transchoice(0) }}
             </div>
         </div><br />
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.nb_volunteers"|trans }} {{ "x" }} {{ "profile.volunteers"|trans }}
+                {{ "profile.nb_volunteers"|trans }} {{ 'profile.volunteers_nb'|transchoice(volunteersNb) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <a href="{{ path('xali_camp_management_assign_volunteer', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_volunteer"|trans }}</a>
