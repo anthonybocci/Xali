@@ -80,3 +80,10 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+            
+services:
+    #intl extension to use localizeddate
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
