@@ -1,3 +1,0 @@
-xali_administration_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: XaliAdministrationBundle:Default:index }
