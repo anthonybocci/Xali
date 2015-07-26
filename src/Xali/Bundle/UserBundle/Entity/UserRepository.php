@@ -2,6 +2,8 @@
 
 namespace Xali\Bundle\UserBundle\Entity;
 
+use Xali\Bundle\CampBundle\Entity\Camp;
+
 /**
  * UserRepository
  *
@@ -10,4 +12,30 @@ namespace Xali\Bundle\UserBundle\Entity;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Update the user's camp
+     * 
+     * @param \Xali\Bundle\UserBundle\Entity\User $volunteer
+     * @param \Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @return integer -1 if parameters type are invalid, 0 if request failed
+     * and 1 else
+     */
+    public function updateCamp($volunteer, $camp) {
+        $return = 0;
+        //If parameters are invalids (usually $volunteer)
+        if ($volunteer instanceof User && $camp instanceof Camp) {
+            $queryBuilder = $this->createQueryBuilder('u');
+            $q = $queryBuilder->update('XaliUserBundle:User', 'u')
+                         ->set('u.camp', ':camp')
+                         ->setParameter('camp', $camp)
+                         ->where('u.id = :user_id')
+                         ->setParameter('user_id', $volunteer->getId())
+                         ->getQuery()
+                    ;
+            $return = $q->execute();
+        } else {
+            $return = -1;
+        }
+        return $return;
+    }
 }
