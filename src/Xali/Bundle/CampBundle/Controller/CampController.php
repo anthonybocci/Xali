@@ -52,10 +52,14 @@ class CampController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $campRepo = $entityManager->getRepository('XaliCampBundle:Camp');
-        $volunteersNb = $campRepo->countVolunteersNb($camp);
+        $userClass= "XaliUserBundle:User";
+        $survivorClass = "XaliSurvivorBundle:Survivor";
+        $volunteersNb = $campRepo->countPeople($camp, $userClass);
+        $survivorsNb = $campRepo->countPeople($camp, $survivorClass);
         return $this->render('XaliCampBundle:Profile:profile.html.twig', array(
                                                 'camp' => $camp,
                                                 'volunteersNb' => $volunteersNb,
+                                                'survivorsNb' => $survivorsNb,
                             ));
     }
     

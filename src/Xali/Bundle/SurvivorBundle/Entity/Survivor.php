@@ -83,6 +83,13 @@ class Survivor
      * @ORM\Column(name="hair_color", type="string", length=50)
      */
     private $hairColor;
+    
+    /**
+     * @var Xali\Bundle\CampBundle\Entity\Camp
+     * 
+     * @ORM\ManyToOne(targetEntity="Xali\Bundle\CampBundle\Entity\Camp")
+     */
+    private $camp;
 
 
     /**
@@ -305,6 +312,30 @@ class Survivor
     {
         $this->heightUnit = $heightUnit;
         return $this;
+    }
+    
+    /**
+     * Set camp
+     *
+     * @param \Xali\Bundle\CampBundle\Entity\Camp $camp
+     *
+     * @return User
+     */
+    public function setCamp(\Xali\Bundle\CampBundle\Entity\Camp $camp = null)
+    {
+        $this->camp = $camp;
+
+        return $this;
+    }
+
+    /**
+     * Get camp
+     *
+     * @return \Xali\Bundle\CampBundle\Entity\Camp
+     */
+    public function getCamp()
+    {
+        return $this->camp;
     }
     
 }

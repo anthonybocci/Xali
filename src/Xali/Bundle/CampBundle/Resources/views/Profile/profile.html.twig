@@ -15,7 +15,7 @@
                 {{ "profile.created_on"|trans }} {{ camp.dateOfCreation|localizeddate('long', 'none', app.request.locale) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.nb_survivors"|trans }} {{ "profile.survivors_nb"|transchoice(0) }}
+                {{ "profile.nb_survivors"|trans }} {{ "profile.survivors_nb"|transchoice(survivorsNb) }}
             </div>
         </div><br />
         <div class="row">
