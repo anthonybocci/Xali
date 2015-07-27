@@ -44,8 +44,8 @@ class SurvivorType extends AbstractType
             ->add('weightUnit', 'choice', array(
                 'label'  => "form.weight_unit",
                 'choices' => array(
+                    'lb' => 'form.lb',
                     'kg' => 'form.kg',
-                    'lb' => 'form.lb'
                 ),
                 'multiple' => false,
                 'expanded' => false,
@@ -57,8 +57,8 @@ class SurvivorType extends AbstractType
             ->add('heightUnit', 'choice', array(
                 'label'  => "form.height_unit",
                 'choices' => array(
+                    'inch' => 'form.inch',
                     'cm' => 'form.cm',
-                    'inch' => 'form.inch'
                 ),
                 'multiple' => false,
                 'expanded' => false,

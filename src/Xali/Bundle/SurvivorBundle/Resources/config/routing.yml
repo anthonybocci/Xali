@@ -1,7 +1,11 @@
-#Add and probably update a survivor, it depend of a variable
+#Add and update a survivor in the camp which has the id {id}
+#To update a survivor we give its id {survivor_id}
 xali_survivor_management_add_survivor:
-    path:     /add_survivor
-    defaults: { _controller: XaliSurvivorBundle:Survivor:add_survivor }
+    path:     /{id}/add_survivor/{survivor_id}
+    defaults: { _controller: XaliSurvivorBundle:Survivor:add_survivor, survivor_id: 0 }
+    requirements:
+        id: \d+
+        survivor_id: (\d+)?
 
 #Add an *obligatory* id after /profile
 xali_survivor_profile_profile:

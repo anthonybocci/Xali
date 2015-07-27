@@ -26,5 +26,10 @@
                 <a href="{{ path('xali_camp_management_assign_volunteer', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_volunteer"|trans }}</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a href="{{ path('xali_survivor_management_add_survivor', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_survivors"|trans }}</a>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace Xali\Bundle\SurvivorBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\SurvivorBundle\Form\SurvivorType;
 use Xali\Bundle\SurvivorBundle\Entity\Survivor;
+use Xali\Bundle\CampBundle\Entity\Camp;
 
 /**
  * Manage survivors
@@ -14,29 +15,36 @@ use Xali\Bundle\SurvivorBundle\Entity\Survivor;
 class SurvivorController extends Controller
 {
     /**
-     * Add a survivor
+     * Add a survivor into a camp
      * 
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param integer $survivor_id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function add_survivorAction()
+    public function add_survivorAction(Camp $camp, $survivor_id)
     {
-        $survivor = new Survivor();
-        $form = $this->createForm(new SurvivorType(), $survivor);
         $request = $this->get('request');
-        $entityManager = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $converter = $this->container->get('xali_survivor.converter');
-        
+        $survivorClass = 'XaliSurvivorBundle:Survivor';
+        $givenSurvivor = $em->getRepository($survivorClass)->find($survivor_id);
+        //If no survivor is found, add a new. Else, take the found survivor
+        $survivor = (empty($givenSurvivor)) ? new Survivor() : $givenSurvivor;
+        $form = $this->createForm(new SurvivorType(), $survivor);
         //If form is submitted
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->convertWeightAndHeight($survivor, $converter);
-                $entityManager->persist($survivor);
-                $entityManager->flush();
+                $survivor->setCamp($camp);
+                $em->persist($survivor);
+                $em->flush();
             }
         }
-        return $this->render('XaliSurvivorBundle:Management:add_survivor.html.twig',
-                array('form' => $form->createView()));
+        $render = 'XaliSurvivorBundle:Management:add_survivor.html.twig';
+        return $this->render($render, array('form' => $form->createView(), 
+                                                            'camp' => $camp,
+                                                    'survivor' => $survivor));
     }
     
     /**

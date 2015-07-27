@@ -15,6 +15,7 @@ profile:
     nb_volunteers:      "Volunteers number:"
     volunteers:         "volunteers"
     assign_volunteer:   "Assign volunteers"
+    assign_survivors:   "Assign survivors"
     volunteers_nb:      "[0,1]%count% volunteer|[2,+Inf]%count% volunteers"
     survivors_nb:      "[0,1]%count% survivor|[2,+Inf]%count% survivors"
     
