@@ -17,7 +17,8 @@ profile:
     assign_volunteer:   "Assign volunteers"
     assign_survivors:   "Assign survivors"
     volunteers_nb:      "[0,1]%count% volunteer|[2,+Inf]%count% volunteers"
-    survivors_nb:      "[0,1]%count% survivor|[2,+Inf]%count% survivors"
+    survivors_nb:       "[0,1]%count% survivor|[2,+Inf]%count% survivors"
+    camp:               "Camp"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"

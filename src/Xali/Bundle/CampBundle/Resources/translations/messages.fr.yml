@@ -17,7 +17,8 @@ profile:
     assign_volunteer:   "Affecter des bénévoles"
     assign_survivors:   "Affecter des rescapés"
     volunteers_nb:      "[0,1]%count% bénévole|[2,+Inf]%count% bénévoles"
-    survivors_nb:      "[0,1]%count% rescapé|]1,+Inf]%count% rescapés"
+    survivors_nb:       "[0,1]%count% rescapé|]1,+Inf]%count% rescapés"
+    camp:               "Camp"
     
 assign_volunteer:
     assign_volunteer:           "Assigner un bénévole"
