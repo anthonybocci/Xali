@@ -11,22 +11,23 @@ namespace Xali\Bundle\CampBundle\Entity;
 class CampRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * Count volunteers number in a given camp
+     * Count people (usually User or Survivor) in a given camp
      * 
      * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param string $class like XaliUserBundle:User for e.g
      * @return integer
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function countVolunteersNb($camp)
+    public function countPeople($camp, $class)
     {
         $queryBuilder = $this->createQueryBuilder('c');
-        return $queryBuilder->select('COUNT(DISTINCT(u))')
-                     ->from('XaliUserBundle:User', 'u')
-                     ->where('u.camp = :camp')
+        return $queryBuilder->select('COUNT(DISTINCT(p))')
+                     ->from($class, 'p')
+                     ->where('p.camp = :camp')
                      ->setParameter('camp', $camp)
                      ->getQuery()
                      ->getSingleScalarResult()
             ;
     }
-
+    
 }
