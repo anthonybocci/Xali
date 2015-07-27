@@ -7,7 +7,7 @@
     <div class="text-center">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>{{ "NGO's name" }}</h1>
+                <h1>{{ "profile.organisation"|trans }} "{{ organisation.name }}"</h1>
             </div>
         </div><br />
         <div class="row">
@@ -15,16 +15,21 @@
                 {{ "profile.created_on"|trans }} xxxx-xx-xx
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.email"|trans }} {{ "email" }}
+                {{ "profile.email"|trans }} {{ organisation.manager.email }}
             </div>
         </div><br />
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.nb_camps"|trans }} {{ "x" }} {{ "profile.camps"|trans }}
+                {{ "profile.camps_nb"|transchoice(campsNb) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.nb_survivors"|trans }} {{ "x" }} {{ "profile.survivors"|trans }}
+                {{ "profile.survivors_nb"|transchoice(survivorsNb) }}
             </div>
-        </div><br />
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                {{ "profile.volunteers_nb"|transchoice(volunteersNb) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

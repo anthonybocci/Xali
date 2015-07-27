@@ -10,7 +10,7 @@
     {% endif %}
     
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">    
-    <form id="form_add_organisation" method="POST" action="{{ path('xali_organisation_management_add_organisation') }}">
+    <form id="form_add_organisation" method="POST" action="{{ path('xali_organisation_management_add_organisation', {'id_organisation': organisation.id}) }}">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                {{ form_label(form.name) }}
@@ -21,7 +21,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label for="email">{{ 'form.manager_email'|trans }}</label>
-                <input type="email" name="manager" id="manager"class="form-control"/>               
+                {% set emailValue = (organisation is not null) ? organisation.manager.email : "" %} 
+                <input type="email" name="manager" value="{{ emailValue }}" id="manager"class="form-control"/>               
             </div>
         </div>
         {{ form_rest(form) }}

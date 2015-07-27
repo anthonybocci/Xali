@@ -14,39 +14,98 @@ class OrganisationController extends Controller
 {
     /**
      * Add an organisation and assign to it a manager
+     * 
+     * @param integer $id_organisation the organisation's id if user want to
+     * update an organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function add_organisationAction()
+    public function add_organisationAction($id_organisation)
     {
-        $organisation = new Organisation();
-        $form = $this->createForm(new OrganisationType(), $organisation);
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('XaliUserBundle:User');
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $givenOrg = $orgRepo->find($id_organisation);
+        $organisation = (empty($givenOrg)) ? new Organisation() : $givenOrg;
+        $form = $this->createForm(new OrganisationType(), $organisation);
         $error = null;
+        $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
+        //The function's return, defined to display form
+        $return = $this->render($render, array('form' => $form->createView(),
+                           'error' => $error, 'organisation' => $organisation));
         //If form is submitted
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $manager = $userRepo->findOneByEmail(
-                                            $request->request->get('manager'));
-                $error = $orgRepo->insertOrganisation($manager, $organisation);
+                $paramManager = $request->request->get('manager');
+                $manager = $userRepo->findOneByEmail($paramManager);
+                $error = $this->insertOrUpdate($organisation, $manager);
+                /*
+                 * If there is no error after insert/update the organisation
+                 * redirect to organisation's profile.
+                 * Else, display form and error
+                 */
+                $return = ($error == null) ? $this->redirect(
+                        $this->generateUrl('xali_organisation_profile_profile', 
+                               array('id' => $organisation->getId()))): $return;
             }
         }
-        
-        $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
-        return $this->render($render, array('form' => $form->createView(), 'error' => $error));
+        return $return;
     }
     
-    public function update_organisationAction()
+    /**
+     * Insert or update an organisation according to $organisation's id
+     * 
+     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
+     * the organisation
+     * @param Xali\Bundle\UserBundle\Entity\User $manager
+     * the manager user want to assign
+     * @return string error message if there is
+     * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function insertOrUpdate($organisation, $manager)
     {
-        $render = 'XaliOrganisationBundle:Management:update_organisation.html.twig';
-        return $this->render($render);
+        $em = $this->getDoctrine()->getManager();
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        //Insert
+        if (empty($organisation->getId())) {
+            return $orgRepo->insertOrganisation($manager, $organisation);
+        } else { //Update
+            return $orgRepo->updateOrganisation($manager, $organisation);
+        }
     }
     
-    public function profileAction() {
+    public function redirectIfSuccess($error, $organisation)
+    {
+        return $this->redirect('https://google.com');
+        if ($error == null) {
+            return $this->redirect(
+                        $this->generateUrl('xali_organisation_profile_profile',
+                                        array('id' => $organisation->getId()))
+                    );
+        }
+    }
+    
+    
+    /**
+     * Display organisation's profile
+     * 
+     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
+     * the organisation user want to display
+     * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function profileAction(Organisation $organisation) {
         $render = 'XaliOrganisationBundle:Profile:profile.html.twig';
-        return $this->render($render);
+        $em = $this->getDoctrine()->getManager();
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $volunteersNb = $orgRepo->countVolunteers($organisation);
+        $campsNb = $orgRepo->countCamps($organisation);
+        $survivorsNb = $orgRepo->countSurvivors($organisation);
+        return $this->render($render, array(
+            'organisation' => $organisation,
+            'volunteersNb' => $volunteersNb,
+            'campsNb' => $campsNb,
+            'survivorsNb' => $survivorsNb,
+        ));
     }
 }
