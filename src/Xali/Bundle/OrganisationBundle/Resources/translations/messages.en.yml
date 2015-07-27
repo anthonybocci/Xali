@@ -2,17 +2,19 @@
 ---
 
 form:
-    name:               "Name:"
-    manager_email:      "Manager's email:"
+    name:                   "Name:"
+    manager_email:          "Manager's email:"
     error:
-        violation_key:  >
-                        "This person manage an other organisation, please chose
-                        an other person."
-        invalid_email:  >
-                        "The email adresse looks invalid."
-        other_error:    >
-                        "There is an error to add this organisation, please 
-                        contact an administrator."
+        violation_key:      >
+                            "This person manage an other organisation, please chose
+                            an other person."
+        invalid_email:      >
+                            "The email adresse looks invalid."
+        other_error:        >
+                            "There is an error to add this organisation, please 
+                            contact an administrator."
+    date_of_creation:   "Date of creation"
+    success:                "Organisation added"
     
 profile:
     created_on:         "Created on"

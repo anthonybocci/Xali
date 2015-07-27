@@ -29,28 +29,20 @@ class OrganisationController extends Controller
         $organisation = (empty($givenOrg)) ? new Organisation() : $givenOrg;
         $form = $this->createForm(new OrganisationType(), $organisation);
         $error = null;
-        $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
-        //The function's return, defined to display form
-        $return = $this->render($render, array('form' => $form->createView(),
-                           'error' => $error, 'organisation' => $organisation));
         //If form is submitted
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $paramManager = $request->request->get('manager');
                 $manager = $userRepo->findOneByEmail($paramManager);
-                $error = $this->insertOrUpdate($organisation, $manager);
-                /*
-                 * If there is no error after insert/update the organisation
-                 * redirect to organisation's profile.
-                 * Else, display form and error
-                 */
-                $return = ($error == null) ? $this->redirect(
-                        $this->generateUrl('xali_organisation_profile_profile', 
-                               array('id' => $organisation->getId()))): $return;
+                $result = $this->insertOrUpdate($organisation, $manager);
+                //If there is no error, display a message of success
+                $error = ($result == null) ? "form.success" : $result;
             }
         }
-        return $return;
+        $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
+        return $this->render($render, array('form' => $form->createView(),
+                           'error' => $error, 'organisation' => $organisation));
     }
     
     /**
@@ -74,18 +66,6 @@ class OrganisationController extends Controller
             return $orgRepo->updateOrganisation($manager, $organisation);
         }
     }
-    
-    public function redirectIfSuccess($error, $organisation)
-    {
-        return $this->redirect('https://google.com');
-        if ($error == null) {
-            return $this->redirect(
-                        $this->generateUrl('xali_organisation_profile_profile',
-                                        array('id' => $organisation->getId()))
-                    );
-        }
-    }
-    
     
     /**
      * Display organisation's profile

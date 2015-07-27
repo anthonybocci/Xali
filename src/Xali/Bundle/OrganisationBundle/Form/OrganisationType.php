@@ -16,8 +16,12 @@ class OrganisationType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'form.name'
+                'label' => 'form.name',
             ))
+            ->add('dateOfCreation', 'date', array(
+                                            'label' => 'form.date_of_creation',
+                                            'widget' => "single_text",
+                ))
             //An email input is added in HTML
         ;
     }

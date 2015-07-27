@@ -25,14 +25,15 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
     {
         if (!empty($manager) && $manager instanceof User) {
             $result = null;
-            $sql = "INSERT INTO organisation (manager_id, name) "
-            . "VALUES (?, ?)";
+            $sql = "INSERT INTO organisation (manager_id, name, dateofcreation)"
+            . "VALUES (?, ?, ?)";
             try {
                 $stmt = $this->_em->getConnection()->prepare($sql);
                 $stmt->execute(
                         array(
                             $manager->getId(),
-                            $organisation->getName()
+                            $organisation->getName(),
+                            $organisation->getDateOfCreation()->format('Y-m-d'),
                         ));
             } catch (UniqueConstraintViolationException $e) {
                 $result = "form.error.violation_key";
@@ -57,13 +58,20 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
     {
         if (!empty($manager) && $manager instanceof User) {
             $result = null;
-            $sql = "UPDATE organisation SET manager_id = ?, name = ?";
+            $sql = "UPDATE organisation
+                    SET manager_id = ?,
+                    name = ?,
+                    dateofcreation = ?
+                    WHERE organisation.id = ?
+                    ";
             try {
                 $stmt = $this->_em->getConnection()->prepare($sql);
                 $stmt->execute(
                         array(
                             $manager->getId(),
-                            $organisation->getName()
+                            $organisation->getName(),
+                            $organisation->getDateOfCreation()->format('Y-m-d'),
+                            $organisation->getId(),
                         ));
             } catch (UniqueConstraintViolationException $e) {
                 $result = "form.error.violation_key";

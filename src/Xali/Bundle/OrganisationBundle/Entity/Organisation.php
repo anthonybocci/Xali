@@ -28,6 +28,13 @@ class Organisation
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
+    
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="dateofcreation", type="date")
+     */
+    private $dateOfCreation;
 
     /**
      * @var \Xali\Bundle\UserBundle\Entity\User
@@ -40,6 +47,7 @@ class Organisation
     public function __construct()
     {
         $this->manager = new User();
+        $this->dateOfCreation = new \DateTime();
     }
     
     /**
@@ -99,5 +107,28 @@ class Organisation
     {
         return $this->manager;
     }
-}
 
+    /**
+     * Set dateOfCreation
+     *
+     * @param \DateTime $dateOfCreation
+     *
+     * @return Organisation
+     */
+    public function setDateOfCreation(\DateTime $dateOfCreation)
+    {
+        $this->dateOfCreation = $dateOfCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateOfCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateOfCreation()
+    {
+        return $this->dateOfCreation;
+    }
+}

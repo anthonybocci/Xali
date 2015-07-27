@@ -2,25 +2,27 @@
 ---
 
 form:
-    name:               "Nom :"
-    manager_email:      "Email du gérant :"
+    name:                   "Nom :"
+    manager_email:          "Email du gérant :"
     error:
-        violation_key:  >
-                        "Il semblerait que cette personne gère déjà une autre
-                        organisation. Veuillez choisir quelqu'un d'autre."
-        invalid_email:  >
-                        "L'adresse email entrée semble invalide."
-        other_error:    >
-                        "Il y a une erreur dans l'ajout de l'organisation, merci
-                        de contacter un administrateur."
+        violation_key:      >
+                            "Il semblerait que cette personne gère déjà une autre
+                            organisation. Veuillez choisir quelqu'un d'autre."
+        invalid_email:      >
+                            "L'adresse email entrée semble invalide."
+        other_error:        >
+                            "Il y a une erreur dans l'ajout de l'organisation, merci
+                            de contacter un administrateur."
+    date_of_creation:   "Date de création"
+    succes:             "Organisation ajoutée"
     
 profile:
-    created_on:         "Créé le"
-    email:              "Email du responsable :"
-    volunteers_nb:      "[0,1]%count% bénévole|[2,+Inf]%count% bénévoles"
-    survivors_nb:       "[0,1]%count% rescapé|[2,+Inf]%count% rescapés"
-    camps_nb:           "[0,1]%count% camp|[2,+Inf]%count% camps"
-    survivors:          "Rescapés"
-    camps:              "camps"
-    organisation:       "Organisation"
+    created_on:             "Créé le"
+    email:                  "Email du responsable :"
+    volunteers_nb:          "[0,1]%count% bénévole|[2,+Inf]%count% bénévoles"
+    survivors_nb:           "[0,1]%count% rescapé|[2,+Inf]%count% rescapés"
+    camps_nb:               "[0,1]%count% camp|[2,+Inf]%count% camps"
+    survivors:              "Rescapés"
+    camps:                  "camps"
+    organisation:           "Organisation"
     
