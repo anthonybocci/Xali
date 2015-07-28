@@ -111,6 +111,7 @@ class OrganisationController extends Controller
      * 
      * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function deleteAction(Organisation $organisation)
     {
@@ -128,7 +129,7 @@ class OrganisationController extends Controller
             $em->remove($organisation);
             $em->flush();
         } else {
-            $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
         return $this->redirect($this->generateUrl($generateUrl));
     }

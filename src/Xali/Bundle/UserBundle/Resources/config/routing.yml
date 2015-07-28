@@ -5,15 +5,21 @@ xali_user_registration_register:
     path:   /register
     defaults: { _controller: XaliUserBundle:Registration:register }
     
-#Show profile
+#Show profile of user which has id equals to {id}
 xali_user_profile_show:
-    path:   /user/profile/{id_user}
+    path:   /user/profile/{id}
     defaults: { _controller: XaliUserBundle:Profile:show }
     requirements:
         id_user:    \d+
     
-#Edit profile
+#Edit profile of user which has id equals to {id}
 xali_user_profile_edit:
     path:   /user/profile/edit/{id}
     defaults: { _controller: XaliUserBundle:Profile:edit }
-    
+
+xali_user_management_leave_organisation:
+    path:   /user/{id}/leave_organisation
+    defaults: { _controller: XaliUserBundle:Management:leave_organisation }
+    requirements:
+        id: \d+
+        _method:    POST

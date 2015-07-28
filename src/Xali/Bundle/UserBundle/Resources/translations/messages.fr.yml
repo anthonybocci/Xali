@@ -8,9 +8,14 @@ form:
     email_confirmation: "Vérification :"
     add_volunteer:      "Ajouter un bénévole"
     
+    
 profile:
     show:
         email:          "Email :"
         camp_assigned:  "Camp :"
         edit:           "Éditer le profile"
         no_camp:        "Aucun camp"
+        leave_organisation:  "Quitter mon organisation pour pouvoir être recruté(e) par une autre"
+        confirm_leave_organisation:  "Confirmer"
+        go_profile:         "Voir le profil"
+    edit:           "Valider"

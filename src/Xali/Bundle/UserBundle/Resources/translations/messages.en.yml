@@ -7,6 +7,7 @@ form:
     email:              "Email:"
     email_confirmation: "Repeat email:"
     add_volunteer:      "Add a volunteer"
+   
     
 profile:
     show:
@@ -14,5 +15,8 @@ profile:
         camp_assigned:      "Assigned camp:"
         edit:               "Edit profile"
         no_camp:            "No camp"
-        left_organisation:  "Left my organisation"
-        confirm_left_organisation:  "Confirm left my organisation"
+        leave_organisation:  "Leave my organisation to an other take on me"
+        confirm_leave_organisation:  "Confirm leave my organisation"
+        go_profile:         "Go to profile"
+    edit:
+        submit:     "Submit"

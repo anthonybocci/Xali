@@ -119,6 +119,7 @@ class CampController extends Controller
      * 
      * @param Xali\Bundle\CampBundle\Entity\Camp $camp
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function deleteAction(Camp $camp)
     {
@@ -136,7 +137,7 @@ class CampController extends Controller
             $em->remove($camp);
             $em->flush();
         } else {
-            $this->createAccessDeniedException();
+            throw $this->createAccessDeniedException();
         }
         return $this->redirect($this->generateUrl($generateUrl));
     }

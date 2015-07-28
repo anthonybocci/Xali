@@ -4,20 +4,23 @@
 
 {% block user_body %}
     <div class="fos_user_user_show">
+        {# If user is logged in and if it's its profile #}
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == profileOwner.id%}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <a href="{#{{ path('xali_user_profile_edit') }}#}">
+                <a href="{{ path('xali_user_profile_edit', {'id' : app.user.id}) }}">
                     {{ "profile.show.edit"|trans }}
                 </a>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <button id="btn-left-organisation" class="btn btn-danger">
-                    {{ "profile.show.left_organisation"|trans }}
+                    {{ "profile.show.leave_organisation"|trans }}
                 </button>
-                <form id="form-left-organisation">
-                    <input type="hidden" name="csrf_token_left_org" value="" />
+                <form method="POST" id="form-left-organisation" 
+                action="{{ path('xali_user_management_leave_organisation', {'id': profileOwner.id}) }}">
+                    <input type="hidden" name="csrf_token_leave_organisation" 
+                    value="{{ app.session.get('csrf_token_leave_organisation') }}" />
                     <input type="submit" class="btn btn-danger" 
-                        value="{{ "profile.show.confirm_left_organisation"|trans }}"/>
+                        value="{{ "profile.show.confirm_leave_organisation"|trans }}"/>
                 </form>
             </div>
         {% endif %}
