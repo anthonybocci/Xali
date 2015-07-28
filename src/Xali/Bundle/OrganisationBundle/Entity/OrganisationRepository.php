@@ -30,8 +30,7 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
             try {
                 $stmt = $this->_em->getConnection()->prepare($sql);
                 $stmt->execute(
-                        array(
-                            $manager->getId(),
+                        array($manager->getId(),
                             $organisation->getName(),
                             $organisation->getDateOfCreation()->format('Y-m-d'),
                         ));
@@ -59,20 +58,14 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
         if (!empty($manager) && $manager instanceof User) {
             $result = null;
             $sql = "UPDATE organisation
-                    SET manager_id = ?,
-                    name = ?,
-                    dateofcreation = ?
+                    SET manager_id = ?, name = ?, dateofcreation = ?
                     WHERE organisation.id = ?
                     ";
             try {
                 $stmt = $this->_em->getConnection()->prepare($sql);
-                $stmt->execute(
-                        array(
-                            $manager->getId(),
-                            $organisation->getName(),
+                $stmt->execute(array($manager->getId(), $organisation->getName(),
                             $organisation->getDateOfCreation()->format('Y-m-d'),
-                            $organisation->getId(),
-                        ));
+                            $organisation->getId()));
             } catch (UniqueConstraintViolationException $e) {
                 $result = "form.error.violation_key";
             } catch (\Exception $e) {
