@@ -74,7 +74,8 @@ class OrganisationController extends Controller
      * the organisation user want to display
      * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function profileAction(Organisation $organisation) {
+    public function profileAction(Organisation $organisation)
+    {
         $render = 'XaliOrganisationBundle:Profile:profile.html.twig';
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
@@ -87,5 +88,14 @@ class OrganisationController extends Controller
             'campsNb' => $campsNb,
             'survivorsNb' => $survivorsNb,
         ));
+    }
+    
+    /**
+     * Show all organisations
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function see_allAction()
+    {
+        return $this->render('XaliOrganisationBundle:Search:see_all.html.twig');
     }
 }

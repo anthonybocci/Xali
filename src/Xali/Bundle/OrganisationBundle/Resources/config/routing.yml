@@ -16,3 +16,8 @@ xali_organisation_profile_profile:
     defaults: { _controller: XaliOrganisationBundle:Organisation:profile }
     requirements:
         id: \d+
+
+#See all organisations, and later search easily an organisation
+xali_organisation_search_see_all:
+    path:     /see_all
+    defaults: { _controller: XaliOrganisationBundle:Organisation:see_all }
