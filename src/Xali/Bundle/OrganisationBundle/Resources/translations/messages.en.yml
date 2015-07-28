@@ -13,8 +13,11 @@ form:
         other_error:        >
                             "There is an error to add this organisation, please 
                             contact an administrator."
-    date_of_creation:   "Date of creation"
+    date_of_creation:       "Date of creation"
     success:                "Organisation added"
+    tip:                    >
+                            Tip: If the manager hasn't an account yet, create
+                             it before
     
     
 profile:
@@ -28,7 +31,7 @@ profile:
     camps:              "camps"
     organisation:       "Organisation"
     delete:             "Delete"
-    confirm_deleting:   "Confirm deleting?"
+    confirm_deleting:   "Confirm deleting"
     
 see_all:
     created_on:     "Created on"

@@ -7,6 +7,7 @@ form:
     city:           "City"
     country:        "Country"
     unique:         "unique"
+    tip:            "Tip: If the volunteer hasn't an account yet, create it"
 
 profile:
     created_on:         "Created on"
@@ -20,7 +21,7 @@ profile:
     survivors_nb:       "[0,1]%count% survivor|[2,+Inf]%count% survivors"
     camp:               "Camp"
     delete:             "Delete"
-    confirm_deleting:   "Confirm deleting?"
+    confirm_deleting:   "Confirm deleting"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"
