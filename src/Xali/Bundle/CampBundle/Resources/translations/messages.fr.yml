@@ -19,6 +19,7 @@ profile:
     volunteers_nb:      "[0,1]%count% bénévole|[2,+Inf]%count% bénévoles"
     survivors_nb:       "[0,1]%count% rescapé|]1,+Inf]%count% rescapés"
     camp:               "Camp"
+    delete:             "Supprimer"
     
 assign_volunteer:
     assign_volunteer:           "Assigner un bénévole"
@@ -30,3 +31,7 @@ assign_volunteer:
                                 Le bénévole que vous essayez d'affecter est 
                                 déjà affecté à ce camp.
     success:                    "Le bénévole a bien été affecté."
+    
+see_all:
+    created_on:     "Créée le"
+    manager_email:  "Email du responsable"

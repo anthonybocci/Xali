@@ -96,6 +96,10 @@ class OrganisationController extends Controller
      */
     public function see_allAction()
     {
-        return $this->render('XaliOrganisationBundle:Search:see_all.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $organisations = $orgRepo->findAll();
+        return $this->render('XaliOrganisationBundle:Search:see_all.html.twig',
+                array('organisations' => $organisations));
     }
 }

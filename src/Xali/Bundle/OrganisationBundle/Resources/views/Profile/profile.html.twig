@@ -8,11 +8,16 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1>{{ "profile.organisation"|trans }} "{{ organisation.name }}"</h1>
+                <form method="POST">
+                    <input type="hidden" name="csrf_token" value="" />
+                    <input type="submit" class="btn btn-danger" href="#"
+                           value="{{ "profile.delete"|trans }}" />
+                </form>
             </div>
         </div><br />
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.created_on"|trans }} xxxx-xx-xx
+                {{ "profile.created_on"|trans }} {{ organisation.dateOfCreation|localizeddate('long', 'none', app.request.locale) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 {{ "profile.email"|trans }} {{ organisation.manager.email }}

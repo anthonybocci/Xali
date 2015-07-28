@@ -5,5 +5,26 @@
 
 {#Overwrite organisation_body block#}
 {% block organisation_body %}
+    <div class="text-center">
+        {% for organisation in organisations %}
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <a href="{{ path('xali_organisation_profile_profile', {'id': organisation.id}) }}">
+                        {{ organisation.name }}
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    {{ "see_all.created_on"|trans }} {{ organisation.dateOfCreation|localizeddate('long', 'none', app.request.locale) }}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    {{ "see_all.manager_email"|trans }} {{ organisation.manager.email }}
+                </div>
+            </div>
+            {% if loop.last == false %}
+                <hr />
+            {% endif %}
+        {% endfor %}
+    </div>
+    
     
 {% endblock %}

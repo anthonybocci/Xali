@@ -48,9 +48,10 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Update an organisation
      * 
-     * @param \Xali\Bundle\UserBundle\Entity\User $manager the manager
+     * @param \Xali\Bundle\UserBundle\Entity\User $manager the manager we want
+     * to assign
      * @param \Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
-     * the organisation
+     * the organisation to update
      * @return string
      */
     public function updateOrganisation($manager, $organisation)

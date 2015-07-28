@@ -19,6 +19,7 @@ profile:
     volunteers_nb:      "[0,1]%count% volunteer|[2,+Inf]%count% volunteers"
     survivors_nb:       "[0,1]%count% survivor|[2,+Inf]%count% survivors"
     camp:               "Camp"
+    delete:             "Delete"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"
@@ -30,3 +31,7 @@ assign_volunteer:
                                 The volunteer you are trying to assign is 
                                 already assigned to this camp.
     success:                    "The volunteer is successfully assigned"
+    
+see_all:
+    created_on:     "Created on"
+    manager_email:  "Manager's email"
