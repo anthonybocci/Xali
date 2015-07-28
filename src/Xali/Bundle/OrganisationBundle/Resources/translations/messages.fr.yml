@@ -27,3 +27,7 @@ profile:
     organisation:           "Organisation"
     delete:                 "Supprimer"
     confirm_deleting:   "Confirmer la suppression ?"
+    
+see_all:
+    created_on:     "Créée le"
+    manager_email:  "Email du responsable"

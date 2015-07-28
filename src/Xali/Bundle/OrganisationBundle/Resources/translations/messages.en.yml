@@ -30,3 +30,6 @@ profile:
     delete:             "Delete"
     confirm_deleting:   "Confirm deleting?"
     
+see_all:
+    created_on:     "Created on"
+    manager_email:  "Manager's email"

@@ -82,6 +82,9 @@ class OrganisationController extends Controller
         $volunteersNb = $orgRepo->countVolunteers($organisation);
         $campsNb = $orgRepo->countCamps($organisation);
         $survivorsNb = $orgRepo->countSurvivors($organisation);
+        $session = $this->get('session');
+        $token = sha1(time() * rand());
+        $session->set('csrf_token_del_org', $token);
         return $this->render($render, array(
             'organisation' => $organisation,
             'volunteersNb' => $volunteersNb,
@@ -114,8 +117,19 @@ class OrganisationController extends Controller
         //Check rights, if user hasn't rights redirect him on organisation's
         //profile
         $em = $this->getDoctrine()->getManager();
-        $em->remove($organisation);
-        $em->flush();
-        return $this->redirect($this->generateUrl('xali_organisation_search_see_all'));
+        $request = $this->get('request');
+        $session = $this->get('session');
+        $sessionToken = $request->request->get('csrf_token_del_org');
+        $givenToken = $session->get('csrf_token_del_org');
+        $generateUrl = 'xali_organisation_search_see_all';
+        //If tokens exists and are valids
+        if (!empty($sessionToken) && !empty($givenToken) && 
+                                                $sessionToken == $givenToken) {
+            $em->remove($organisation);
+            $em->flush();
+        } else {
+            $this->createAccessDeniedException();
+        }
+        return $this->redirect($this->generateUrl($generateUrl));
     }
 }

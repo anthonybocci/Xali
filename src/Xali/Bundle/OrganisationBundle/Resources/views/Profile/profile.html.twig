@@ -10,7 +10,7 @@
                 <h1>{{ "profile.organisation"|trans }} "{{ organisation.name }}"</h1>
                 <button id="btn-delete" class="btn btn-danger">{{ "profile.delete"|trans }}</button>
                 <form id = "form-delete" method="POST" action="{{ path('xali_organisation_delete', {'id': organisation.id}) }}">
-                    <input type="hidden" name="csrf_token" value="" />
+                    <input type="hidden" value="{{ app.session.get('csrf_token_del_org') }}" name="csrf_token_del_org" />
                     <input type="submit" class="btn btn-danger" href="#"
                            value="{{ "profile.confirm_deleting"|trans }}" />
                 </form>
