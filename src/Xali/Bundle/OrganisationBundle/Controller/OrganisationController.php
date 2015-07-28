@@ -102,4 +102,20 @@ class OrganisationController extends Controller
         return $this->render('XaliOrganisationBundle:Search:see_all.html.twig',
                 array('organisations' => $organisations));
     }
+    
+    /**
+     * Delete an organisation
+     * 
+     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function deleteAction(Organisation $organisation)
+    {
+        //Check rights, if user hasn't rights redirect him on organisation's
+        //profile
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($organisation);
+        $em->flush();
+        return $this->redirect($this->generateUrl('xali_organisation_search_see_all'));
+    }
 }

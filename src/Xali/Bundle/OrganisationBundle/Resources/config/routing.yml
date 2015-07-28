@@ -21,3 +21,9 @@ xali_organisation_profile_profile:
 xali_organisation_search_see_all:
     path:     /see_all
     defaults: { _controller: XaliOrganisationBundle:Organisation:see_all }
+    
+xali_organisation_delete:
+    path:  /delete/{id}
+    defaults: { _controller: XaliOrganisationBundle:Organisation:delete }
+    requirements:
+        _method:  POST

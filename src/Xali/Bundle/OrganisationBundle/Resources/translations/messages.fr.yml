@@ -25,4 +25,5 @@ profile:
     survivors:              "Rescapés"
     camps:                  "camps"
     organisation:           "Organisation"
-    
+    delete:                 "Supprimer"
+    confirm_deleting:   "Confirmer la suppression ?"

@@ -1,15 +1,17 @@
 #Header
 header:
-    xali:               Xali
-    login:              Connexion
-    logout:             Déconnexion
-    administration:     Administration
-    profile:            Profil
-    add_ngo:            Ajouter une ONG
-    add_camp:           Ajouter un camp
-    add_volunteer:      Ajouter un bénévole
-    add_survivor:       Ajouter un rescapé
-    search_survivor:    Rechercher un rescapé
+    xali:                   "Xali"
+    login:                  "Connexion"
+    logout:                 "Déconnexion"
+    administration:         "Administration"
+    profile:                "Profil"
+    add_ngo:                "Ajouter une ONG"
+    add_camp:               "Ajouter un camp"
+    add_volunteer:          "Ajouter un bénévole"
+    add_survivor:           "Ajouter un rescapé"
+    search_survivor:        "Rechercher un rescapé"
+    see_all_organisations:   "Voir les organisations"
+    
 #Footer
 footer:
-    legal: Xali est un projet gratuit et open source distribué sous la licence GNU GPL
+    legal: "Xali est un projet gratuit et open source distribué sous la licence GNU GPL"

@@ -20,6 +20,7 @@ profile:
     survivors_nb:       "[0,1]%count% survivor|[2,+Inf]%count% survivors"
     camp:               "Camp"
     delete:             "Delete"
+    confirm_deleting:   "Confirm deleting?"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"
