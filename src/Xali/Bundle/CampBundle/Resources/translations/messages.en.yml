@@ -35,4 +35,4 @@ assign_volunteer:
     
 see_all:
     created_on:     "Created on"
-    manager_email:  "Manager's email"
+    organisation_name:  "Organisation's name"

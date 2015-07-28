@@ -35,4 +35,4 @@ assign_volunteer:
     
 see_all:
     created_on:     "Créée le"
-    manager_email:  "Email du responsable"
+    organisation_name:  "Nom de l'organisation"

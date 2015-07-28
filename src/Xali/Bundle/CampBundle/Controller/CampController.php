@@ -56,6 +56,9 @@ class CampController extends Controller
         $survivorClass = "XaliSurvivorBundle:Survivor";
         $volunteersNb = $campRepo->countPeople($camp, $userClass);
         $survivorsNb = $campRepo->countPeople($camp, $survivorClass);
+        $session = $this->get('session');
+        $token = sha1(time() * rand());
+        $session->set('csrf_token_del_camp', $token);
         return $this->render('XaliCampBundle:Profile:profile.html.twig', array(
                                                 'camp' => $camp,
                                                 'volunteersNb' => $volunteersNb,
@@ -96,5 +99,45 @@ class CampController extends Controller
         $render = 'XaliCampBundle:Management:assign_volunteer.html.twig';
         return $this->render($render, array(
                                 'camp' => $camp, 'insertSuccess' => $insert));
+    }
+    
+    /**
+     * Show all camps
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function see_allAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $campRepo = $em->getRepository('XaliCampBundle:Camp');
+        $camps = $campRepo->findAll();
+        return $this->render('XaliCampBundle:Search:see_all.html.twig',
+                array('camps' => $camps));
+    }
+    
+    /**
+     * Delete a camp
+     * 
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function deleteAction(Camp $camp)
+    {
+        //Check rights, if user hasn't rights redirect him on camp's
+        //profile
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request');
+        $session = $this->get('session');
+        $sessionToken = $request->request->get('csrf_token_del_camp');
+        $givenToken = $session->get('csrf_token_del_camp');
+        $generateUrl = 'xali_camp_search_see_all';
+        //If tokens exists and are valids
+        if (!empty($sessionToken) && !empty($givenToken) && 
+                                                $sessionToken == $givenToken) {
+            $em->remove($camp);
+            $em->flush();
+        } else {
+            $this->createAccessDeniedException();
+        }
+        return $this->redirect($this->generateUrl($generateUrl));
     }
 }

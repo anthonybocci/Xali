@@ -1,0 +1,30 @@
+{# src/CampBundle/Resources/views/Search/see_all.html.twig #}
+{# Here we can see all camps. Later, we'll can easily search them #}
+
+{% extends "XaliCampBundle::base_camp.html.twig" %}
+
+{#Overwrite camp_body block#}
+{% block camp_body %}
+    <div class="text-center">
+        {% for camp in camps %}
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <a href="{{ path('xali_camp_profile_profile', {'id': camp.id}) }}">
+                        {{ camp.name }}
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    {{ "see_all.created_on"|trans }} {{ camp.dateOfCreation|localizeddate('long', 'none', app.request.locale) }}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    {{ "see_all.organisation_name"|trans }} {{ camp.organisation.name }}
+                </div>
+            </div>
+            {% if loop.last == false %}
+                <hr />
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    
+{% endblock %}
