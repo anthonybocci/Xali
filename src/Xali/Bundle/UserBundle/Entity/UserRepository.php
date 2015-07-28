@@ -38,4 +38,22 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         }
         return $return;
     }
+    
+    /**
+     * Find a user, joined with its camp
+     * 
+     * @param integer $id
+     * @return Xali\Bundle\UserBundle\Entity\User
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     */
+    public function findWithCamp($id)
+    {
+        return $queryBuilder = $this->createQueryBuilder('u')
+                     ->where('u.id = :user_id')
+                     ->setParameter('user_id', $id)
+                     ->leftJoin('u.camp', 'c')
+                     ->addSelect('c')
+                     ->getQuery()
+                     ->getOneOrNullResult();
+    }
 }

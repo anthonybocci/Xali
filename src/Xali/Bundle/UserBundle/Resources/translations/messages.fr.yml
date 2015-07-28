@@ -7,3 +7,10 @@ form:
     email:              "Email :"
     email_confirmation: "Vérification :"
     add_volunteer:      "Ajouter un bénévole"
+    
+profile:
+    show:
+        email:          "Email :"
+        camp_assigned:  "Camp :"
+        edit:           "Éditer le profile"
+        no_camp:        "Aucun camp"

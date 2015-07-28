@@ -7,3 +7,12 @@ form:
     email:              "Email:"
     email_confirmation: "Repeat email:"
     add_volunteer:      "Add a volunteer"
+    
+profile:
+    show:
+        email:              "Email:"
+        camp_assigned:      "Assigned camp:"
+        edit:               "Edit profile"
+        no_camp:            "No camp"
+        left_organisation:  "Left my organisation"
+        confirm_left_organisation:  "Confirm left my organisation"

@@ -84,8 +84,6 @@ class User implements UserInterface
     
     /**
      * @var string
-     * 
-     * @Assert\NotBlank()
      */
     private $plainPassword;
     

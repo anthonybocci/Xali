@@ -39,6 +39,11 @@
         </div>
     </div>
     {% block javascript %}
-        <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_deleting.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
+        <script type="text/javascript">
+            $(function() {
+                hideButton("btn-delete", "form-delete");
+            });
+        </script>
     {% endblock %}
 {% endblock %}

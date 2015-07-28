@@ -7,11 +7,13 @@ xali_user_registration_register:
     
 #Show profile
 xali_user_profile_show:
-    path:   /profile/id/
+    path:   /user/profile/{id_user}
     defaults: { _controller: XaliUserBundle:Profile:show }
+    requirements:
+        id_user:    \d+
     
 #Edit profile
 xali_user_profile_edit:
-    path:   /profile/edit/id/
+    path:   /user/profile/edit/{id}
     defaults: { _controller: XaliUserBundle:Profile:edit }
     

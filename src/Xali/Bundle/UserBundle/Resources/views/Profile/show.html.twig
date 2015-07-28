@@ -4,25 +4,52 @@
 
 {% block user_body %}
     <div class="fos_user_user_show">
-        <div class="">
-            <a href="{#{{ path('xali_user_profile_edit') }}#}">{{ "profile.show.edit"|trans }}</a>
-        </div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == profileOwner.id%}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <a href="{#{{ path('xali_user_profile_edit') }}#}">
+                    {{ "profile.show.edit"|trans }}
+                </a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <button id="btn-left-organisation" class="btn btn-danger">
+                    {{ "profile.show.left_organisation"|trans }}
+                </button>
+                <form id="form-left-organisation">
+                    <input type="hidden" name="csrf_token_left_org" value="" />
+                    <input type="submit" class="btn btn-danger" 
+                        value="{{ "profile.show.confirm_left_organisation"|trans }}"/>
+                </form>
+            </div>
+        {% endif %}
         <div class="row text-center">
             <div class="col-md-6">
-                <h1>{{ "user.firstname" }}</h1>
+                <h1>{{ profileOwner.firstname }}</h1>
             </div>
             <div class="col-md-6">
-                <h1>{{ "user.lastname" }}</h1>
+                <h1>{{ profileOwner.lastname }}</h1>
             </div>
         </div><br />
 
         <div class="row text-center">
             <div class="col-md-6">
-                {{ 'profile.show.email'|trans }}: {{ "user.email" }}
+                {{ 'profile.show.email'|trans }} {{ profileOwner.email }}
             </div>
             <div class="col-md-6">
-                {{ 'profile.show.camp_assigned'|trans }}: {{ "his camp" }}
-            </div>
+                {% if profileOwner.camp is not null %}
+                    {{ 'profile.show.camp_assigned'|trans }} {{ profileOwner.camp.name }}
+                {% else %}
+                    {{ 'profile.show.no_camp'|trans }}
+                {% endif %}
+            </div>    
         </div>
     </div>
+                
+    {% block javascript %}
+        <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
+        <script type="text/javascript">
+            $(function() {
+                hideButton("btn-left-organisation", "form-left-organisation");
+            });
+        </script>
+    {% endblock %}
 {% endblock %}
