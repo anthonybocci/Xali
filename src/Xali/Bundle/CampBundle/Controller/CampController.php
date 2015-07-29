@@ -22,6 +22,10 @@ class CampController extends Controller
      */
     public function add_campAction(Organisation $organisation)
     {
+        //Only the organisation's manager can add a camp
+        if ($this->getUser()->getId() != $organisation->getManager()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $camp = new Camp();
         $form = $this->createForm(new CampType, $camp);
         $request = $this->get('request');
@@ -74,15 +78,25 @@ class CampController extends Controller
     /**
      * Assign a volunteer to a camp
      * 
-     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param integer $id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function assign_volunteerAction(Camp $camp)
+    public function assign_volunteerAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $campRepo = $em->getRepository('XaliCampBundle:Camp');
+        $camp = $campRepo->findWithOrganisation($id);
+        //If the camp doesn't exist
+        if (!($camp instanceof Camp)) {
+            throw $this->createNotFoundException();
+        } else if ($camp->getOrganisation()->getManager()->getId() != 
+                                                    $this->getUser()->getId()) {
+            //If the camp doesn't belong to this organisation
+            throw $this->createAccessDeniedException();
+        }
         $insert = null;
         $request = $this->get('request');
         $session = $this->get('session');
-        $em = $this->getDoctrine()->getManager();
         $userRepository = $em->getRepository('XaliUserBundle:User');
         //If form is submitted and tokens and email exist
         if ($request->getMethod() == "POST" &&
