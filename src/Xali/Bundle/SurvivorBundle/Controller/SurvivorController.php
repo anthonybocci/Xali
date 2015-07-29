@@ -20,6 +20,7 @@ class SurvivorController extends Controller
      * @param Xali\Bundle\CampBundle\Entity\Camp $camp
      * @param integer $survivor_id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function add_survivorAction(Camp $camp, $survivor_id)
     {
