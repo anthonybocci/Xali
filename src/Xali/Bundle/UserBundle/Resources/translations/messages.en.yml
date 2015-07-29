@@ -26,3 +26,4 @@ security:
         username:       "Username"
         password:       "Password"
         submit:         "Submit"
+        remember_me:    "Remember me"
