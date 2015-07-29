@@ -20,3 +20,9 @@ profile:
         go_profile:         "Go to profile"
     edit:
         submit:     "Submit"
+        
+security:
+    login:
+        username:       "Username"
+        password:       "Password"
+        submit:         "Submit"

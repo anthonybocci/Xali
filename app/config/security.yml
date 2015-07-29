@@ -34,13 +34,14 @@ security:
             security: false
             
         #Allow user to access to welcome page and login page even if he's anonymous
-       # welcome_login:
-        #    pattern:    ^/(login)?$
-         #   anonymous:  true
-            
+        welcome_login:
+            pattern:    ^/login?$
+            anonymous:  true
+         
+        #Obligate user to be logged in
         main:
             pattern:    ^/
-            anonymous: true
+            anonymous: false
             #Update to false to secure all URLs
             provider: main
             form_login:

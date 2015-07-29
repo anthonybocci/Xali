@@ -11,11 +11,17 @@ form:
     
 profile:
     show:
-        email:          "Email :"
-        camp_assigned:  "Camp :"
-        edit:           "Éditer le profile"
-        no_camp:        "Aucun camp"
-        leave_organisation:  "Quitter mon organisation pour pouvoir être recruté(e) par une autre"
-        confirm_leave_organisation:  "Confirmer"
-        go_profile:         "Voir le profil"
-    edit:           "Valider"
+        email:                          "Email :"
+        camp_assigned:                  "Camp :"
+        edit:                           "Éditer le profile"
+        no_camp:                        "Aucun camp"
+        leave_organisation:             "Quitter mon organisation pour pouvoir être recruté(e) par une autre"
+        confirm_leave_organisation:     "Confirmer"
+        go_profile:                     "Voir le profil"
+    edit:                               "Valider"
+    
+security:
+    login:
+        username:       "Nom d'utilisateur"
+        password:       "Mot de passe"
+        submit:         "Valider"
