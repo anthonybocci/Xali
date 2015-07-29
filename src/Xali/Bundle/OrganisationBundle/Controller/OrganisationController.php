@@ -5,6 +5,7 @@ namespace Xali\Bundle\OrganisationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\OrganisationBundle\Form\OrganisationType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Manage organisations
@@ -17,8 +18,11 @@ class OrganisationController extends Controller
      * 
      * @param integer $id_organisation the organisation's id if user want to
      * update an organisation
-     * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createNotFoundException
+     * @throws createAccessDeniedException
+     * @Secure(roles="ROLE_ORGANISATION")
+     * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * 
      */
     public function add_organisationAction($id_organisation)
     {
@@ -26,11 +30,23 @@ class OrganisationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('XaliUserBundle:User');
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
-        $organisation = $orgRepo->find($id_organisation);
+        $organisation = $orgRepo->findWithManager($id_organisation);
+        $user = $this->getUser();
+        if ($organisation == null) {
+            $organisation = new Organisation();
+        }
         //If organisation doesn't exist
         if (!($organisation instanceof Organisation)) {
             throw $this->createNotFoundException();
         }
+        /*An organisation can only update itself, not add organisation*/
+        if ($id_organisation == 0 && !in_array("ROLE_SUPER_ADMIN", 
+                $user->getRoles()) || !in_array("ROLE_SUPER_ADMIN", 
+                $user->getRoles()) && $this->getUser()->getId() != 
+                $organisation->getManager()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        
         $form = $this->createForm(new OrganisationType(), $organisation);
         $error = null;
         //If form is submitted
@@ -38,10 +54,21 @@ class OrganisationController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $paramManager = $request->request->get('manager');
+                $oldManager = $userRepo->find(
+                        $organisation->getManager()->getId());
                 $manager = $userRepo->findOneByEmail($paramManager);
                 $result = $this->insertOrUpdate($organisation, $manager);
+                $error = $result;
                 //If there is no error, display a message of success
-                $error = ($result == null) ? "form.success" : $result;
+                if ($result == null) {
+                    $error = ($id_organisation == 0) ? "form.add_success" : 
+                                                        "form.update_success";
+                    $oldManager->removeRole("ROLE_ORGANISATION");
+                    $manager->addRoles(array("ROLE_ORGANISATION"));
+                    $em->flush();
+                }
+                
+               
             }
         }
         $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
@@ -118,6 +145,7 @@ class OrganisationController extends Controller
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
      * @throws createNotFoundException
+     * @Secure(roles="ROLE_ORGANISATION")
      */
     public function deleteAction($id)
     {

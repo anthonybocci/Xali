@@ -18,7 +18,8 @@ form:
                             organisation, il doit d'abord la quitter.
                             
     date_of_creation:       "Date de création"
-    succes:                 "Organisation ajoutée"
+    add_success:            "Organisation ajoutée"
+    update_success:         "Organisation modifiée"
     tip:                    >
                             Astuce : Si le manager n'a pas encore de compte,
                             créez-en un.

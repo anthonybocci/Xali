@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\CampBundle\Entity\Camp;
 use Xali\Bundle\CampBundle\Form\CampType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Manage camps
@@ -20,6 +21,7 @@ class CampController extends Controller
      * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
+     * @Secure(roles="ROLE_ORGANISATION")
      */
     public function add_campAction(Organisation $organisation)
     {
@@ -84,6 +86,7 @@ class CampController extends Controller
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
      * @throws createNotFoundException
+     * @Secure(roles="ROLE_ORGANISATION")
      */
     public function assign_volunteerAction($id)
     {
@@ -144,6 +147,7 @@ class CampController extends Controller
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
      * @throws createNotFoundException
+     * @Secure(roles="ROLE_ORGANISATION")
      */
     public function deleteAction($id)
     {

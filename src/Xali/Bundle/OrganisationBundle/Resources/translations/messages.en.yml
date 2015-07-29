@@ -18,7 +18,8 @@ form:
                             he has to leave it before.
                             
     date_of_creation:       "Date of creation"
-    success:                "Organisation added"
+    add_success:            "Organisation added"
+    update_success:         "Organisation updated"
     tip:                    >
                             Tip: If the manager hasn't an account yet, create
                              it before

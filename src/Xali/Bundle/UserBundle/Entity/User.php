@@ -210,12 +210,27 @@ class User implements UserInterface
     /**
      * Add roles
      * 
-     * @param array $role
+     * @param array $roles
      */
     public function addRoles($roles)
     {
         foreach ($roles as $role) {
             $this->roles[] = $role;
+        }
+    }
+    
+    /**
+     * Remove a role
+     * 
+     * @param string $role the role to remove
+     */
+    public function removeRole($role)
+    {
+        $roles = $this->roles;
+        foreach ($roles as $key => $value) {
+            if ($value == $role) {
+                unset($this->roles[$key]);
+            }
         }
     }
 
