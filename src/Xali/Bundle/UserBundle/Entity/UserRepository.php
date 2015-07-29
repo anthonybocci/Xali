@@ -17,13 +17,22 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      * 
      * @param \Xali\Bundle\UserBundle\Entity\User $volunteer
      * @param \Xali\Bundle\CampBundle\Entity\Camp $camp
-     * @return integer -1 if parameters type are invalid, 0 if request failed
-     * and 1 else
+     * @param \Xali\Bundle\OrganisationBundle\Entity\Organisation
+     * @return integer -1 if parameters type are invalids, 0 if request failed
+     * and 1 if it works, and 2 if volunteerd doesn't belong to this 
+     * organisation
      */
     public function updateCamp($volunteer, $camp) {
         $return = 0;
         //If parameters are invalids (usually $volunteer)
         if ($volunteer instanceof User && $camp instanceof Camp) {
+            //If user belong to an other organisation
+            $volunteerOrganisation = ($volunteer->getCamp() == null) ? 
+                    null : $volunteer->getCamp()->getOrganisation();
+            if ($volunteerOrganisation != null && 
+                           $camp->getOrganisation()->getId() != $volunteerOrganisation->getId()) {
+                return 2;
+            }
             $queryBuilder = $this->createQueryBuilder('u');
             $q = $queryBuilder->update('XaliUserBundle:User', 'u')
                          ->set('u.camp', ':camp')

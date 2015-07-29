@@ -33,6 +33,7 @@ assign_volunteer:
                                 The volunteer you are trying to assign is 
                                 already assigned to this camp.
     success:                    "The volunteer is successfully assigned"
+    belong_other_org:           "The volunteer belong to an other organisation"
     
 see_all:
     created_on:     "Created on"

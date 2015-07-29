@@ -35,6 +35,7 @@ assign_volunteer:
                                 Le bénévole que vous essayez d'affecter est 
                                 déjà affecté à ce camp.
     success:                    "Le bénévole a bien été affecté."
+    belong_other_org:           "Le bénévole appartient à une autre organisation"
     
 see_all:
     created_on:     "Créée le"

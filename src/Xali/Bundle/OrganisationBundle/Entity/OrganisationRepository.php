@@ -25,6 +25,14 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
     {
         if (!empty($manager) && $manager instanceof User) {
             $result = null;
+            
+            $managerOrganisation = ($manager->getCamp() == null) ?
+                    null : $manager->getCamp()->getOrganisation();
+            //user belong to an other organisation
+            if ($managerOrganisation != null) {
+                return "form.error.belong_other_org";
+            }          
+            
             $sql = "INSERT INTO organisation (manager_id, name, dateofcreation)"
             . "VALUES (?, ?, ?)";
             try {
@@ -58,6 +66,15 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
     {
         if (!empty($manager) && $manager instanceof User) {
             $result = null;
+            
+            $managerOrganisation = ($manager->getCamp() == null) ?
+                    null : $manager->getCamp()->getOrganisation();
+            //user belong to an other organisation
+            if ($managerOrganisation != null && 
+                    $managerOrganisation->getId() != $organisation->getId()) {
+                return "form.error.belong_other_org";
+            }   
+            
             $sql = "UPDATE organisation
                     SET manager_id = ?, name = ?, dateofcreation = ?
                     WHERE organisation.id = ?
@@ -160,4 +177,5 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
         $query->setParameter('organisation', $organisation);
         return $query->getSingleScalarResult();
     }
+    
 }

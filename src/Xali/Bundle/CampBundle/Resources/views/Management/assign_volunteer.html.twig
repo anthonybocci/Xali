@@ -23,8 +23,10 @@
                         {{ "assign_volunteer.volunteer_invalid"|trans }}
                     {% elseif insertSuccess == 0 %}
                         {{ "assign_volunteer.volunteer_already_assigned"|trans }}
-                    {% else %}
+                    {% elseif insertSuccess == 1 %}
                         {{ "assign_volunteer.success"|trans }}
+                    {% elseif insertSuccess == 2 %}
+                        {{ "assign_volunteer.belong_other_org"|trans }}
                     {% endif %}
                 {% endif %}
                 </div>
