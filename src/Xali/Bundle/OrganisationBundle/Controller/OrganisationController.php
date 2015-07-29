@@ -70,15 +70,16 @@ class OrganisationController extends Controller
     /**
      * Display organisation's profile
      * 
-     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
-     * the organisation user want to display
+     * @param integer $id
+     * the organisation'id user want to display
      * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function profileAction(Organisation $organisation)
+    public function profileAction($id)
     {
         $render = 'XaliOrganisationBundle:Profile:profile.html.twig';
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $organisation = $orgRepo->findWithManager($id);
         $volunteersNb = $orgRepo->countVolunteers($organisation);
         $campsNb = $orgRepo->countCamps($organisation);
         $survivorsNb = $orgRepo->countSurvivors($organisation);

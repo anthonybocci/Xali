@@ -33,7 +33,8 @@ profile:
     camps:                  "camps"
     organisation:           "Organisation"
     delete:                 "Supprimer"
-    confirm_deleting:   "Confirmer la suppression"
+    confirm_deleting:       "Confirmer la suppression"
+    add_camp:               "Ajouter un camp"
     
 see_all:
     created_on:     "Créée le"

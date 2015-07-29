@@ -30,12 +30,13 @@ profile:
     nb_camps:           "Camps number"
     volunteers_nb:      "[0,1]%count% volunteer|[2,+Inf]%count% volunteers"
     survivors_nb:       "[0,1]%count% survivor|[2,+Inf]%count% survivors"
-    camps_nb:       "[0,1]%count% camp|[2,+Inf]%count% camps"
+    camps_nb:           "[0,1]%count% camp|[2,+Inf]%count% camps"
     survivors:          "Survivors"
     camps:              "camps"
     organisation:       "Organisation"
     delete:             "Delete"
     confirm_deleting:   "Confirm deleting"
+    add_camp:           "Add a camp"
     
 see_all:
     created_on:     "Created on"

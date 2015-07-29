@@ -103,10 +103,9 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findWithManager($id)
     {
-        $queryBuilder = $this->createQueryBuilder('org');
-        return $queryBuilder->select('o')
-                     ->from('XaliOrganisationBundle:Organisation', 'o')
+        return $queryBuilder = $this->createQueryBuilder('o')
                      ->innerJoin('o.manager', 'm')
+                     ->addSelect('m')
                      ->where('o.id = :id')
                      ->setParameter('id', $id)
                      ->getQuery()
