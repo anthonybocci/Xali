@@ -30,7 +30,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             $volunteerOrganisation = ($volunteer->getCamp() == null) ? 
                     null : $volunteer->getCamp()->getOrganisation();
             if ($volunteerOrganisation != null && 
-                           $camp->getOrganisation()->getId() != $volunteerOrganisation->getId()) {
+            $camp->getOrganisation()->getId() != $volunteerOrganisation->getId()) {
                 return 2;
             }
             $queryBuilder = $this->createQueryBuilder('u');
