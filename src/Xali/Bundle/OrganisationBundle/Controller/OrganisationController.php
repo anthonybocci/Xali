@@ -18,6 +18,7 @@ class OrganisationController extends Controller
      * @param integer $id_organisation the organisation's id if user want to
      * update an organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createNotFoundException
      */
     public function add_organisationAction($id_organisation)
     {
@@ -25,8 +26,11 @@ class OrganisationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('XaliUserBundle:User');
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
-        $givenOrg = $orgRepo->find($id_organisation);
-        $organisation = (empty($givenOrg)) ? new Organisation() : $givenOrg;
+        $organisation = $orgRepo->find($id_organisation);
+        //If organisation doesn't exist
+        if (!($organisation instanceof Organisation)) {
+            throw $this->createNotFoundException();
+        }
         $form = $this->createForm(new OrganisationType(), $organisation);
         $error = null;
         //If form is submitted
@@ -110,15 +114,24 @@ class OrganisationController extends Controller
     /**
      * Delete an organisation
      * 
-     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
+     * @param integer $id $organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
+     * @throws createNotFoundException
      */
-    public function deleteAction(Organisation $organisation)
+    public function deleteAction($id)
     {
-        //Check rights, if user hasn't rights redirect him on organisation's
-        //profile
         $em = $this->getDoctrine()->getManager();
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $organisation = $orgRepo->findWithManager($id);
+        //If the organisation doesn't exist
+        if (!($organisation instanceof Organisation)) {
+            throw $this->createNotFoundException();
+        } else if ($organisation->getManager()->getId() != 
+                                                    $this->getUser()->getId()) {
+            //If user is not organisation's manager
+            throw $this->createAccessDeniedException();
+        }
         $request = $this->get('request');
         $session = $this->get('session');
         $sessionToken = $request->request->get('csrf_token_del_org');

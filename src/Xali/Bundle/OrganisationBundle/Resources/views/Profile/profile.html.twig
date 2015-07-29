@@ -7,24 +7,7 @@
     <div class="text-center">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1>{{ "profile.organisation"|trans }} "{{ organisation.name }}"</h1>
-                {# Only organisation's manager can delete an organisation #}
-                {% if app.user.id == organisation.manager.id %}
-                    <button id="btn-delete" class="btn btn-danger">
-                        {{ "profile.delete"|trans }}
-                    </button>
-                    <form id = "form-delete" method="POST"
-                    action="{{ path('xali_organisation_delete', {'id': organisation.id}) }}">
-                        <input type="hidden" value="{{ app.session.get('csrf_token_del_org') }}" 
-                               name="csrf_token_del_org" />
-                        <input type="submit" class="btn btn-danger" href="#"
-                               value="{{ "profile.confirm_deleting"|trans }}" />
-                    </form>
-                    <a href="{{ path("xali_camp_management_add_camp", {'id' : organisation.id}) }}" 
-                       class="btn btn-info">
-                        {{ "profile.add_camp"|trans }}
-                    </a>
-                {% endif %}
+                <h1>{{ "profile.organisation"|trans }} "{{ organisation.name }}"</h1>       
             </div>
         </div><br />
         <div class="row">
@@ -48,6 +31,30 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 {{ "profile.volunteers_nb"|transchoice(volunteersNb) }}
             </div>
+            {% if app.user.id == organisation.manager.id %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <button id="btn-delete" class="btn btn-danger">
+                        {{ "profile.delete"|trans }}
+                    </button> 
+                    <form id="form-delete" method="POST"
+                    action="{{ path('xali_organisation_delete', {'id': organisation.id}) }}">
+                        <input type="hidden" value="{{ app.session.get('csrf_token_del_org') }}" 
+                               name="csrf_token_del_org" />
+                        <input type="submit" class="btn btn-danger"
+                               href="#" value="{{ "profile.confirm_deleting"|trans }}" />
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% if app.user.id == organisation.manager.id %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <a href="{{ path("xali_camp_management_add_camp", {'id' : organisation.id}) }}" 
+                    class="btn btn-info">
+                        {{ "profile.add_camp"|trans }}
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 
