@@ -45,15 +45,20 @@ class CampController extends Controller
     /**
      * Display a camp's profile
      * 
-     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param integer $id the camp's id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function profileAction(Camp $camp)
+    public function profileAction($id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $campRepo = $entityManager->getRepository('XaliCampBundle:Camp');
         $userClass= "XaliUserBundle:User";
         $survivorClass = "XaliSurvivorBundle:Survivor";
+        $camp = $campRepo->findWithOrganisation($id);
+        //If camp doesn't exists
+        if (!($camp instanceof Camp)) {
+            throw $this->createNotFoundException();
+        }
         $volunteersNb = $campRepo->countPeople($camp, $userClass);
         $survivorsNb = $campRepo->countPeople($camp, $survivorClass);
         $session = $this->get('session');
@@ -121,13 +126,22 @@ class CampController extends Controller
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
      */
-    public function deleteAction(Camp $camp)
+    public function deleteAction($id)
     {
-        //Check rights, if user hasn't rights redirect him on camp's
-        //profile
         $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
         $session = $this->get('session');
+        $campRepo = $em->getRepository('XaliCampBundle:Camp');
+        $camp = $campRepo->findWithOrganisation($id);
+        $user = $this->getUser();
+        //If camp doesn't exist
+        if (!($camp instanceof Camp)) {
+            throw $this->createNotFoundException();
+        }
+        //If user is not organisation's manager
+        if ($user->getId() != $camp->getOrganisation()->getManager()->getId()) {
+            throw $this->createAccessDeniedException();
+        }
         $sessionToken = $request->request->get('csrf_token_del_camp');
         $givenToken = $session->get('csrf_token_del_camp');
         $generateUrl = 'xali_camp_search_see_all';

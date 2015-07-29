@@ -8,12 +8,15 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1>{{ "profile.camp"|trans }} "{{ camp.name }}"</h1>
-                <button id="btn-delete" class="btn btn-danger">{{ "profile.delete"|trans }}</button>
-                <form id = "form-delete" method="POST" action="{{ path('xali_camp_delete', {'id': camp.id}) }}">
-                    <input type="hidden" value="{{ app.session.get('csrf_token_del_camp') }}" name="csrf_token_del_camp" />
-                    <input type="submit" class="btn btn-danger" href="#"
-                           value="{{ "profile.confirm_deleting"|trans }}" />
-                </form>
+                {# If user is the manager of the camp's organisation #}
+                {% if app.user.id == camp.organisation.manager.id %}
+                    <button id="btn-delete" class="btn btn-danger">{{ "profile.delete"|trans }}</button>
+                    <form id = "form-delete" method="POST" action="{{ path('xali_camp_delete', {'id': camp.id}) }}">
+                        <input type="hidden" value="{{ app.session.get('csrf_token_del_camp') }}" name="csrf_token_del_camp" />
+                        <input type="submit" class="btn btn-danger" href="#"
+                               value="{{ "profile.confirm_deleting"|trans }}" />
+                    </form>
+                {% endif %}
             </div>
         </div><br />
         <div class="row">
@@ -28,22 +31,31 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 {{ "profile.nb_volunteers"|trans }} {{ 'profile.volunteers_nb'|transchoice(volunteersNb) }}
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <a href="{{ path('xali_camp_management_assign_volunteer', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_volunteer"|trans }}</a>
-            </div>
+            {# Only the organisation's manager can assign volunteer #}
+            {% if app.user.id == camp.organisation.manager.id %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <a href="{{ path('xali_camp_management_assign_volunteer', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_volunteer"|trans }}</a>
+                </div>
+            {% endif %}
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <a href="{{ path('xali_survivor_management_add_survivor', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_survivors"|trans }}</a>
-            </div>
-        </div>
+        {# User can add a survivor only if it's the camp he belong to #}
+        {% if app.user.camp.id == camp.id %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <a href="{{ path('xali_survivor_management_add_survivor', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_survivors"|trans }}</a>
+                </div>
+           </div>
+        {% endif %}
     </div>
     {% block javascript %}
-        <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
-        <script type="text/javascript">
-            $(function() {
-                hideButton("btn-delete", "form-delete");
-            });
-        </script>
+        {# If user is the manager of camp's organisation #}
+        {% if app.user.id == camp.organisation.manager.id %}
+            <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
+            <script type="text/javascript">
+                $(function() {
+                    hideButton("btn-delete", "form-delete");
+                });
+            </script>
+        {% endif %}
     {% endblock %}
 {% endblock %}

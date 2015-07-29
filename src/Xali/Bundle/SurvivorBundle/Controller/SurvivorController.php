@@ -23,6 +23,11 @@ class SurvivorController extends Controller
      */
     public function add_survivorAction(Camp $camp, $survivor_id)
     {
+        //If volunteer try to add a survivor in an other camp
+        if ($this->getUser()->getCamp()->getId() != $camp->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $converter = $this->container->get('xali_survivor.converter');

@@ -13,7 +13,8 @@ class CampRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Count people (usually User or Survivor) in a given camp
      * 
-     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp the camp in which we
+     * want to count
      * @param string $class like XaliUserBundle:User for e.g
      * @return integer
      * @author Anthony Bocci <boccianthony@yahoo.fr>
@@ -27,6 +28,24 @@ class CampRepository extends \Doctrine\ORM\EntityRepository
                      ->setParameter('camp', $camp)
                      ->getQuery()
                      ->getSingleScalarResult()
+            ;
+    }
+    
+    /**
+     * Find a camp joined with its organisation
+     * 
+     * @param integer $idCamp the camp searched
+     * @return Xali\Bundle\CampBundle\Entity\Camp
+     */
+    public function findWithOrganisation($idCamp)
+    {
+        return $this->createQueryBuilder('c')
+                     ->innerJoin('c.organisation', 'o')
+                     ->addSelect('o')
+                     ->where('c.id = :id_camp')
+                     ->setParameter('id_camp', $idCamp)
+                     ->getQuery()
+                     ->getOneOrNullResult()
             ;
     }
     
