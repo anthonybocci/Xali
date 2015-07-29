@@ -19,6 +19,7 @@ class CampController extends Controller
      * 
      * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function add_campAction(Organisation $organisation)
     {
@@ -51,6 +52,7 @@ class CampController extends Controller
      * 
      * @param integer $id the camp's id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createNotFoundException
      */
     public function profileAction($id)
     {
@@ -80,6 +82,8 @@ class CampController extends Controller
      * 
      * @param integer $id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
+     * @throws createNotFoundException
      */
     public function assign_volunteerAction($id)
     {
@@ -91,7 +95,7 @@ class CampController extends Controller
             throw $this->createNotFoundException();
         } else if ($camp->getOrganisation()->getManager()->getId() != 
                                                     $this->getUser()->getId()) {
-            //If the camp doesn't belong to this organisation
+            //If the user is not manager of organisation's camp
             throw $this->createAccessDeniedException();
         }
         $insert = null;
@@ -136,9 +140,10 @@ class CampController extends Controller
     /**
      * Delete a camp
      * 
-     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @param integer $id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
+     * @throws createNotFoundException
      */
     public function deleteAction($id)
     {
