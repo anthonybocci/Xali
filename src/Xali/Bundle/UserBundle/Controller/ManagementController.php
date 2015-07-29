@@ -18,6 +18,7 @@ class ManagementController extends Controller
      * @param Xali\Bundle\UserBundle\Entity\User $givenUser
      * @throws createAccessDeniedException
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function leave_organisationAction(User $givenUser)
     {

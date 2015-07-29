@@ -40,6 +40,7 @@ class ProfileController extends Controller
      * 
      * @param Xali\Bundle\UserBundle\Entity\User $givenUser the user to edit
      * @author Anthony Bocci <boccianthony@yahoo.fr>
+     * @throws createAccessDeniedException
      */
     public function editAction(User $givenUser)
     {
