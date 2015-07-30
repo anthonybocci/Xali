@@ -55,6 +55,12 @@
                     </a>
                 </div>
             {% endif %}
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a href="{{ path("xali_camp_search_see_all", {'organisation_id' : organisation.id}) }}" 
+                    class="btn btn-info">
+                    {{ "profile.view_camps"|trans }}
+                </a>
+            </div>
         </div>
     </div>
 

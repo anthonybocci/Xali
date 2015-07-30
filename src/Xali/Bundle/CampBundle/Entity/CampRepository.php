@@ -49,4 +49,19 @@ class CampRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
     
+    /**
+     * Find all camps joined with their organisations
+     * 
+     * @return ArrayCollection
+     */
+    public function findAllWithOrganisation()
+    {
+        return $this->createQueryBuilder('c')
+                     ->innerJoin('c.organisation', 'o')
+                     ->addSelect('o')
+                     ->getQuery()
+                     ->getResult()
+            ;
+    }
+    
 }

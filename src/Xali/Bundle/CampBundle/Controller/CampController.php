@@ -128,14 +128,27 @@ class CampController extends Controller
     }
     
     /**
-     * Show all camps
+     * Show all camps or camps sorted by organisation
+     * 
+     * @param integer $organisation_id the organisation's id if user want to
+     * sort camps by organisation
+     * @throw createNotFoundException
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function see_allAction()
+    public function see_allAction($organisation_id)
     {
         $em = $this->getDoctrine()->getManager();
         $campRepo = $em->getRepository('XaliCampBundle:Camp');
-        $camps = $campRepo->findAll();
+        $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
+        $organisation = $orgRepo->find($organisation_id);
+        if (!($organisation instanceof Organisation)) {
+            throw $this->createNotFoundException();
+        }
+        if ($organisation_id == 0) {
+            $camps = $campRepo->findAllWithOrganisation();
+        } else {
+            $camps = $campRepo->findByOrganisation($organisation);
+        }                              
         return $this->render('XaliCampBundle:Search:see_all.html.twig',
                 array('camps' => $camps));
     }

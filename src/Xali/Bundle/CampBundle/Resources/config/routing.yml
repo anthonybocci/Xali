@@ -19,10 +19,12 @@ xali_camp_management_assign_volunteer:
     requirements:
         id: \d+
         
-#See all camps, and later search easily a camp
+#See camps, sorted by organisation
 xali_camp_search_see_all:
-    path:     /see_all
-    defaults: { _controller: XaliCampBundle:Camp:see_all }
+    path:     /see_all/{organisation_id}
+    defaults: { _controller: XaliCampBundle:Camp:see_all, organisation_id: 0 }
+    requirements:
+        organisation_id:    \d+
     
 xali_camp_delete:
     path:  /delete/{id}

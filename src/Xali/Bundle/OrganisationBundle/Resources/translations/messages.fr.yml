@@ -36,6 +36,7 @@ profile:
     delete:                 "Supprimer"
     confirm_deleting:       "Confirmer la suppression"
     add_camp:               "Ajouter un camp"
+    view_camps:              "Voir les camps"
     
 see_all:
     created_on:     "Créée le"
