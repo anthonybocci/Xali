@@ -33,8 +33,59 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 {{ "profile.hair_color"|trans }} {{ survivor.hairColor }}
             </div>
-            <button class="btn btn-success col-lg-2 col-lg-offset-2">{{ "profile.left"|trans }}</button>
+            {% if survivor.camp is not null %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <button id="btn-leave-camp" class="btn btn-success">
+                        {{ "profile.left"|trans }}
+                    </button>
+                    <form method="POST" id="form-leave-camp"
+                    action="{{ path('xali_survivor_management_leave_camp', {'survivor_id': survivor.id, 'camp_id': survivor.camp.id}) }}"
+                     >
+                        <input type="hidden" name="csrf_token_leave_camp" 
+                               value="{{ app.session.get('csrf_token_leave_camp') }}"/>
+                        <input type="submit" class="btn btn-success" 
+                                            value="{{ "profile.confirm_leave"|trans }}"/>
+                    </form>
+                </div>
+            {% endif %}
         </div>
-    </div>    
+        <div class="row">
+            {% if survivor.camp is null %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <button id="btn-assign-my-camp" class="btn btn-success">
+                        {{ "profile.in_my_camp"|trans }}
+                    </button>
+                    <form method="POST" id="form-assign-my-camp"
+                          action="{{ path('xali_survivor_management_assign_camp', {'survivor_id': survivor.id, 'camp_id': app.user.camp.id}) }}" >
+                        <input type="hidden" name="csrf_token_assign_camp" 
+                               value="{{ app.session.get('csrf_token_assign_camp') }}"/>
+                        <input type="submit" class="btn btn-success" 
+                                  value="{{ "profile.confirm_assign"|trans }}"/>
+                    </form>
+                </div>
+            {% endif %}
+            {% if survivor.camp is not null %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    {{ "profile.camp_belongs_to"|trans }} {{ survivor.camp.name }}
+                </div>
+            {% else %}
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    {{ "profile.camp_belongs_to"|trans }} {{ "profile.no_camp"|trans}}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+            
+    {% block javascript %}
+  
+        <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
+        <script type="text/javascript">
+            $(function() {
+                hideButton("btn-leave-camp", "form-leave-camp");
+                hideButton("btn-assign-my-camp", "form-assign-my-camp");
+            });
+        </script>
+    {% endblock %}
+            
 {% endblock %}
 

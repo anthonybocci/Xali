@@ -7,11 +7,29 @@ xali_survivor_management_add_survivor:
         id: \d+
         survivor_id: (\d+)
 
-#Add an *obligatory* id after /profile
+#See survivor's profile
 xali_survivor_profile_profile:
     path:     /profile/{id}
     defaults: { _controller: XaliSurvivorBundle:Survivor:see_profile }
 
+#If a survivor leave a camp
+xali_survivor_management_leave_camp:
+    path:       /{survivor_id}/leave_camp/{camp_id}
+    defaults:   { _controller: XaliSurvivorBundle:Survivor:leave_camp }
+    requirements:
+        _methods:   POST
+        survivor_id:    \d+
+        camp_id:        \d+
+        
+#Assign a survivor to a camp
+xali_survivor_management_assign_camp:
+    path:   /{survivor_id}/assign_camp/{camp_id}
+    defaults:   { _controller: XaliSurvivorBundle:Survivor:assign_camp }
+    requirements:
+        _methods:   POST
+        survivor_id:    \d+
+        camp_id:        \d+
+        
 #Search a survivor
 xali_survivor_search_search:
     path:     /search

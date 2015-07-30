@@ -36,12 +36,17 @@ form:
     choose_value:   "Choose a value"
     
 profile:
-    birth_on:       "Birth on"
-    eyes_color:     "Eyes color:"
-    weight:         "Weight:"
-    height:         "Height:"
-    hair_color:     "Hair color:"
-    left:           "Has left the camp"
+    birth_on:           "Birth on:"
+    eyes_color:         "Eyes color:"
+    weight:             "Weight:"
+    height:             "Height:"
+    hair_color:         "Hair color:"
+    left:               "Has left the camp"
+    camp_belongs_to:    "Camp:"
+    in_my_camp:         "Assign to my camp"
+    confirm_assign:     "Confirm"
+    no_camp:            "No camp"
+    confirm_leave:      "Confirm"
     
 search:
     suggestions:    "Suggestions"

@@ -10,4 +10,21 @@ namespace Xali\Bundle\SurvivorBundle\Entity;
  */
 class SurvivorRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Find a survivor joined with its camp
+     * 
+     * @param integer $id the survivor's id
+     * @return Xali\Bundle\SurvivorBundle\Entity\Survivor
+     */
+    public function findWithCamp($id)
+    {
+        return $this->createQueryBuilder('s')
+                    ->leftJoin('s.camp', 'c')
+                    ->addSelect('c')
+                    ->where('s.id = :survivor_id')
+                    ->setParameter('survivor_id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult()
+                ;
+    }
 }

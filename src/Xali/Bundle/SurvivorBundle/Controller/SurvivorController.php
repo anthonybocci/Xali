@@ -80,12 +80,108 @@ class SurvivorController extends Controller
         }
     }
     
-    public function see_profileAction(Survivor $survivor)
+    /**
+     * Show survivor's profile
+     * 
+     * @param integer $id the survivor's id
+     * @throws createNotFoundException
+     */
+    public function see_profileAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
+        $survivor = $survivorRepo->findWithCamp($id);
+        $session = $this->get('session');
+        if (!($survivor instanceof Survivor)) {
+            throw $this->createNotFoundException();
+        }
+        //If survivor hasn't camp
+        if ($survivor->getCamp() == null) {
+            $session->set('csrf_token_assign_camp', sha1(time() * rand()));
+        } else {
+            $session->set('csrf_token_leave_camp', sha1(time() * rand()));
+        }
+        
+        
         return $this->render('XaliSurvivorBundle:Profile:profile.html.twig',
                 array(
                     'survivor' => $survivor
                 ));
+    }
+    
+    public function leave_campAction($survivor_id, $camp_id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
+        $campRepo = $em->getRepository('XaliCampBundle:Camp');
+        $camp = $campRepo->find($camp_id);
+        $survivor = $survivorRepo->findWithCamp($survivor_id);
+        $session = $this->get('session');
+        $request = $this->get('request');
+        //If camp doesn't exist
+        if (!($camp instanceof Camp) || !($survivor instanceof Survivor)) {
+            throw $this->createNotFoundException();
+        }
+        //If volunteer try to manage a survivor in an other camp
+        if ($user->getCamp() == null || $user->getCamp()->getId() != 
+                                                               $camp->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        //If survivor doesn't belong to this camp
+        if ($camp->getId() != $survivor->getCamp()->getId()) {
+            throw $this->createNotFoundException();
+        }
+        $token = $session->get('csrf_token_leave_camp');
+        $givenToken = $request->request->get('csrf_token_leave_camp');
+        //If tokens are invalids
+        if (empty($token) || empty($givenToken) || $token != $givenToken) {
+            throw $this->createAccessDeniedException();
+        }
+        $survivor->setCamp(null);
+        $em->flush();
+        return $this->redirect($this->generateUrl('xali_survivor_profile_profile',
+                array(
+                    'id' => $survivor->getId()
+                )));
+    }
+    
+    
+    public function assign_campAction($survivor_id, $camp_id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
+        $campRepo = $em->getRepository('XaliCampBundle:Camp');
+        $camp = $campRepo->find($camp_id);
+        $survivor = $survivorRepo->findWithCamp($survivor_id);
+        $session = $this->get('session');
+        $request = $this->get('request');
+        //If camp doesn't exist
+        if (!($camp instanceof Camp) || !($survivor instanceof Survivor)) {
+            throw $this->createNotFoundException();
+        }
+        //If volunteer try to manage a survivor in an other camp
+        if ($user->getCamp() == null || $user->getCamp()->getId() != 
+                                                               $camp->getId()) {
+            throw $this->createAccessDeniedException();
+        }
+        //If survivor belong to a camp
+        if ($survivor->getCamp() != null) {
+            throw $this->createAccessDeniedException();
+        }
+        $token = $session->get('csrf_token_assign_camp');
+        $givenToken = $request->request->get('csrf_token_assign_camp');
+        //If tokens are invalids
+        if (empty($token) || empty($givenToken) || $token != $givenToken) {
+            throw $this->createAccessDeniedException();
+        }
+        $survivor->setCamp($camp);
+        $em->flush();
+        return $this->redirect($this->generateUrl('xali_survivor_profile_profile',
+                array(
+                    'id' => $survivor->getId()
+                )));
     }
     
     public function searchAction()

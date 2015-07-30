@@ -36,12 +36,17 @@ form:
     choose_value:   "Choisissez une valeur"
     
 profile:
-    birth_on:       "Né(e) le"
-    eyes_color:     "Couleur des yeux :"
-    weight:         "Poids :"
-    height:         "Taille :"
-    hair_color:     "Couleur des cheveux :"
-    left:           "A quitté le camp"
+    birth_on:           "Né(e) le :"
+    eyes_color:         "Couleur des yeux :"
+    weight:             "Poids :"
+    height:             "Taille :"
+    hair_color:         "Couleur des cheveux :"
+    left:               "A quitté le camp"
+    camp_belongs_to:    "Camp :"
+    in_my_camp:         "Affecter à mon camp"
+    confirm_assign:     "Confirmer"
+    no_camp:            "Aucun camp"
+    confirm_leave:      "Confirmer"
 
 search:
     suggestions:    "Suggestions"
