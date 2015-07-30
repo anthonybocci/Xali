@@ -109,6 +109,13 @@ class SurvivorController extends Controller
                 ));
     }
     
+    /**
+     * 
+     * @param integer $survivor_id the survivor's id
+     * @param integer $camp_id the camp's id to leave
+     * @throws createNotFoundException
+     * @throws createAccessDeniedException
+     */
     public function leave_campAction($survivor_id, $camp_id)
     {
         $user = $this->getUser();
@@ -146,7 +153,13 @@ class SurvivorController extends Controller
                 )));
     }
     
-    
+    /**
+     * 
+     * @param type $survivor_id the survivor's id
+     * @param type $camp_id the camp's id
+     * @throws createNotFoundException
+     * @throws createAccessDeniedException
+     */
     public function assign_campAction($survivor_id, $camp_id)
     {
         $user = $this->getUser();
