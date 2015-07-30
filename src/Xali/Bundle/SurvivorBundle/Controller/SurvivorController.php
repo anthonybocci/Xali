@@ -17,18 +17,21 @@ class SurvivorController extends Controller
     /**
      * Add a survivor into a camp
      * 
-     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
-     * @param integer $survivor_id
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp the camp the survivor
+     * belong to
+     * @param integer $survivor_id sur survivor's id
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * @throws createAccessDeniedException
+     * @throws createNotFoundException
      */
     public function add_survivorAction(Camp $camp, $survivor_id)
     {
+        $user = $this->getUser();
         //If volunteer try to add a survivor in an other camp
-        if ($this->getUser()->getCamp()->getId() != $camp->getId()) {
+        if ($user->getCamp() == null || $user->getCamp()->getId() != 
+                                                               $camp->getId()) {
             throw $this->createAccessDeniedException();
         }
-        
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $converter = $this->container->get('xali_survivor.converter');
@@ -36,6 +39,11 @@ class SurvivorController extends Controller
         $givenSurvivor = $em->getRepository($survivorClass)->find($survivor_id);
         //If no survivor is found, add a new. Else, take the found survivor
         $survivor = (empty($givenSurvivor)) ? new Survivor() : $givenSurvivor;
+        //On survivor update, if survivor doesn't belong to the given camp
+        if ($survivor_id != 0 && $survivor->getId() == null || 
+                            $survivor->getCamp()->getId() != $camp->getId()) {
+            throw $this->createNotFoundException();
+        }
         $form = $this->createForm(new SurvivorType(), $survivor);
         //If form is submitted
         if ($request->getMethod() == "POST") {
