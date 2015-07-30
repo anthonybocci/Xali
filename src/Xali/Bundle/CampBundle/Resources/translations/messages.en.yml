@@ -22,6 +22,11 @@ profile:
     camp:               "Camp"
     delete:             "Delete"
     confirm_deleting:   "Confirm deleting"
+    kg:                 "Kg"
+    lb:                 "Lb"
+    cm:                 "Cm"
+    inches_nb:          "[0,1]%count% inch|[2,+Inf]%count% inches"
+    weight_value:       "[0,1]%count% pound|[2,+Inf]%count% pounds"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"

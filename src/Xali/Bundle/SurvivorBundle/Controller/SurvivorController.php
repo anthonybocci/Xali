@@ -72,9 +72,12 @@ class SurvivorController extends Controller
         }
     }
     
-    public function see_profileAction()
+    public function see_profileAction(Survivor $survivor)
     {
-        return $this->render('XaliSurvivorBundle:Profile:profile.html.twig');
+        return $this->render('XaliSurvivorBundle:Profile:profile.html.twig',
+                array(
+                    'survivor' => $survivor
+                ));
     }
     
     public function searchAction()

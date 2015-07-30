@@ -24,6 +24,10 @@ profile:
     camp:               "Camp"
     delete:             "Supprimer"
     confirm_deleteing:  "Confirmer la suppression"
+    kg:                 "Kg"
+    lb:                 "Lb"
+    inches_nb:          "[0,1]%count% pied|[2,+Inf]%count% pieds"
+    weight_value:       "[0,1]%count% livre|[2,+Inf]%count% livres"
     
 assign_volunteer:
     assign_volunteer:           "Assigner un bénévole"

@@ -7,31 +7,31 @@
     <div class="text-center">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h1>{{ "Firstname" }}</h1>
+                <h1>{{ survivor.firstname }}</h1>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h1>{{ "Lastname" }}</h1>
-            </div>
-        </div><br />
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.birth_on"|trans }} xxxx-xx-xx
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.eyes_color"|trans }} {{ "color" }}
+                <h1>{{ survivor.lastname }}</h1>
             </div>
         </div><br />
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.weight"|trans }} {{ "weight" }} {{ "unit" }}
+                {{ "profile.birth_on"|trans }} {{ survivor.birthday|localizeddate('long', 'none', app.request.locale) }}
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.height"|trans }} {{ "height" }} {{ "unit" }}
+                {{ "profile.eyes_color"|trans }} {{ survivor.eyesColor }}
             </div>
         </div><br />
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                {{ "profile.hair_color"|trans }} {{ "color" }}
+                {{ "profile.weight"|trans }} {{ "profile.weight_value"|transchoice(survivor.weight) }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                {{ "profile.height"|trans }} {{ "profile.inches_nb"|transchoice(survivor.height) }}
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                {{ "profile.hair_color"|trans }} {{ survivor.hairColor }}
             </div>
             <button class="btn btn-success col-lg-2 col-lg-offset-2">{{ "profile.left"|trans }}</button>
         </div>
