@@ -33,9 +33,14 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
             
-        #Allow user to access to welcome page and login page even if he's anonymous
-        welcome_login:
-            pattern:    ^/login?$
+        #Allow user to access to login page even if he's anonymous
+        login:
+            pattern:    ^/login
+            anonymous:  true
+
+        #Welcome is just a vitrine page for visitors
+        welcome:
+            pattern:    ^/$
             anonymous:  true
          
         #Obligate user to be logged in
