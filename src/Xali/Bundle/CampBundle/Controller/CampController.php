@@ -3,10 +3,11 @@
 namespace Xali\Bundle\CampBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Xali\Bundle\CampBundle\Entity\Camp;
 use Xali\Bundle\CampBundle\Form\CampType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
 
 /**
  * Manage camps
@@ -25,14 +26,20 @@ class CampController extends Controller
      */
     public function add_campAction(Organisation $organisation)
     {
-        //Only the organisation's manager can add a camp
-        if ($this->getUser()->getId() != $organisation->getManager()->getId()) {
-            throw $this->createAccessDeniedException();
-        }
+        $user = $this->getUser();
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $camp = new Camp();
         $form = $this->createForm(new CampType, $camp);
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
+        //Only the organisation's manager can add a camp
+        if (!$rightsManager->isOrganisationManager($user, $organisation)) {
+            throw $this->createAccessDeniedException();
+        }
         //If form is submitted
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
@@ -93,32 +100,38 @@ class CampController extends Controller
         $em = $this->getDoctrine()->getManager();
         $campRepo = $em->getRepository('XaliCampBundle:Camp');
         $camp = $campRepo->findWithOrganisation($id);
-        //If the camp doesn't exist
-        if (!($camp instanceof Camp)) {
-            throw $this->createNotFoundException();
-        } else if ($camp->getOrganisation()->getManager()->getId() != 
-                                                    $this->getUser()->getId()) {
-            //If the user is not manager of organisation's camp
-            throw $this->createAccessDeniedException();
-        }
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
+        $user = $this->getUser();
+        $organisation = $camp->getOrganisation();
         $insert = null;
         $request = $this->get('request');
         $session = $this->get('session');
         $userRepository = $em->getRepository('XaliUserBundle:User');
-        //If form is submitted and tokens and email exist
+        $receivedToken = $request->request->get('csrf_token');
+        $rightToken = $session->get('csrf_token');
+        
+        //If the camp doesn't exist
+        if (!($camp instanceof Camp)) {
+            throw $this->createNotFoundException();
+        } else if (
+                !$rightsManager->isOrganisationManager($user, $organisation)) {
+            //If the user is not manager of organisation's camp
+            throw $this->createAccessDeniedException();
+        }
+        
+        //If form is submitted and tokens are valids and email exist
         if ($request->getMethod() == "POST" &&
-                            !empty($session->get('csrf_token')) &&
-                            !empty($request->request->get('csrf_token')) &&
+                 $rightsManager->areValidsTokens($givenToken, $rightToken) &&
                             !empty($request->request->get('volunteer_email'))) {
             
-            $receivedToken = $request->request->get('csrf_token');
-            //If received token equals to token in session
-            if ($receivedToken == $session->get('csrf_token')) {
                 $volunteer = $userRepository->findOneByEmail(
                                     $request->request->get('volunteer_email'));
                 //Assign user if email is valid
                 $insert = $userRepository->updateCamp($volunteer, $camp);
-            }
         }
         //Set csrf token
         $session->set('csrf_token', sha1(time() * rand()));
@@ -144,6 +157,7 @@ class CampController extends Controller
         if (!($organisation instanceof Organisation)) {
             throw $this->createNotFoundException();
         }
+        //If no research parameter has been given
         if ($organisation_id == 0) {
             $camps = $campRepo->findAllWithOrganisation();
         } else {
@@ -170,20 +184,26 @@ class CampController extends Controller
         $campRepo = $em->getRepository('XaliCampBundle:Camp');
         $camp = $campRepo->findWithOrganisation($id);
         $user = $this->getUser();
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
+        
         //If camp doesn't exist
         if (!($camp instanceof Camp)) {
             throw $this->createNotFoundException();
         }
+        $organisation = $camp->getOrganisation();
         //If user is not organisation's manager
-        if ($user->getId() != $camp->getOrganisation()->getManager()->getId()) {
+        if ($rightsManager->isOrganisationManager($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
         $sessionToken = $request->request->get('csrf_token_del_camp');
         $givenToken = $session->get('csrf_token_del_camp');
         $generateUrl = 'xali_camp_search_see_all';
         //If tokens exists and are valids
-        if (!empty($sessionToken) && !empty($givenToken) && 
-                                                $sessionToken == $givenToken) {
+        if ($rightsManager->areValidsToken($givenToken, $sessionToken)) {
             $em->remove($camp);
             $em->flush();
         } else {
