@@ -1,4 +1,7 @@
+#XaliRightsManager manage rights, verify if a user can add a survivor in a camp
+# or if he belong to an organisation, etc
 services:
-#    xali_user.example:
-#        class: Xali\Bundle\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    xali_user.rightsmanager:
+        class: Xali\Bundle\UserBundle\RightManager\XaliRightsManager
+        arguments:
+             entityManager: "@doctrine.orm.entity_manager"
