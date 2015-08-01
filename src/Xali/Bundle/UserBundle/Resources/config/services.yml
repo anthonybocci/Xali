@@ -2,6 +2,6 @@
 # or if he belong to an organisation, etc
 services:
     xali_user.rightsmanager:
-        class: Xali\Bundle\UserBundle\RightManager\XaliRightsManager
+        class: Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
         arguments:
              entityManager: "@doctrine.orm.entity_manager"
