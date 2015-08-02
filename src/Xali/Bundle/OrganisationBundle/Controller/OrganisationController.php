@@ -3,9 +3,10 @@
 namespace Xali\Bundle\OrganisationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Xali\Bundle\OrganisationBundle\Form\OrganisationType;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
 
 /**
  * Manage organisations
@@ -32,18 +33,23 @@ class OrganisationController extends Controller
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
         $organisation = $orgRepo->findWithManager($id_organisation);
         $user = $this->getUser();
-        if ($organisation == null) {
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
+        //If no parameter has been given
+        if ($id_organisation == 0) {
             $organisation = new Organisation();
-        }
-        //If organisation doesn't exist
-        if (!($organisation instanceof Organisation)) {
+        } elseif (!($organisation instanceof Organisation)) {
+            //If given organisation doesn't exist
             throw $this->createNotFoundException();
         }
-        /*An organisation can only update itself, not add organisation*/
-        if ($id_organisation == 0 && !in_array("ROLE_SUPER_ADMIN", 
-                $user->getRoles()) || !in_array("ROLE_SUPER_ADMIN", 
-                $user->getRoles()) && $this->getUser()->getId() != 
-                $organisation->getManager()->getId()) {
+        /*An organisation can only update itself, not add an other
+         * organisation
+         */
+        if ($id_organisation == 0 && 
+                $rightsManager->canUpdateOrganisation($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
         
@@ -58,17 +64,14 @@ class OrganisationController extends Controller
                         $organisation->getManager()->getId());
                 $manager = $userRepo->findOneByEmail($paramManager);
                 $result = $this->insertOrUpdate($organisation, $manager);
-                $error = $result;
                 //If there is no error, display a message of success
                 if ($result == null) {
-                    $error = ($id_organisation == 0) ? "form.add_success" : 
-                                                        "form.update_success";
+                    $error = ($id_organisation == 0) ? 
+                            "form.add_success" : "form.update_success";
                     $oldManager->removeRole("ROLE_ORGANISATION");
                     $manager->addRoles(array("ROLE_ORGANISATION"));
                     $em->flush();
                 }
-                
-               
             }
         }
         $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
@@ -152,22 +155,28 @@ class OrganisationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
         $organisation = $orgRepo->findWithManager($id);
-        //If the organisation doesn't exist
-        if (!($organisation instanceof Organisation)) {
-            throw $this->createNotFoundException();
-        } else if ($organisation->getManager()->getId() != 
-                                                    $this->getUser()->getId()) {
-            //If user is not organisation's manager
-            throw $this->createAccessDeniedException();
-        }
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $request = $this->get('request');
         $session = $this->get('session');
         $sessionToken = $request->request->get('csrf_token_del_org');
         $givenToken = $session->get('csrf_token_del_org');
         $generateUrl = 'xali_organisation_search_see_all';
+        $user = $this->getUser();
+        
+        //If the organisation doesn't exist
+        if (!($organisation instanceof Organisation)) {
+            throw $this->createNotFoundException();
+        } else if (!$rightsManager->isOrganisationManager($user, $organisation)) {
+            //If user is not organisation's manager
+            throw $this->createAccessDeniedException();
+        }
+        
         //If tokens exists and are valids
-        if (!empty($sessionToken) && !empty($givenToken) && 
-                                                $sessionToken == $givenToken) {
+        if ($rightsManager->areValidsTokens($givenToken, $sessionToken)) {
             $em->remove($organisation);
             $em->flush();
         } else {

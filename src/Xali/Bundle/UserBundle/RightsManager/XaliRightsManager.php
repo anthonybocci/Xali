@@ -72,7 +72,31 @@ class XaliRightsManager
         return false;
     }
     
-    
+    /**
+     * Check if a user can create/update an organisation.
+     * Note: check organisation validity (for update for example check if the
+     * given id is different to 0) above in controller
+     * 
+     * @param Xali\Bundle\UserBundle\Entity\User $user
+     * @param Xali\Bundle\OrganisationBundle\Entity\Organisation $organisation
+     * @return boolean
+     */
+    public function canUpdateOrganisation($user, $organisation)
+    {
+        //If user is invalid
+        if (!$user instanceof User) {
+            return false;
+        }elseif (!$organisation instanceof Organisation) {
+             /* Else if it's for an organisation adding
+              * User has to be SUPER_ADMIN
+              */
+            return in_array("ROLE_SUPER_ADMIN", $user->getRoles());
+        } else {
+            //Else, user has to be the organisation's manager
+             return !in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && 
+                $user()->getId() != $organisation->getManager()->getId();
+        }
+    }
     
     
     
