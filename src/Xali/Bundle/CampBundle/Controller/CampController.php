@@ -203,7 +203,7 @@ class CampController extends Controller
         $givenToken = $session->get('csrf_token_del_camp');
         $generateUrl = 'xali_camp_search_see_all';
         //If tokens exists and are valids
-        if ($rightsManager->areValidsToken($givenToken, $sessionToken)) {
+        if ($rightsManager->areValidsTokens($givenToken, $sessionToken)) {
             $em->remove($camp);
             $em->flush();
         } else {
