@@ -40,4 +40,4 @@ and set it to your locale. Open the file
 'app/config/parameters.yml' and update locale from 'en' to your
 language.
 
-Finally, commit and click on 'Push request' on Github.
+Finally, commit and click on 'Pull request' on Github.
