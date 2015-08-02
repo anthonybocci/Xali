@@ -139,8 +139,21 @@ class XaliRightsManager
     }
     
     
-
-    
+    /**
+     * Check if two users are the same
+     * 
+     * @param Xali\Bundle\UserBundle\Entity\User $loggedUser
+     * @param Xali\Bundle\UserBundle\Entity\User $givenUser
+     * @return boolean
+     */
+    public function isSameUser($loggedUser, $givenUser)
+    {
+        //If at least one of users is invalid
+        if (!($loggedUser instanceof User) || !($givenUser instanceof User)) {
+            return false;
+        }
+        return $loggedUser->getId() == $givenUser->getId();
+    }
     
     
     

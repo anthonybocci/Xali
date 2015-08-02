@@ -4,6 +4,7 @@ namespace Xali\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\UserBundle\Entity\User;
+use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
 
 /**
  * Controller managing the user
@@ -22,6 +23,11 @@ class ManagementController extends Controller
      */
     public function leave_organisationAction(User $givenUser)
     {
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $session = $this->get('session');
         $request = $this->get('request');
         $token = $session->get('csrf_token_leave_organisation');
@@ -29,8 +35,8 @@ class ManagementController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         //If user want to mange an other user, or tokens are invalid
-        if ($user->getId() != $givenUser->getId() || empty($token) || 
-                                empty($givenToken) || $token != $givenToken) {
+        if (!$rightsManager->isSameUser($user, $givenUser) || 
+                !$rightsManager->areValidsTokens($givenToken, $token)) {
             throw $this->createAccessDeniedException();
         }
         $givenUser->setCamp(null);

@@ -5,6 +5,7 @@ namespace Xali\Bundle\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\UserBundle\Entity\User;
 use Xali\Bundle\UserBundle\Form\ProfileUserType;
+use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
 
 /**
  * Controller managing the user profile
@@ -27,7 +28,7 @@ class ProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('XaliUserBundle:User');
         $profileOwner = $userRepo->findWithCamp($id);
-        if (!($profileOwner instanceof User) || empty($profileOwner)) {
+        if (!($profileOwner instanceof User)) {
             throw $this->createNotFoundException();
         }
         return $this->render('XaliUserBundle:Profile:show.html.twig', array(
@@ -44,11 +45,16 @@ class ProfileController extends Controller
      */
     public function editAction(User $givenUser)
     {
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $user = $this->getUser();
         $session = $this->get('session');
         $request = $this->get('request');
         //If it is not the user's profile
-        if ($user->getId() != $givenUser->getId()) {
+        if (!$rightsManager->isSameUser($user, $givenUser)) {
             throw $this->createAccessDeniedException();
         }
         $form = $this->createForm(new ProfileUserType(), $user);
