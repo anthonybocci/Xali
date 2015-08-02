@@ -84,7 +84,7 @@ class XaliRightsManager
     public function canUpdateOrganisation($user, $organisation)
     {
         //If user is invalid
-        if (!$user instanceof User) {
+        if (!$user instanceof User || !$organisation instanceof Organisation) {
             return false;
         }elseif (!$organisation instanceof Organisation) {
              /* Else if it's for an organisation adding
@@ -98,14 +98,48 @@ class XaliRightsManager
         }
     }
     
+    /**
+     * Check if the user has rights to add a survivor in a camp
+     * 
+     * @param Xali\Bundle\UserBundle\Entity\User $user
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @return boolean
+     */
+    public function userBelongsToCamp($user, $camp)
+    {
+        //If $user is not a valid User or $camp is not a valid Camp
+        if (!($user instanceof User) || !($camp instanceof Camp)) {
+            return false;
+        }
+        //If user belong to a camp  and he try to add a survivor in its camp
+        return ($user->getCamp() != null && 
+                $user->getCamp()->getId() == $camp->getId());
+    }
+    
+    /**
+     * Check if the survivor belong to the camp
+     * Note: check survivor validity (for update for example check if the
+     * given id is different to 0) above in controller
+     * 
+     * @param \Xali\Bundle\SurvivorBundle\Entity\Survivor $survivor
+     * @param \Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @return boolean
+     */
+    public function survivorBelongsToCamp($survivor, $camp)
+    {
+        //If survivor or camp is invalid
+        if (!($survivor instanceof Survivor) || !($camp instanceof Camp)) {
+            return false;
+        }
+        /*
+         * If survivor has a camp and survivor belong to $camp
+         */
+        return $survivor->getCamp() != null &&
+                $survivor->getCamp()->getId() == $camp->getId();
+    }
     
     
-    
-    
-    
-    
-    
-    
+
     
     
     

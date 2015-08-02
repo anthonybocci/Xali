@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xali\Bundle\SurvivorBundle\Form\SurvivorType;
 use Xali\Bundle\SurvivorBundle\Entity\Survivor;
 use Xali\Bundle\CampBundle\Entity\Camp;
+use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
 
 /**
  * Manage survivors
@@ -26,24 +27,36 @@ class SurvivorController extends Controller
      */
     public function add_survivorAction(Camp $camp, $survivor_id)
     {
-        $user = $this->getUser();
-        //If volunteer try to add a survivor in an other camp
-        if ($user->getCamp() == null || $user->getCamp()->getId() != 
-                                                               $camp->getId()) {
-            throw $this->createAccessDeniedException();
-        }
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $request = $this->get('request');
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $converter = $this->container->get('xali_survivor.converter');
         $survivorClass = 'XaliSurvivorBundle:Survivor';
-        $givenSurvivor = $em->getRepository($survivorClass)->find($survivor_id);
-        //If no survivor is found, add a new. Else, take the found survivor
-        $survivor = (empty($givenSurvivor)) ? new Survivor() : $givenSurvivor;
-        //On survivor update, if survivor doesn't belong to the given camp
-        if ($survivor_id != 0 && $survivor->getId() == null || 
-                            $survivor->getCamp()->getId() != $camp->getId()) {
+        $survivor = null;
+        
+        //If volunteer try to add a survivor in an other camp
+        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
+            throw $this->createAccessDeniedException();
+        }
+        //If no survivor is given create a new
+        if ($survivor_id == 0) {
+            $survivor = new Survivor();
+        }else {
+            $survivor = $em->getRepository($survivorClass)->find($survivor_id);
+        }
+        /*On update if survivor doesn't exist  or survivor doesn't belong to this
+         * camp
+         */
+        if (!($survivor instanceof Survivor || 
+                $rightsManager->survivorBelongToCamp($survivor, $camp))) {
             throw $this->createNotFoundException();
         }
+       
         $form = $this->createForm(new SurvivorType(), $survivor);
         //If form is submitted
         if ($request->getMethod() == "POST") {
@@ -95,14 +108,13 @@ class SurvivorController extends Controller
         if (!($survivor instanceof Survivor)) {
             throw $this->createNotFoundException();
         }
-        //If survivor hasn't camp
+        //If survivor hasn't camp it is possible to assign him onto a camp
         if ($survivor->getCamp() == null) {
             $session->set('csrf_token_assign_camp', sha1(time() * rand()));
         } else {
+            //If survivor has a camp he can leave his camp
             $session->set('csrf_token_leave_camp', sha1(time() * rand()));
-        }
-        
-        
+        }       
         return $this->render('XaliSurvivorBundle:Profile:profile.html.twig',
                 array(
                     'survivor' => $survivor
@@ -110,6 +122,7 @@ class SurvivorController extends Controller
     }
     
     /**
+     * A survivor leave his camp
      * 
      * @param integer $survivor_id the survivor's id
      * @param integer $camp_id the camp's id to leave
@@ -118,6 +131,11 @@ class SurvivorController extends Controller
      */
     public function leave_campAction($survivor_id, $camp_id)
     {
+        /**
+         * @var \Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
+         * Service which manager rights
+         */
+        $rightsManager = $this->get('xali_user.rightsmanager');
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
@@ -126,23 +144,22 @@ class SurvivorController extends Controller
         $survivor = $survivorRepo->findWithCamp($survivor_id);
         $session = $this->get('session');
         $request = $this->get('request');
-        //If camp doesn't exist
+        //If camp or survivor doesn't exist
         if (!($camp instanceof Camp) || !($survivor instanceof Survivor)) {
             throw $this->createNotFoundException();
         }
         //If volunteer try to manage a survivor in an other camp
-        if ($user->getCamp() == null || $user->getCamp()->getId() != 
-                                                               $camp->getId()) {
+        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
             throw $this->createAccessDeniedException();
         }
         //If survivor doesn't belong to this camp
-        if ($camp->getId() != $survivor->getCamp()->getId()) {
+        if (!$rightsManager->survivorBelongsToCamp($survivor, $camp)) {
             throw $this->createNotFoundException();
         }
         $token = $session->get('csrf_token_leave_camp');
         $givenToken = $request->request->get('csrf_token_leave_camp');
-        //If tokens are invalids
-        if (empty($token) || empty($givenToken) || $token != $givenToken) {
+        //If tokens don't exist are invalids
+        if (!$rightsManager->areValidsTokens($givenToken, $token)) {
             throw $this->createAccessDeniedException();
         }
         $survivor->setCamp(null);
@@ -175,18 +192,17 @@ class SurvivorController extends Controller
             throw $this->createNotFoundException();
         }
         //If volunteer try to manage a survivor in an other camp
-        if ($user->getCamp() == null || $user->getCamp()->getId() != 
-                                                               $camp->getId()) {
+        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
             throw $this->createAccessDeniedException();
         }
-        //If survivor belong to a camp
+        //If survivor already belong to a camp
         if ($survivor->getCamp() != null) {
             throw $this->createAccessDeniedException();
         }
         $token = $session->get('csrf_token_assign_camp');
         $givenToken = $request->request->get('csrf_token_assign_camp');
         //If tokens are invalids
-        if (empty($token) || empty($givenToken) || $token != $givenToken) {
+        if (!$rightsManager->areValidsTokens($givenToken, $token)) {
             throw $this->createAccessDeniedException();
         }
         $survivor->setCamp($camp);
