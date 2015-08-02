@@ -15,8 +15,9 @@ organisation which will user Xali to find them.
 ---------------------------------
 
 
- To install Xali, follow [these instructions](link) and then
- do the second step
+ To install Xali, follow
+ [these instructions](https://github.com/anthonybocci/Xali/blob/master/documentation/install.md)
+ and then do the second step
 
 
 2) Check your configuration
@@ -28,8 +29,8 @@ http://localhost/<pathToHumanitarianHelper>/web/config.php
 This page will tell you if your configuration is fine or not.
 
 
-3) Using Xali
+3) Contributing to Xali
 ----------------------------
 
-To know exactly how to use it, you have to read features.html, and there
-is a Use Case ("Use Case.png")
+To contribute to Xali, you can follow
+[these instructions](https://github.com/anthonybocci/Xali/blob/master/documentation/how_to_contribute.md)

@@ -133,6 +133,7 @@ is already written to do that. Type the following command :
 
 - `php app/console doctrine:fixtures:load`
 
-It could take some minutes.
+It could take some minutes. To know more about fixtures you can read
+[this document](https://github.com/anthonybocci/Xali/blob/master/documentation/load_fixtures.md)
 
 Xali is now functional on your server !

@@ -11,5 +11,7 @@ Xali need different types of people:
 - Translator can translate the documentation or the Xali's
 content. Translate in English, because we are not English
 or translate if your language in order to more user understand
-Xali's content. See [here](link) how to translate Xali.
-- Users can [install](link) and test Xali to find bug or give advices
+Xali's content. See [here](https://github.com/anthonybocci/Xali/blob/master/documentation/translate.md)
+how to translate Xali.
+- Users can [install](https://github.com/anthonybocci/Xali/blob/master/documentation/install.md)
+and test Xali to find bug or give advices
