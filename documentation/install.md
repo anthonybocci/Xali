@@ -68,7 +68,7 @@ recommanded to use Git scm, the software you've installed just before,
 for syntacic colouring.
 
 In the Terminal, type:
-- `cd <pathToWebserver>` to go into the wanted folder in Web server
+- `cd [pathToWebserver]` to go into the wanted folder in Web server
 - `git clone https://github.com/anthonybocci/Xali`
 
 You have now a folder named 'Xali' which contains all of Xali project.
@@ -109,7 +109,7 @@ following commands.
 - `php app/console doctrine:database:create`
 
 To delete completely this database, you can use MySQL
-in a Terminal (type `DROP DATABASE <databaseName>`) or
+in a Terminal (type `DROP DATABASE [databaseName]`) or
 PhpMyAdmin in your browser for example
 
 ### Update database's schema

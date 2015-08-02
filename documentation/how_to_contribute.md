@@ -15,3 +15,5 @@ Xali's content. See [here](https://github.com/anthonybocci/Xali/blob/master/docu
 how to translate Xali.
 - Users can [install](https://github.com/anthonybocci/Xali/blob/master/documentation/install.md)
 and test Xali to find bug or give advices
+
+If you have a problem, declare an issue on Github.

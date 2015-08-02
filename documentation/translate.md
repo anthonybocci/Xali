@@ -7,12 +7,12 @@ need you to translate Xali in your language.
 is not English.**
 
 It is easy to translate Xali in your language. The files are
-located in 'src/Xali/Bundle/<sth>Bundle/Resources/translations'
-and are named messages.<language>.yml, where <language> equals
+located in 'src/Xali/Bundle/[sth]Bundle/Resources/translations'
+and are named messages.<language>.yml, where [language] equals
 to 'en' for English for example. It can also equals to 'en_US'
 to translate Xali in US english.
 
-Just open the file or create the file 'messages.<language>.yml if
+Just open the file or create the file 'messages.[language].yml if
 it doesn't exist. As you can see in the other files, there are
 strings like :
 
@@ -40,4 +40,6 @@ and set it to your locale. Open the file
 'app/config/parameters.yml' and update locale from 'en' to your
 language.
 
-Finally, commit and click on 'Pull request' on Github.
+Finally, commit and click on 'Pull request' on Github (if you've forked
+the repository). If you've any problem, declare an *issue* on Github
+and a Xali's member will help you.
