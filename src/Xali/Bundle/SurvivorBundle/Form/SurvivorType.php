@@ -66,7 +66,7 @@ class SurvivorType extends AbstractType
                 ))
             
             ->add('hairColor', 'choice', array(
-                'label' => "form.hair_color",
+                'label' => 'form.hair_color',
                 'choices' => array(
                     'blond'  => 'form.haircolor.blond',
                     'blue'   => 'form.haircolor.blue',

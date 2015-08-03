@@ -53,7 +53,7 @@ class SurvivorController extends Controller
          * camp
          */
         if (!($survivor instanceof Survivor || 
-                $rightsManager->survivorBelongToCamp($survivor, $camp))) {
+                !$rightsManager->survivorBelongToCamp($survivor, $camp))) {
             throw $this->createNotFoundException();
         }
        
