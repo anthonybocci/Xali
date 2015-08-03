@@ -5,6 +5,7 @@ namespace Xali\Bundle\UserBundle\RightsManager;
 use \Doctrine\ORM\EntityManager;
 use \Xali\Bundle\UserBundle\Entity\User;
 use \Xali\Bundle\OrganisationBundle\Entity\Organisation;
+use \Xali\Bundle\CampBundle\Entity\Camp;
 
 /**
  * XaliRightsManager manage rights on Xali. It verify if a survivor belong to
