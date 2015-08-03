@@ -57,7 +57,12 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
             $birthday->sub(new \DateInterval('P'.$daysNumber.'D'));
             $survivor->setBirthday($birthday);
             $camp = $camps[rand(0, count($camps)-1)];
-            $survivor->setCamp($camp);
+            //Each 15 times, survivor has no camp
+            if ($i % 15 != 0) {
+                $survivor->setCamp($camp);
+            } else {
+                $survivor->setCamp(null);
+            }
             $firstname = $firstnames[$maleOrFemale]
                                 [rand(0, count($firstnames[$maleOrFemale])-1)];
             $lastname = $lastnames[$maleOrFemale]

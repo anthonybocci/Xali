@@ -65,12 +65,15 @@ class LoadCamps extends AbstractFixture implements OrderedFixtureInterface
                             'XaliOrganisationBundle:Organisation')->findAll());
         
         for ($i = 0; $i < $usersNumber; $i++) {
-            //
+            //Firsts users has organisations managers
             if ($i < $organisationsNumber) {
                 $index = ($i*15 > 0) ? $i*15 -1 : 0;
                 $users[$i]->setCamp($camps[$index]);
             } else {
-                $users[$i]->setCamp($camps[rand(0, count($camps)-1)]);
+                //Each 15 times, the user has no camp
+                if ($i % 15 != 0) {
+                    $users[$i]->setCamp($camps[rand(0, count($camps)-1)]);
+                }
             }
             $manager->persist($users[$i]);
         }
