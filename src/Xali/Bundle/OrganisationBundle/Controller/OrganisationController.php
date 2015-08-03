@@ -136,7 +136,7 @@ class OrganisationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
-        $organisations = $orgRepo->findAll();
+        $organisations = $orgRepo->findAllWithManager();
         return $this->render('XaliOrganisationBundle:Search:see_all.html.twig',
                 array('organisations' => $organisations));
     }

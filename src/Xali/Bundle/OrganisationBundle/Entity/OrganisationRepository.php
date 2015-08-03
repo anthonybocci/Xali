@@ -177,4 +177,18 @@ class OrganisationRepository extends \Doctrine\ORM\EntityRepository
         return $query->getSingleScalarResult();
     }
     
+    /**
+     * Find all organisations joined with their manager
+     * 
+     * @return ArrayCollection
+     */
+    public function findAllWithManager() {
+        return $this->createQueryBuilder('o')
+                    ->innerJoin('o.manager', 'm')
+                    ->addSelect('m')
+                    ->getQuery()
+                    ->getResult()
+                ;
+    }
+    
 }
