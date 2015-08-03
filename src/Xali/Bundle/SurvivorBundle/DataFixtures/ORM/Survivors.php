@@ -51,8 +51,8 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
         
         for ($i = 0; $i < $survivorsNumber; $i++) {
             $maleOrFemale = rand(0, count($genders)-1);
-            $survivor->setGender($genders[$maleOrFemale]);
             $survivor = new Survivor();
+            $survivor->setGender($genders[$maleOrFemale]);
             //Today minus a number of days between 3 and 10 years
             $daysNumber = rand(1095, 146000);
             $birthday = new \DateTime();
