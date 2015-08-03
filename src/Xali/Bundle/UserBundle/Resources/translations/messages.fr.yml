@@ -7,6 +7,12 @@ form:
     email:              "Email :"
     email_confirmation: "Vérification :"
     add_volunteer:      "Ajouter un bénévole"
+    password:               "Mot de passe :"
+    password_confirmation:  "Confirmer mot de passe :"
+    gender:                 "Sexe:"
+    gender_choices:
+        male:               "Homme"
+        female:             "Femme"
     
     
 profile:

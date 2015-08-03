@@ -21,17 +21,14 @@ class UserType extends AbstractType
                     'second_options' => array(
                                             'label' => 'form.email_confirmation'
                                         ),
-                    'invalid_message' => 'fos_user.email.mismatch',
                 ))
                 
                 ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
-                'options' => array('translation_domain' => 'FOSUserBundle'),
                 'first_options' => array('label' => 'form.password'),
                 'second_options' => array(
                                         'label' => 'form.password_confirmation'
                                     ),
-                'invalid_message' => 'fos_user.password.mismatch',
             ))
        
             ->add('firstname', 'text', array('label' => "form.firstname"))
