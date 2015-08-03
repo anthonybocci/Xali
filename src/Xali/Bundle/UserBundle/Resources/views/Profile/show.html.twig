@@ -39,7 +39,10 @@
             </div>
             <div class="col-md-6">
                 {% if profileOwner.camp is not null %}
-                    {{ 'profile.show.camp_assigned'|trans }} {{ profileOwner.camp.name }}
+                        {{ 'profile.show.camp_assigned'|trans }} 
+                        <a href="{{ path('xali_camp_profile_profile', {'id': profileOwner.camp.id}) }}">
+                            {{ profileOwner.camp.name }}
+                        </a>
                 {% else %}
                     {{ 'profile.show.no_camp'|trans }}
                 {% endif %}
