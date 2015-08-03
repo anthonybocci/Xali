@@ -80,6 +80,17 @@ class SurvivorType extends AbstractType
             'expanded' => false,
             'empty_value' => 'form.choose_value',
             ))
+            
+            ->add('gender', 'choice', array(
+                'label' => 'form.gender',
+                'choices' => array(
+                    'm' => 'form.gender_choices.male',
+                    'f' => 'form.gender_choices.female'
+                ),
+                'multiple' => false,
+                'expanded' => false,
+                'empty_value' => 'form.choose_value',
+            ));
         ;
     }
     

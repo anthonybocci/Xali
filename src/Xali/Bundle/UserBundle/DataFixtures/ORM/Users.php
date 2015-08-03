@@ -54,7 +54,7 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
             'Granger', 'Connor', 'Amidala', 'Kent', 'Parker', 'Potter'
         );
         
-        $genders = array('male', 'female');
+        $genders = array('m', 'f');
         $firstnames = array($firstnamesMale, $firstnamesFemale);
         $lastnames = array($lastnamesMale, $lastnamesFemale);
 
@@ -62,7 +62,8 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
         //Create users
         for ($i = 0; $i < $usersNumber; $i++) {
             $user = new User();
-            $maleOrFemale = rand(0, count($lastnames)-1);
+            $maleOrFemale = rand(0, count($genders)-1);
+            $user->setGender($genders[$maleOrFemale]);
             $firstname = $firstnames[$maleOrFemale]
                                 [rand(0, count($firstnames[$maleOrFemale])-1)];
             $user->setFirstname($firstname);

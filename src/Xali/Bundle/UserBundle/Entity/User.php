@@ -94,6 +94,14 @@ class User implements UserInterface
      */
     private $camp;
     
+    /**
+     * User's gender, 'm' for male or 'f' for female
+     * 
+     * @var char 
+     * 
+     * @ORM\Column(name="gender", type="string", length=1)
+     */
+    private $gender;
 
     public function __construct()
     {
@@ -345,5 +353,29 @@ class User implements UserInterface
     public function getCamp()
     {
         return $this->camp;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param char $gender
+     *
+     * @return User
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return char
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }

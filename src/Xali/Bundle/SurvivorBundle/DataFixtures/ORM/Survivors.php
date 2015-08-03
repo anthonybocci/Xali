@@ -38,6 +38,7 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
         );
         $firstnames = array($firstnamesMale, $firstnamesFemale);
         $lastnames = array($lastnamesMale, $lastnamesFemale);
+        $genders = array('m', 'f');
         
         $survivorsNumber = 50000;
         $camps = $manager->getRepository('XaliCampBundle:Camp')->findAll();
@@ -49,7 +50,8 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
         
         
         for ($i = 0; $i < $survivorsNumber; $i++) {
-            $maleOrFemale = rand(0, count($lastnames)-1);
+            $maleOrFemale = rand(0, count($genders)-1);
+            $survivor->setGender($genders[$maleOrFemale]);
             $survivor = new Survivor();
             //Today minus a number of days between 3 and 10 years
             $daysNumber = rand(1095, 146000);

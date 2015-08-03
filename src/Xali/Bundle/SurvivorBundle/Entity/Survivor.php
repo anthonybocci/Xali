@@ -85,6 +85,15 @@ class Survivor
     private $hairColor;
     
     /**
+     * Survivor's gender. "m" for male, "f" for female
+     * 
+     * @var char 
+     * 
+     * @ORM\Column(name="gender", type="string", length=1)
+     */
+    private $gender;
+    
+    /**
      * @var Xali\Bundle\CampBundle\Entity\Camp
      * 
      * @ORM\ManyToOne(targetEntity="Xali\Bundle\CampBundle\Entity\Camp")
@@ -338,4 +347,28 @@ class Survivor
         return $this->camp;
     }
     
+
+    /**
+     * Set gender
+     *
+     * @param char $gender
+     *
+     * @return Survivor
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return char
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
 }

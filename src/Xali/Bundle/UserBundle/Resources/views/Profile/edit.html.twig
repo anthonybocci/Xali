@@ -40,9 +40,16 @@
                 </div>
             </div>
         </div>
-        {{ form_rest(form) }}
-        <div>
-            <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+        <div class="row">
+             <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                {{ form_label(form.gender) }}<br />
+                {{ form_errors(form.gender) }}
+                {{ form_widget(form.gender, {'attr': {'class': 'form-control'} }) }}
+            </div><br />
+            <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input type="submit" class="form-control btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
         </div>
+        {{ form_rest(form) }}
     </form>
 {% endblock %}

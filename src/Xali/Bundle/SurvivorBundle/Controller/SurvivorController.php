@@ -171,6 +171,7 @@ class SurvivorController extends Controller
     }
     
     /**
+     * Assign a survivor to a camp
      * 
      * @param type $survivor_id the survivor's id
      * @param type $camp_id the camp's id
