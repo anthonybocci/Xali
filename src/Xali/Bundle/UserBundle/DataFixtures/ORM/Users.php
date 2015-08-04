@@ -73,7 +73,11 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
             $user->setEmail(
                     strtolower($user->getFirstname()).
                     '@'.strtolower($user->getLastname().$i).'.com');
-            $roles = array('ROLE_USER');
+            //First user is root
+            $roles = ($i!= 0) ? array('ROLE_USER') : array(
+								'ROLE_USER',
+								'ROLE_SUPER_ADMIN'
+								);
             $user->setRoles($roles);
             
             $user->setSalt(md5(uniqid()));

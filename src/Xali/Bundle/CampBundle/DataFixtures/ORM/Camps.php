@@ -18,7 +18,7 @@ class LoadCamps extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $usersNumber = 10000;
+    
         $countries = array(
             'south africa', 'algeria', 'angola', 'bénin'
         );
@@ -61,8 +61,10 @@ class LoadCamps extends AbstractFixture implements OrderedFixtureInterface
         
         //Assign users to camps
         $users = $manager->getRepository('XaliUserBundle:User')->findAll();
-        $organisationsNumber = count($manager->getRepository(
-                            'XaliOrganisationBundle:Organisation')->findAll());
+        $usersNumber = count($users);
+        $organisations = $manager->getRepository(
+                            'XaliOrganisationBundle:Organisation')->findAll();
+        $organisationsNumber = count($organisations);
         
         for ($i = 0; $i < $usersNumber; $i++) {
             //Firsts users has organisations managers
@@ -73,7 +75,9 @@ class LoadCamps extends AbstractFixture implements OrderedFixtureInterface
                 //Each 15 times, the user has no camp
                 if ($i % 15 != 0) {
                     $users[$i]->setCamp($camps[rand(0, count($camps)-1)]);
-                }
+                } else {
+					$users[$i]->setCamp(null);
+				}
             }
             $manager->persist($users[$i]);
         }
