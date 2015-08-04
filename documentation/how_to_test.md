@@ -55,30 +55,7 @@ role, can you access to the wanted resource ?
 Try to submit a form with a wrong csrf token, does it works ?
 
 
-**For each problem, each bug or strange thing, create a new issue
-on Github**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**For each problem, each bug or strange thing,
+[create a new issue]()
+on Github.** If you don't know how to declare an issue, see
+[this document](https://github.com/anthonybocci/Xali/blob/master/documentation/how_to_create_issue.md)

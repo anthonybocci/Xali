@@ -17,10 +17,3 @@ Note than the title has to be short, and clear.
 
 Example:
     Login doesn't works for root
-
-
-
-
-
-
-
