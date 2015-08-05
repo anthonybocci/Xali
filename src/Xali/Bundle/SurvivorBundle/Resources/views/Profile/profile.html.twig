@@ -33,7 +33,8 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 {{ "profile.hair_color"|trans }} {{ survivor.hairColor }}
             </div>
-            {% if survivor.camp is not null %}
+            {% if survivor.camp is not null and survivor.camp == app.user.camp
+                                            or is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <button id="btn-leave-camp" class="btn btn-success">
                         {{ "profile.left"|trans }}
@@ -77,7 +78,6 @@
     </div>
             
     {% block javascript %}
-  
         <script type="text/javascript" src="{{ asset('resources/scripts/profiles/confirm_button.js') }}"></script>
         <script type="text/javascript">
             $(function() {

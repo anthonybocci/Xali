@@ -93,9 +93,9 @@ class XaliRightsManager
               */
             return in_array("ROLE_SUPER_ADMIN", $user->getRoles());
         } else {
-            //Else, user has to be the organisation's manager
-             return !in_array("ROLE_SUPER_ADMIN", $user->getRoles()) && 
-                $user()->getId() != $organisation->getManager()->getId();
+            //Else, user has to be the organisation's manager or root
+             return in_array("ROLE_SUPER_ADMIN", $user->getRoles()) || 
+                $user()->getId() == $organisation->getManager()->getId();
         }
     }
     

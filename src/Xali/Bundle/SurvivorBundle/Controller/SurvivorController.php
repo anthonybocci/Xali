@@ -39,8 +39,9 @@ class SurvivorController extends Controller
         $survivorClass = 'XaliSurvivorBundle:Survivor';
         $survivor = null;
         
-        //If volunteer try to add a survivor in an other camp
-        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
+        //If volunteer try to add a survivor in an other camp and is not root
+        if (!$rightsManager->userBelongsToCamp($user, $camp) &&
+                !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             throw $this->createAccessDeniedException();
         }
         //If no survivor is given create a new
@@ -148,8 +149,9 @@ class SurvivorController extends Controller
         if (!($camp instanceof Camp) || !($survivor instanceof Survivor)) {
             throw $this->createNotFoundException();
         }
-        //If volunteer try to manage a survivor in an other camp
-        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
+        //If volunteer try to manage a survivor in an other camp and is not root
+        if (!$rightsManager->userBelongsToCamp($user, $camp) &&
+                 !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             throw $this->createAccessDeniedException();
         }
         //If survivor doesn't belong to this camp
@@ -193,7 +195,8 @@ class SurvivorController extends Controller
             throw $this->createNotFoundException();
         }
         //If volunteer try to manage a survivor in an other camp
-        if (!$rightsManager->userBelongsToCamp($user, $camp)) {
+        if (!$rightsManager->userBelongsToCamp($user, $camp) &&
+                 !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             throw $this->createAccessDeniedException();
         }
         //If survivor already belong to a camp

@@ -111,14 +111,14 @@ class CampController extends Controller
         $request = $this->get('request');
         $session = $this->get('session');
         $userRepository = $em->getRepository('XaliUserBundle:User');
-        $receivedToken = $request->request->get('csrf_token');
+        $givenToken = $request->request->get('csrf_token');
         $rightToken = $session->get('csrf_token');
         
         //If the camp doesn't exist
         if (!($camp instanceof Camp)) {
             throw $this->createNotFoundException();
         } else if (
-                !$rightsManager->isOrganisationManager($user, $organisation)) {
+                !$rightsManager->canUpdateOrganisation($user, $organisation)) {
             //If the user is not manager of organisation's camp
             throw $this->createAccessDeniedException();
         }
@@ -196,7 +196,7 @@ class CampController extends Controller
         }
         $organisation = $camp->getOrganisation();
         //If user is not organisation's manager
-        if ($rightsManager->isOrganisationManager($user, $organisation)) {
+        if ($rightsManager->canUpdateOrganisation($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
         $sessionToken = $request->request->get('csrf_token_del_camp');
