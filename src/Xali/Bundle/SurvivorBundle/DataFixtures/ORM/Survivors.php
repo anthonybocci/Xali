@@ -87,8 +87,7 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
             $survivor->setLastname($lastname);
             $survivor->setHairColor($hairColors[rand(0, count($hairColors)-1)]);
             $survivor->setEyesColor($eyesColors[rand(0, count($eyesColors)-1)]);
-            //TODO : improve in order to height and weight be coherent with 
-            //birthday
+            //Set height and weight according to age
             $years = $daysNumber / 365;
             if ($years <= 6) {
                 $heightInCm = rand(60, 110);
