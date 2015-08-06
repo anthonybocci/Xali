@@ -17,7 +17,21 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-         $firstnamesMale = array(
+    /**
+     * Coefficient between kilogrammes and pounds
+     * 
+     * @var float
+     */
+     $WEIGHTCOEFFICIENT = 2.20458554;
+     
+     /**
+      * Coefficient between centimeters and inches
+      * 
+      * @var float
+      */
+     $HEIGHTCOEFFICIENT = 2.54;
+        
+        $firstnamesMale = array(
             'John', 'Luke', 'Mike', 'Anakin', 'Bruce', 'Clark', 'Peet', 'Jack',
             'Harry', 'Peter', 'Ron', 'Chuck', 'Cordel', 'Aladdin'
         );
@@ -75,8 +89,22 @@ class LoadSurvivors extends AbstractFixture implements OrderedFixtureInterface
             $survivor->setEyesColor($eyesColors[rand(0, count($eyesColors)-1)]);
             //TODO : improve in order to height and weight be coherent with 
             //birthday
-            $survivor->setWeight(rand(10, 190));
-            $survivor->setHeight(rand(20, 75));
+            $years = $daysNumber / 365;
+            if ($years <= 6) {
+                $heightInCm = rand(60, 110);
+            } elseif($years <= 12) {
+                $heightInCm = rand(110, 150);
+            } else {
+                $heightInCm = rand(150, 200);
+            }
+            $genderCoeff = ($survivor->getGender() == 'f') ? 2.5 : 4;
+            //Set coherent weight according to height
+            $weightInKg = $heightInCm - 100 - 
+                                           (($heightInCm - 150) / $genderCoeff);
+            $weight = $weightInKg * $WEIGHTCOEFFICIENT;
+            $height = $heightInCm / $HEIGHTCOEFFICIENT;
+            $survivor->setWeight($weight);
+            $survivor->setHeight($height);
             $manager->persist($survivor);
         }
         $manager->flush();
