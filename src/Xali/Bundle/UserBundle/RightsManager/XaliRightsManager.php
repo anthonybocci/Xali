@@ -95,7 +95,7 @@ class XaliRightsManager
         } else {
             //Else, user has to be the organisation's manager or root
              return in_array("ROLE_SUPER_ADMIN", $user->getRoles()) || 
-                $user()->getId() == $organisation->getManager()->getId();
+                     $this->isOrganisationManager($user, $organisation);
         }
     }
     
@@ -155,15 +155,4 @@ class XaliRightsManager
         }
         return $loggedUser->getId() == $givenUser->getId();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
