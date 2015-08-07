@@ -6,7 +6,7 @@ use Xali\Bundle\UserBundle\RightsManager\XaliRightsManager;
 use Xali\Bundle\UserBundle\Entity\User;
 use Xali\Bundle\OrganisationBundle\Entity\Organisation;
 use Xali\Bundle\CampBundle\Entity\Camp;
-use Xali\Bundle\SurivorBundle\Entity\Survivor;
+use Xali\Bundle\SurvivorBundle\Entity\Survivor;
 
 /**
  * Class XaliRightsManagerTest
