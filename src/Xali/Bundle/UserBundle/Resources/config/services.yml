@@ -3,5 +3,5 @@
 services:
     xali_user.rightsmanager:
         class: Xali\Bundle\UserBundle\RightsManager\XaliRightsManager
-        arguments:
-             entityManager: "@doctrine.orm.entity_manager"
+        #arguments:
+        #     entityManager: "@doctrine.orm.entity_manager"

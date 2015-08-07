@@ -14,22 +14,6 @@ use \Xali\Bundle\CampBundle\Entity\Camp;
  */
 class XaliRightsManager
 {
-    /**
-     * Entity Manager to manage entity
-     * 
-     * @var \Doctrine\ORM\EntityManager 
-     */
-    protected $em;
-    
-    /**
-     * Constructor
-     * 
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->em = $entityManager;
-    }
     
     /**
      * Check if $user is the $organisation's manager
