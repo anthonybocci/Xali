@@ -4,9 +4,9 @@ namespace Xali\Bundle\CampBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class CampControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testadd_camp()
     {
         $client = static::createClient();
 
