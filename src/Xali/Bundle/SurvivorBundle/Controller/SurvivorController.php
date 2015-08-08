@@ -7,6 +7,7 @@ use Xali\Bundle\SurvivorBundle\Form\SurvivorType;
 use Xali\Bundle\SurvivorBundle\Entity\Survivor;
 use Xali\Bundle\CampBundle\Entity\Camp;
 use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
+use Xali\Bundle\SurvivorBundle\Form\SurvivorSearchType;
 
 /**
  * Manage survivors
@@ -64,6 +65,15 @@ class SurvivorController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $this->convertWeightAndHeight($survivor, $converter);
+                /* Put firstname and lastname in lowercase, then put first char
+                 * in uppercase
+                 */
+                $survivor->setFirstname(
+                        ucfirst(strtolower($survivor->getFirstname()))
+                        );
+                $survivor->setLastname(
+                        ucfirst(strtolower($survivor->getLastname()))
+                        );
                 $survivor->setCamp($camp);
                 $em->persist($survivor);
                 $em->flush();
@@ -217,9 +227,27 @@ class SurvivorController extends Controller
                 )));
     }
     
+    /**
+     * Search a survivor and display results
+     */
     public function searchAction()
     {
-        return $this->render('XaliSurvivorBundle:Search:search.html.twig');
+        $request = $this->get('request');
+        $survivor = new Survivor();
+        $form = $this->createForm(new SurvivorSearchType(), $survivor);
+        $results = null;
+        $em = $this->getDoctrine()->getManager();
+        $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
+        //If form is submitted
+        if ($request->getMethod() == "POST") {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $results = $survivorRepo->search($survivor);
+            }
+        }
+        
+        return $this->render('XaliSurvivorBundle:Search:search.html.twig',
+                array('form' => $form->createView(), 'results' => $results));
     }
     
 

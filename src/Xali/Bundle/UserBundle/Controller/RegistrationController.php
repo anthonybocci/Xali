@@ -28,6 +28,12 @@ class RegistrationController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $data = $form->getData();
+                /*
+                 * Put firstname and lastname in lowercase, then put first char
+                 * in uppercase
+                 */
+                $user->setFirstname(ucfirst(strtolower($user->getFirstname())));
+                $user->setLastname(ucfirst(strtolower($user->getLastname())));
                 $data->setPassword(
                     $this->container->get("security.encoder_factory")
                         ->getEncoder(
