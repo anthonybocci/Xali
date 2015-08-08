@@ -59,4 +59,4 @@ search:
     weight:         "Poids"
     results:        "Résultats"
     camp:           "Camp"
-    not_found:      "Non trouvé ? Ajouter le rescapé"
+    no_camp:        "Aucun camp"

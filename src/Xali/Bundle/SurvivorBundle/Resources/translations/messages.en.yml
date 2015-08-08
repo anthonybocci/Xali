@@ -59,4 +59,4 @@ search:
     weight:         "Weight"
     results:        "Results"
     camp:           "Camp"
-    not_found:      "Not found ? Add the survivor"
+    no_camp:        "No camp"

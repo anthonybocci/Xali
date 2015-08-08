@@ -2,6 +2,8 @@
 
 namespace Xali\Bundle\SurvivorBundle\Entity;
 
+use Xali\Bundle\SurvivorBundle\Converter\Converter;
+
 /**
  * SurvivorRepository
  *
@@ -26,5 +28,61 @@ class SurvivorRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getOneOrNullResult()
                 ;
+    }
+    
+    
+    public function search(Survivor $survivor)
+    {
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->leftJoin('s.camp', 'c')
+              ->addSelect('c')
+              ->where('s.firstname = :firstname')
+              ->setParameter('firstname', ucfirst($survivor->getFirstname()))
+              ->andWhere('s.lastname = :lastname')
+              ->setParameter('lastname', ucfirst($survivor->getLastname()))
+                ;
+        if (!empty($survivor->getBirthday())) {
+            $queryBuilder->andWhere('s.birthday = :birthday')
+                         ->setParameter('birthday', $survivor->getBirthday());
+        }
+        if (!empty($survivor->getEyesColor())) {
+            $queryBuilder->andWhere('s.eyesColor = :eyescolor')
+                         ->setParameter('eyescolor', $survivor->getEyesColor());
+        }
+        if (!empty($survivor->getWeight())) {
+            //Convert weight if necessary
+            if ($survivor->getWeightUnit() == "kg") {
+                $converter = new Converter();
+                $weight = $converter->fromKgToLb($survivor->getWeight());
+                $survivor->setWeight($weight);
+            }
+            
+            $queryBuilder->andWhere(
+                    $queryBuilder->expr()->between(
+                            ':weight', 's.weight - 5', 's.weight + 5'
+                            )
+                    )
+                    ->setParameter('weight', $survivor->getWeight());
+        }
+        if (!empty($survivor->getHeight())) {
+            //Convert height if necessary
+            if ($survivor->getHeightUnit() == "cm") {
+                $converter = new Converter();
+                $height = $converter->fromCmToInch($survivor->getHeight());
+                $survivor->setHeight($height);
+            }
+            
+            $queryBuilder->andWhere(
+                    $queryBuilder->expr()->between(
+                            ':height', 's.height - 5', 's.height + 5'
+                            )
+                    )
+                         ->setParameter('height', $survivor->getHeight());
+        }
+        if (!empty($survivor->getHairColor())) {
+           $queryBuilder->andWhere('s.hairColor = :haircolor')
+                         ->setParameter('haircolor', $survivor->getHairColor());
+        }
+        return $queryBuilder->getQuery()->getResult();
     }
 }

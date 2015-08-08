@@ -54,8 +54,6 @@ class SurvivorSearchType extends AbstractType
                 ),
                 'multiple' => false,
                 'expanded' => false,
-                'empty_value' => 'form.choose_value',
-                'required' => false
                 ))
             
             ->add('height', 'number', array('label' => "form.height",
@@ -69,8 +67,6 @@ class SurvivorSearchType extends AbstractType
                 ),
                 'multiple' => false,
                 'expanded' => false,
-                'empty_value' => 'form.choose_value',
-                'required' => false
                 ))
             
             ->add('hairColor', 'choice', array(

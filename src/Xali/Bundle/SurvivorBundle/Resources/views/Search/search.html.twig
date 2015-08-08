@@ -72,6 +72,14 @@
                 {{ form_widget(form.hairColor, {'attr': {'class': 'form-control'} }) }}
             </div>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.gender) }}
+                {{ form_errors(form.gender) }}
+                {{ form_widget(form.gender, {'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
         <input type="submit" class="form-control btn btn-primary" value="{{ "form.search"|trans }}" />
     </form>
     
@@ -90,78 +98,37 @@
                 <th>{{ "search.birthday"|trans }}</th>
                 <th>{{ "search.eyes_color"|trans }}</th>
                 <th>{{ "search.hair_color"|trans }}</th>
-                <th>{{ "search.height"|trans }} (<span id="height_unit">{{ "unit" }}</span>)</th>
-                <th>{{ "search.weight"|trans }} (<span id="weight_unit">{{ "unit" }}</span>)</th>
+                <th>{{ "search.height"|trans }}</th>
+                <th>{{ "search.weight"|trans }}</th>
                 <th>{{ "search.camp"|trans }}</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-                <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-                <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-                <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-                <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-              <td>Firstname example</td>
-                <td>Lastname example</td>
-                <td>xxxx-xx-xx</td>
-                <td>Eyes color example</td>
-                <td>Hair color example</td>
-                <td>xx</td>
-                <td>xx</td>
-                <td>camp x</td>
-            </tr>
-            <tr>
-                <td><button class="btn btn-info col-lg-12 text-center">{{ "search.not_found"|trans }}</button></td>
-            </tr>
+            {% if results is null %}
+                {{ 'No results' }}
+            {% else %}
+                {% for survivor in results %}
+                    <tr>
+                        <td>{{ survivor.firstname }}</td>
+                        <td>{{ survivor.lastname }}</td>
+                        <td>{{ survivor.birthday | localizeddate('medium', 'none')}}</td>
+                        <td>{{ survivor.eyesColor }}</td>
+                        <td>{{ survivor.hairColor }}</td>
+                        <td>{{ survivor.height }}</td>
+                        <td>{{ survivor.weight }}</td>
+                        <td>
+                            {% if survivor.camp is not null %}
+                                {{ survivor.camp.name }}
+                            {% else %}
+                                {{ 'search.no_camp'|trans }}
+                            {% endif %}
+                        </td>
+                    </tr> 
+                {% endfor %}
+            {% endif %}
+            
       </tbody>
     </table>
-    
     
     
     
