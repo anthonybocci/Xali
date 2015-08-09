@@ -49,7 +49,7 @@ class OrganisationController extends Controller
          * organisation
          */
         if ($id_organisation == 0 && 
-                $rightsManager->canUpdateOrganisation($user, $organisation)) {
+                !$rightsManager->canUpdateOrganisation($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
         
