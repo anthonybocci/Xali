@@ -36,7 +36,7 @@ form:
     choose_value:   "Choose a value"
     
 profile:
-    birth_on:           "Birth on:"
+    birth_on:           "Born on:"
     eyes_color:         "Eyes color:"
     weight:             "Weight:"
     height:             "Height:"
