@@ -33,7 +33,8 @@
                 {{ "profile.nb_volunteers"|trans }} {{ 'profile.volunteers_nb'|transchoice(volunteersNb) }}
             </div>
             {# Only the organisation's manager can assign volunteer #}
-            {% if app.user.id == camp.organisation.manager.id %}
+            {% if app.user.id == camp.organisation.manager.id or
+                                               is_granted("ROLE_SUPER_ADMIN") %}
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <a href="{{ path('xali_camp_management_assign_volunteer', {'id': camp.id}) }}" class="btn btn-info">
                         {{ "profile.assign_volunteer"|trans }}
