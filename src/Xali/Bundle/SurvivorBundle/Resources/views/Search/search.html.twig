@@ -105,12 +105,20 @@
         </thead>
         <tbody>
             {% if results is null %}
-                {{ 'No results' }}
+                <tr><td>{{ 'search.no_result'|trans }}</td></tr>
             {% else %}
                 {% for survivor in results %}
                     <tr>
-                        <td>{{ survivor.firstname }}</td>
-                        <td>{{ survivor.lastname }}</td>
+                        <td>
+                            <a href="{{ path('xali_survivor_profile_profile', {'id': survivor.id}) }}">
+                                {{ survivor.firstname }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('xali_survivor_profile_profile', {'id': survivor.id}) }}">
+                                {{ survivor.lastname }}
+                            </a>
+                        </td>
                         <td>{{ survivor.birthday | localizeddate('medium', 'none')}}</td>
                         <td>{{ survivor.eyesColor }}</td>
                         <td>{{ survivor.hairColor }}</td>
