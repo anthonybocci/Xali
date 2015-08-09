@@ -57,12 +57,27 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findWithCamp($id)
     {
-        return $queryBuilder = $this->createQueryBuilder('u')
+        return $this->createQueryBuilder('u')
                      ->where('u.id = :user_id')
                      ->setParameter('user_id', $id)
                      ->leftJoin('u.camp', 'c')
                      ->addSelect('c')
                      ->getQuery()
                      ->getOneOrNullResult();
+    }
+    
+    /**
+     * Find all user who belong to a given camp
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @return ArrayCollection
+     */
+    public function findAllInCamp($camp)
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.camp = :camp')
+                    ->setParameter('camp', $camp)
+                    ->getQuery()
+                    ->getResult()
+                ;
     }
 }

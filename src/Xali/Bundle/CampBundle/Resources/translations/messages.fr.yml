@@ -44,3 +44,7 @@ assign_volunteer:
 see_all:
     created_on:     "Créée le"
     organisation_name:  "Nom de l'organisation"
+    
+see:
+    volunteers:
+        camp_volunteers: Volontaires du camp "%camp_name%"

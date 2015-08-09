@@ -211,4 +211,17 @@ class CampController extends Controller
         }
         return $this->redirect($this->generateUrl($generateUrl));
     }
+    
+    /**
+     * Display all volunteers who belong to a camp
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     */
+    public function see_volunteersAction(Camp $camp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository('XaliUserBundle:User');
+        $volunteers = $userRepo->findAllInCamp($camp);
+        return $this->render('XaliCampBundle:Display:see_volunteers.html.twig',
+                array('volunteers' => $volunteers, 'camp' => $camp));
+    }
 }

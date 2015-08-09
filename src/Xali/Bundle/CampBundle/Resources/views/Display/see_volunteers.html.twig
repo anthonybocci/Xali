@@ -1,0 +1,27 @@
+{# src/CampBundle/Resources/views/Management/see_volunteers.html.twig #}
+
+{% extends "XaliCampBundle::base_camp.html.twig" %}
+
+{#Overwrite camp_body block#}
+{% block camp_body %}
+    <div class="text-center">
+        <h1>
+            <a href="{{ path('xali_camp_profile_profile', {'id': camp.id}) }}">
+                {{ 'see.volunteers.camp_volunteers'|trans({'%camp_name%': camp.name}) }}
+            </a>
+        </h1>
+        
+        {% for volunteer in volunteers %}
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <a href="{{ path('xali_user_profile_show', {'id': volunteer.id}) }}">
+                        {{ volunteer.firstname ~ ' ' ~ volunteer.lastname }}
+                    </a>
+                </div>
+            </div>
+            {% if loop.last == false %}
+                <hr />
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
