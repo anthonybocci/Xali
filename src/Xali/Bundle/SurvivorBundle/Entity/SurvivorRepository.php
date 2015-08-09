@@ -85,4 +85,19 @@ class SurvivorRepository extends \Doctrine\ORM\EntityRepository
         }
         return $queryBuilder->getQuery()->getResult();
     }
+    
+    /**
+     * Find all survivors who belong to a given camp
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     * @return ArrayCollection
+     */
+    public function findAllInCamp($camp)
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.camp = :camp')
+                    ->setParameter('camp', $camp)
+                    ->getQuery()
+                    ->getResult()
+                ;
+    }
 }

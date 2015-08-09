@@ -7,16 +7,19 @@
     <div class="text-center">
         <h1>
             <a href="{{ path('xali_camp_profile_profile', {'id': camp.id}) }}">
-                {{ 'see.volunteers.camp_volunteers'|trans({'%camp_name%': camp.name}) }}
+                {{ 'see.survivors.camp_survivors'|trans({'%camp_name%': camp.name}) }}
             </a>
         </h1>
         
-        {% for volunteer in volunteers %}
+        {% for survivor in survivors %}
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <a href="{{ path('xali_user_profile_show', {'id': volunteer.id}) }}">
-                        {{ volunteer.firstname ~ ' ' ~ volunteer.lastname }}
+                    <a href="{{ path('xali_survivor_profile_profile', {'id': survivor.id}) }}">
+                        {{ survivor.firstname ~ ' ' ~ survivor.lastname }}
                     </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    {{ 'see.survivors.birth_on'|trans }} {{ survivor.birthday|localizeddate('long', 'none', app.request.locale) }}
                 </div>
             </div>
             {% if loop.last == false %}

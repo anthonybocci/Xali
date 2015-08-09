@@ -49,7 +49,19 @@
                     <a href="{{ path('xali_survivor_management_add_survivor', {'id': camp.id}) }}" class="btn btn-info">{{ "profile.assign_survivors"|trans }}</a>
                 </div>
            </div>
-        {% endif %}
+        {% endif %}<br />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a href="{{ path('xali_camp_display_see_volunteers', {'id': camp.id}) }}" class="btn btn-info">
+                    {{ "profile.see_volunteers"|trans }}
+                </a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a href="{{ path('xali_camp_display_see_survivors', {'id': camp.id}) }}" class="btn btn-info">
+                    {{ "profile.see_survivors"|trans }}
+                </a>
+            </div>
+        </div>
     </div>
     {% block javascript %}
         {# If user is the manager of camp's organisation #}

@@ -224,4 +224,18 @@ class CampController extends Controller
         return $this->render('XaliCampBundle:Display:see_volunteers.html.twig',
                 array('volunteers' => $volunteers, 'camp' => $camp));
     }
+    
+    
+    /**
+     * Display all survivors who belong to a camp
+     * @param Xali\Bundle\CampBundle\Entity\Camp $camp
+     */
+    public function see_survivorsAction(Camp $camp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $survivorRepo = $em->getRepository('XaliSurvivorBundle:Survivor');
+        $survivors = $survivorRepo->findAllInCamp($camp);
+        return $this->render('XaliCampBundle:Display:see_survivors.html.twig',
+                array('survivors' => $survivors, 'camp' => $camp));
+    }
 }

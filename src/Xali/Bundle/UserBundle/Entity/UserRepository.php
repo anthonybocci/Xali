@@ -67,7 +67,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     }
     
     /**
-     * Find all user who belong to a given camp
+     * Find all users who belong to a given camp
      * @param Xali\Bundle\CampBundle\Entity\Camp $camp
      * @return ArrayCollection
      */

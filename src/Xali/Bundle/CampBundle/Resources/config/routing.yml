@@ -34,8 +34,15 @@ xali_camp_delete:
         _method:  POST
 
 #See volunteers who belong to a given camp
-xali_camp_see_volunteers:
+xali_camp_display_see_volunteers:
     path:   /{id}/see_volunteers
     defaults: { _controller: XaliCampBundle:Camp:see_volunteers }
+    requirements:
+        id: \d+
+        
+#See survivors who belong to a given camp
+xali_camp_display_see_survivors:
+    path:   /{id}/see_survivors
+    defaults: { _controller: XaliCampBundle:Camp:see_survivors }
     requirements:
         id: \d+

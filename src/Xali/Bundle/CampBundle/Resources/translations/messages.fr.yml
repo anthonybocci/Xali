@@ -28,6 +28,8 @@ profile:
     lb:                 "Lb"
     inches_nb:          "[0,1]%count% pied|[2,+Inf]%count% pieds"
     weight_value:       "[0,1]%count% livre|[2,+Inf]%count% livres"
+    see_volunteers:     "Voir les bénévoles"
+    see_survivors:      "Voir les rescapés"
     
 assign_volunteer:
     assign_volunteer:           "Assigner un bénévole"
@@ -48,3 +50,6 @@ see_all:
 see:
     volunteers:
         camp_volunteers: Volontaires du camp "%camp_name%"
+    survivors:
+        camp_survivors: Rescapés du camp "%camp_name%"
+        birth_on:   "Né(e) le"

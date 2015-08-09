@@ -27,6 +27,8 @@ profile:
     cm:                 "Cm"
     inches_nb:          "[0,1]%count% inch|[2,+Inf]%count% inches"
     weight_value:       "[0,1]%count% pound|[2,+Inf]%count% pounds"
+    see_volunteers:     "View volunteers"
+    see_survivors:      "View survivors"
     
 assign_volunteer:
     assign_volunteer:           "Assign a volunteer"
@@ -47,3 +49,6 @@ see_all:
 see:
     volunteers:
         camp_volunteers: Camp "%camp_name%"'s volunteers
+    survivors:
+        camp_survivors:  Camp "%camp_name%"'s survivors
+        birth_on:   "Birth on"
