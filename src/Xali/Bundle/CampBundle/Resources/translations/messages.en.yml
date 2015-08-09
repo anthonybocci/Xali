@@ -51,4 +51,4 @@ see:
         camp_volunteers: Camp "%camp_name%"'s volunteers
     survivors:
         camp_survivors:  Camp "%camp_name%"'s survivors
-        birth_on:   "Birth on"
+        birth_on:   "Born on"
