@@ -175,6 +175,7 @@ class SurvivorController extends Controller
             throw $this->createAccessDeniedException();
         }
         $survivor->setCamp(null);
+        $survivor->setLastLeftCamp(new \DateTime());
         $em->flush();
         return $this->redirect($this->generateUrl('xali_survivor_profile_profile',
                 array(
@@ -220,6 +221,7 @@ class SurvivorController extends Controller
             throw $this->createAccessDeniedException();
         }
         $survivor->setCamp($camp);
+        $survivor->setLastLeftCamp(null);
         $em->flush();
         return $this->redirect($this->generateUrl('xali_survivor_profile_profile',
                 array(

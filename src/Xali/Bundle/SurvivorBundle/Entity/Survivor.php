@@ -99,6 +99,14 @@ class Survivor
      * @ORM\ManyToOne(targetEntity="Xali\Bundle\CampBundle\Entity\Camp")
      */
     private $camp;
+    
+    /**
+     * The date of last time he left a camp
+     * @var \DateTime 
+     * 
+     * @ORM\Column(name="lastleftcamp", type="date", nullable=true)
+     */
+    private $lastLeftCamp;
 
 
     /**
@@ -370,5 +378,29 @@ class Survivor
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * Set lastLeftCamp
+     *
+     * @param \DateTime $lastLeftCamp
+     *
+     * @return Survivor
+     */
+    public function setLastLeftCamp($lastLeftCamp)
+    {
+        $this->lastLeftCamp = $lastLeftCamp;
+
+        return $this;
+    }
+
+    /**
+     * Get lastLeftCamp
+     *
+     * @return \DateTime
+     */
+    public function getLastLeftCamp()
+    {
+        return $this->lastLeftCamp;
     }
 }
