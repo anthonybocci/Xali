@@ -47,6 +47,8 @@ class CampController extends Controller
                 $camp->setOrganisation($organisation);
                 $em->persist($camp);
                 $em->flush();
+                return $this->redirectToRoute("xali_camp_search_see_all", 
+                        array('organisation_id' => $organisation->getId()));
             }
         }
         $render = 'XaliCampBundle:Management:add_camp.html.twig';
@@ -209,7 +211,8 @@ class CampController extends Controller
         } else {
             throw $this->createAccessDeniedException();
         }
-        return $this->redirect($this->generateUrl($generateUrl));
+        return $this->redirectToRoute($generateUrl, 
+                array('organisation_id' => $camp->getOrganisation()->getId()));
     }
     
     /**
