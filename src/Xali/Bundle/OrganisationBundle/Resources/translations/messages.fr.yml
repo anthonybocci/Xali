@@ -2,6 +2,7 @@
 ---
 
 form:
+    manager:                "Manager :"
     name:                   "Nom :"
     manager_email:          "Email du gérant :"
     error:

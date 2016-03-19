@@ -12,8 +12,8 @@ use Xali\Bundle\UserBundle\RightManager\XaliRightsManager;
  * Manage organisations
  * @author Anthony Bocci <boccianthony@yahoo.fr>
  */
-class OrganisationController extends Controller
-{
+class OrganisationController extends Controller {
+
     /**
      * Add an organisation and assign to it a manager
      * 
@@ -25,8 +25,7 @@ class OrganisationController extends Controller
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      * 
      */
-    public function add_organisationAction($id_organisation)
-    {
+    public function add_organisationAction($id_organisation) {
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $userRepo = $em->getRepository('XaliUserBundle:User');
@@ -45,40 +44,43 @@ class OrganisationController extends Controller
             //If given organisation doesn't exist
             throw $this->createNotFoundException();
         }
-        /*An organisation can only update itself, not add an other
+        /* An organisation can only update itself, not add an other
          * organisation
          */
-        if ($id_organisation == 0 && 
+        if ($id_organisation == 0 &&
                 !$rightsManager->canUpdateOrganisation($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
-        
+
+        //$em->persist($organisation);
+
         $form = $this->createForm(new OrganisationType(), $organisation);
-        $error = null;
+        $form->handleRequest($request);
+        $result = null;
         //If form is submitted
-        if ($request->getMethod() == "POST") {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $paramManager = $request->request->get('manager');
-                $oldManager = $userRepo->find(
-                        $organisation->getManager()->getId());
-                $manager = $userRepo->findOneByEmail($paramManager);
-                $result = $this->insertOrUpdate($organisation, $manager);
-                //If there is no error, display a message of success
-                if ($result == null) {
-                    $error = ($id_organisation == 0) ? 
-                            "form.add_success" : "form.update_success";
+        if ($request->getMethod() == "POST" && $form->isValid()) {
+            $paramManager = $request->request->get('manager');
+            if ($id_organisation != 0) {
+                $oldManager = $userRepo->find($organisation->getManager()->getId());
+            }
+            $manager = $userRepo->findOneByEmail($paramManager);
+            $result = $this->insertOrUpdate($organisation, $manager);
+            //If there is no error, display a message of success
+            if ($result == null) {
+                $result = ($id_organisation == 0) ?
+                        "form.add_success" : "form.update_success";
+                if ($id_organisation != 0) {
                     $oldManager->removeRole("ROLE_ORGANISATION");
-                    $manager->addRoles(array("ROLE_ORGANISATION"));
-                    $em->flush();
                 }
+                $manager->addRoles(array("ROLE_ORGANISATION"));
+                $em->flush();
             }
         }
         $render = 'XaliOrganisationBundle:Management:add_organisation.html.twig';
         return $this->render($render, array('form' => $form->createView(),
-                           'error' => $error, 'organisation' => $organisation));
+                    'error' => $result, 'organisation' => $organisation));
     }
-    
+
     /**
      * Insert or update an organisation according to $organisation's id
      * 
@@ -89,8 +91,7 @@ class OrganisationController extends Controller
      * @return string error message if there is
      * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function insertOrUpdate($organisation, $manager)
-    {
+    public function insertOrUpdate($organisation, $manager) {
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
         //Insert
@@ -100,7 +101,7 @@ class OrganisationController extends Controller
             return $orgRepo->updateOrganisation($manager, $organisation);
         }
     }
-    
+
     /**
      * Display organisation's profile
      * 
@@ -108,8 +109,7 @@ class OrganisationController extends Controller
      * the organisation'id user want to display
      * @author Anthony Bocci Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function profileAction($id)
-    {
+    public function profileAction($id) {
         $render = 'XaliOrganisationBundle:Profile:profile.html.twig';
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
@@ -121,26 +121,24 @@ class OrganisationController extends Controller
         $token = sha1(time() * rand());
         $session->set('csrf_token_del_org', $token);
         return $this->render($render, array(
-            'organisation' => $organisation,
-            'volunteersNb' => $volunteersNb,
-            'campsNb' => $campsNb,
-            'survivorsNb' => $survivorsNb,
+                    'organisation' => $organisation,
+                    'volunteersNb' => $volunteersNb,
+                    'campsNb' => $campsNb,
+                    'survivorsNb' => $survivorsNb,
         ));
     }
-    
+
     /**
      * Show all organisations
      * @author Anthony Bocci <boccianthony@yahoo.fr>
      */
-    public function see_allAction()
-    {
+    public function see_allAction() {
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
         $organisations = $orgRepo->findAllWithManager();
-        return $this->render('XaliOrganisationBundle:Search:see_all.html.twig',
-                array('organisations' => $organisations));
+        return $this->render('XaliOrganisationBundle:Search:see_all.html.twig', array('organisations' => $organisations));
     }
-    
+
     /**
      * Delete an organisation
      * 
@@ -150,8 +148,7 @@ class OrganisationController extends Controller
      * @throws createNotFoundException
      * @Secure(roles="ROLE_ORGANISATION")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $em = $this->getDoctrine()->getManager();
         $orgRepo = $em->getRepository('XaliOrganisationBundle:Organisation');
         $organisation = $orgRepo->findWithManager($id);
@@ -166,7 +163,7 @@ class OrganisationController extends Controller
         $givenToken = $session->get('csrf_token_del_org');
         $generateUrl = 'xali_organisation_search_see_all';
         $user = $this->getUser();
-        
+
         //If the organisation doesn't exist
         if (!($organisation instanceof Organisation)) {
             throw $this->createNotFoundException();
@@ -174,7 +171,7 @@ class OrganisationController extends Controller
             //If user is not organisation's manager
             throw $this->createAccessDeniedException();
         }
-        
+
         //If tokens exists and are valids
         if ($rightsManager->areValidsTokens($givenToken, $sessionToken)) {
             $em->remove($organisation);
@@ -184,4 +181,5 @@ class OrganisationController extends Controller
         }
         return $this->redirect($this->generateUrl($generateUrl));
     }
+
 }
