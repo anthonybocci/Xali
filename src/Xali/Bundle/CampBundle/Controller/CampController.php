@@ -196,7 +196,7 @@ class CampController extends Controller
         }
         $organisation = $camp->getOrganisation();
         //If user is not organisation's manager
-        if ($rightsManager->canUpdateOrganisation($user, $organisation)) {
+        if (!$rightsManager->canUpdateOrganisation($user, $organisation)) {
             throw $this->createAccessDeniedException();
         }
         $sessionToken = $request->request->get('csrf_token_del_camp');

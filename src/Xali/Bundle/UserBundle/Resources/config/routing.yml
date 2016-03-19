@@ -7,18 +7,18 @@ xali_user_registration_register:
     
 #Show profile of user which has id equals to {id}
 xali_user_profile_show:
-    path:   /user/profile/{id}
+    path:   /profile/show/{id}
     defaults: { _controller: XaliUserBundle:Profile:show }
     requirements:
         id_user:    \d+
     
 #Edit profile of user which has id equals to {id}
 xali_user_profile_edit:
-    path:   /user/profile/edit/{id}
+    path:   /profile/edit/{id}
     defaults: { _controller: XaliUserBundle:Profile:edit }
 
 xali_user_management_leave_organisation:
-    path:   /user/{id}/leave_organisation
+    path:   /{id}/leave_organisation
     defaults: { _controller: XaliUserBundle:Management:leave_organisation }
     requirements:
         id: \d+

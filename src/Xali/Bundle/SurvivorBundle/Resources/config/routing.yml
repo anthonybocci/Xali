@@ -9,7 +9,7 @@ xali_survivor_management_add_survivor:
 
 #See survivor's profile
 xali_survivor_profile_profile:
-    path:     /profile/{id}
+    path:     /see_profile/{id}
     defaults: { _controller: XaliSurvivorBundle:Survivor:see_profile }
 
 #If a survivor leave a camp

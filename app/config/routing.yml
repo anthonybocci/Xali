@@ -1,6 +1,6 @@
 xali_user:
     resource: "@XaliUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /user
 
 xali_camp:
     resource: "@XaliCampBundle/Resources/config/routing.yml"
